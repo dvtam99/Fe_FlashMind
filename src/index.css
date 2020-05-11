@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.header {
+  height: 70px;
+}
+.btnLogin {
+  position: absolute;
+  right: 50px;
+}
+.logo {
+  color: white;
+}
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-focus:focus {
+  box-shadow: unset;
+}
+
+.link {
+  color: #17a2b8;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link-muted {
+  color: unset;
+  background-color: unset;
+  text-decoration: unset;
+}
+
+.link-muted:hover {
+  color: unset;
+  text-decoration: unset;
+}
+
+.pointer {
+  cursor: pointer;
+}

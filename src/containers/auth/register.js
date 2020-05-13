@@ -17,11 +17,7 @@ const Register = ({ onMoveToLogin }) => {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Confirm password not matched!")
       .required("Required"),
-    policy:  Yup
-    .boolean()
-    .oneOf([true], 'Must Accept Terms and Conditions'),
-      
-    
+    policy: Yup.boolean().oneOf([true], "Must Accept Terms and Conditions"),
   });
 
   const formik = useFormik({

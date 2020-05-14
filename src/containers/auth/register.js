@@ -1,24 +1,31 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Modal, Alert } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { register } from "../../api/auth";
+import {useAsync} from "react-hook-async";
+
+const SignInSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(6, "Username must length than 6 characters!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  password: Yup.string()
+    .min(4, "Password must length than 4 characters!")
+    .max(50, "Too Long!")
+    .required("Required"),
+
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Confirm password not matched!")
+    .required("Required"),
+  policy: Yup.boolean().oneOf([true], "Must Accept Terms and Conditions"),
+});
 
 const Register = ({ onMoveToLogin }) => {
-  const SignInSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(6, "Username must length than 6 characters!")
-      .max(50, "Too Long!")
-      .required("Required"),
-    password: Yup.string()
-      .min(4, "Password must length than 4 characters!")
-      .max(50, "Too Long!")
-      .required("Required"),
+  const [registerApiData, fetchRegister] = useAsync(null, register);
 
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Confirm password not matched!")
-      .required("Required"),
-    policy: Yup.boolean().oneOf([true], "Must Accept Terms and Conditions"),
-  });
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [failureModalVisible, setFailureModalVisible] = useState(false);
 
   const formik = useFormik({
     validationSchema: SignInSchema,
@@ -28,13 +35,50 @@ const Register = ({ onMoveToLogin }) => {
       confirmPassword: "",
       policy: false,
     },
-    onSubmit: (value) => {
-      console.log(value.username + " " + value.password);
+    onSubmit: (values) => {
+      fetchRegister(values.username, values.password)
+        .then(() => setSuccessModalVisible(true))
+        .catch(() => {
+          setFailureModalVisible(true);
+        });
     },
   });
 
   return (
     <div className="d-flex justify-content-center">
+      <Modal show={successModalVisible} centered>
+        <Modal.Body className="alert-success text-center">
+          <Alert variant="success" className="border-0">
+            <Alert.Heading>Registered</Alert.Heading>
+            <p>Please check your inbox!</p>
+          </Alert>
+          <Button
+            variant="success"
+            size="sm"
+            onClick={() => setSuccessModalVisible(false)}
+          >
+            Confirm
+          </Button>
+        </Modal.Body>
+      </Modal>
+      <Modal show={failureModalVisible} centered>
+        <Modal.Body className="alert-danger text-center">
+          <Alert variant="danger" className="border-0">
+            <Alert.Heading>Something went wrong</Alert.Heading>
+            {registerApiData.error && (
+              <p>{registerApiData.error.response.data.err}</p>
+            )}
+          </Alert>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={() => setFailureModalVisible(false)}
+          >
+            Okay
+          </Button>
+        </Modal.Body>
+      </Modal>
+
       <div className="loginCard ">
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
           <Form.Group controlId="formBasicUsername">

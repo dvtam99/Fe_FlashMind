@@ -1,19 +1,31 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { Form, Button, Modal, Alert } from "react-bootstrap";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useAsync } from "react-hook-async";
 
-const Login = ({onMoveToRegister}) => {
-  const SignInSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(6, "Username must length than 6 characters!")
-      .max(50, "Too Long!")
-      .required("Required"),
-    password: Yup.string()
-      .min(4, "Password must length than 4 characters!")
-      .max(50, "Too Long!")
-      .required("Required"),
-  });
+import { login } from "../../api/auth";
+
+import authCtx from "../../context/authCtx";
+
+const SignInSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(6, "Username must length than 6 characters!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  password: Yup.string()
+    .min(4, "Password must length than 4 characters!")
+    .max(50, "Too Long!")
+    .required("Required"),
+});
+
+const Login = ({ onMoveToRegister }) => {
+  const { setAuthUser } = useContext(authCtx);
+
+  const [loginApiData, fetchLogin] = useAsync(null, login);
+
+  const [failureModalVisible, setFailureModalVisible] = useState(false);
 
   const formik = useFormik({
     validationSchema: SignInSchema,
@@ -22,16 +34,44 @@ const Login = ({onMoveToRegister}) => {
       password: "",
       rememberMe: false,
     },
-    onSubmit: (value) => {
-      console.log(value.username + " " + value.password);
+    onSubmit: (values) => {
+      fetchLogin(values.username, values.password)
+        .then((authUser) => {
+          if (values.rememberMe) {
+            localStorage.setItem("jwt", authUser.token);
+          }
+          console.log(authUser)
+          setAuthUser(authUser);
+        })
+        .catch((err) => {
+          console.log("here "+err.message)
+          setFailureModalVisible(true);
+        });
     },
   });
 
   return (
     <div className="d-flex justify-content-center">
+
+      <Modal show={failureModalVisible} centered>
+        <Modal.Body className="alert-danger text-center">
+          <Alert variant="danger" className="border-0">
+            <Alert.Heading>Something went wrong</Alert.Heading>
+            {loginApiData.error && (
+              <p>{loginApiData.error.response.data.err}</p>
+            )}
+          </Alert>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={() => setFailureModalVisible(false)}
+          >
+            Okay
+          </Button>
+        </Modal.Body>
+      </Modal>
       <div className="loginCard ">
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
-          
           <Form.Group controlId="formBasicUsername">
             <Form.Label>UserName</Form.Label>
             <Form.Control
@@ -63,7 +103,7 @@ const Login = ({onMoveToRegister}) => {
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me!" />
           </Form.Group>
-          <Button variant="primary" type="submit" style={{width:"60%"}}>
+          <Button variant="primary" type="submit" style={{ width: "60%" }}>
             Login
           </Button>
           <Form.Label>

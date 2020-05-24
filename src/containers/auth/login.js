@@ -7,7 +7,7 @@ import { useAsync } from "react-hook-async";
 
 import { login } from "../../api/auth";
 
-import authCtx from "../../context/authCtx";
+import authCtx from "../../contexts/auth";
 
 const SignInSchema = Yup.object().shape({
   username: Yup.string()
@@ -40,11 +40,10 @@ const Login = ({ onMoveToRegister }) => {
           if (values.rememberMe) {
             localStorage.setItem("jwt", authUser.token);
           }
-          console.log(authUser)
           setAuthUser(authUser);
         })
-        .catch((err) => {
-          console.log("here "+err.message)
+        .catch((e) => {
+          console.log(e.message);
           setFailureModalVisible(true);
         });
     },
@@ -52,7 +51,6 @@ const Login = ({ onMoveToRegister }) => {
 
   return (
     <div className="d-flex justify-content-center">
-
       <Modal show={failureModalVisible} centered>
         <Modal.Body className="alert-danger text-center">
           <Alert variant="danger" className="border-0">

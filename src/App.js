@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+
 import { Header } from "./components/layout";
+
 import AuthContext from "./contexts/auth";
+
 function App() {
   const [authUser, setAuthUser] = useState(null);
   return (

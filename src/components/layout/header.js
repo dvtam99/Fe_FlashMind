@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navbar, Form, FormControl, Button, Modal } from "react-bootstrap";
 import Login from "../../containers/auth";
+
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
 
@@ -26,6 +27,7 @@ const Header = () => {
       </div>
     );
   };
+
   return (
     <>
       <Navbar bg="dark" variant="dark">

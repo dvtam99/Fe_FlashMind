@@ -108,7 +108,7 @@ const Login = ({ onMoveToRegister }) => {
             You don't have an account? &nbsp;
             <span className="link" onClick={onMoveToRegister}>
               Register
-            </span>{" "}
+            </span>
             now!
           </Form.Label>
         </Form>

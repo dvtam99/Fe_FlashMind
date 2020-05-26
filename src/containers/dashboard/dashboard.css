@@ -1,0 +1,18 @@
+.dashboard-wrapper{
+	display: flex;
+}
+.sidebar{
+	width: 300px;
+}
+.mainbar{
+	width: 100%;
+}
+.card-section{
+	margin-bottom: 25px;
+}
+.section-body{
+	display: flex;
+}
+.set-item{
+	margin: 0 10px;
+}

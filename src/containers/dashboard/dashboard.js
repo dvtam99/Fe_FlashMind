@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-import './dashboard.css'
+import './dashboard.scss'
 const Dashboard = () => {
   return (
     <Container>

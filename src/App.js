@@ -15,9 +15,9 @@ function App() {
 		
 			<div className="App">
 				<Header />
-				<div className="flex-grow-1">
-					<Dashboard />
-				</div>
+				
+				<Dashboard />
+			
 			</div>
     </AuthContext.Provider>
 

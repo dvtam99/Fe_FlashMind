@@ -37,91 +37,94 @@ const Dashboard = () => {
 					</form>
 
 				</div>
-				<div className="card-section">
-					<div className="section-title">
-						<h3>Your own flashcard</h3>
-						<button>NEW</button>
+
+				<div className="mainbar-content">
+					<div className="card-section">
+						<div className="section-title">
+							<h3>Your own flashcard</h3>
+							<button>NEW</button>
+						</div>
+						<div className="section-body">
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+						</div>	
 					</div>
-					<div className="section-body">
-						<div className="set-item" style={{background: 'yellow'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
+					<div className="card-section">
+						<div className="section-title">
+							<h3>Your favorite flashcard</h3>
+							<button>Browse</button>
 						</div>
-						<div className="set-item" style={{background: 'yellow'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'yellow'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'yellow'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'yellow'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-					</div>	
-				</div>
-				<div className="card-section">
-					<div className="section-title">
-						<h3>Your cloned flashcard</h3>
-						<button>Browse</button>
+						<div className="section-body">
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+							<div className="set-item">
+								<h4>Popular English slangs</h4>
+								<div className="date-created">26/05/2020</div>
+								<div className="author">Dat Xanh</div>
+								<div className="empty">Empty</div>
+								<div className="completed">Not Yet</div>
+							</div>
+						</div>	
 					</div>
-					<div className="section-body">
-						<div className="set-item" style={{background: 'green'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'green'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'green'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'green'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-						<div className="set-item" style={{background: 'green'}}>
-							<h4>Popular English slangs</h4>
-							<div className="date-created">26/05/2020</div>
-							<div className="author">Dat Xanh</div>
-							<div className="empty">Empty</div>
-							<div className="completed">Not Yet</div>
-						</div>
-					</div>	
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-
+import { MOCK_DATA } from '../../data/MOCK_DATA';
+import SetItem from './setItem';
 import './dashboard.scss'
 const Dashboard = () => {
   return (
@@ -23,16 +24,16 @@ const Dashboard = () => {
 			<div className="mainbar">
 				<div className="filterBar">
 					<form action="#">
-						<input type="radio" id="finish" value="finish" />
+						<input type="radio" id="finish" value="finish" name="status" />
 						<label htmlFor="finish">Finish</label>
 
-						<input type="radio" id="unfinish"  value="unfinish" />
+						<input type="radio" id="unfinish"  value="unfinish" name="status" />
 						<label htmlFor="unfinish">Unfinish</label>
 
-						<input type="radio" id="empty"  value="empty" />
+						<input type="radio" id="empty"  value="empty" name="status" />
 						<label htmlFor="empty">Empty</label>
 
-						<input type="radio" id="all"  value="all" />
+						<input type="radio" id="all"  value="all" name="status" />
 						<label htmlFor="all">All</label>
 					</form>
 
@@ -42,44 +43,38 @@ const Dashboard = () => {
 					<div className="card-section">
 						<div className="section-title">
 							<h3>Your own flashcard</h3>
-							<button>NEW</button>
+							<button>New</button>
 						</div>
 						<div className="section-body">
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
+
+							{/* BEGIN SET ITEM */}
+
+							{/* USER EMPTY SET DISPLAY FIRST */}
+							{
+								MOCK_DATA
+								.filter((item) => item.author.id === 11 && item.empty)
+								.map((item) => (
+									<SetItem
+										key={item.id}
+										item={item}
+									/>
+								))
+							}
+
+							{/* USER NON-EMPTY SET DISPLAY SECOND */}
+
+							{
+								MOCK_DATA
+								.filter((item) => item.author.id === 11 && !item.empty)
+								.map((item) => (
+									<SetItem
+										key={item.id}
+										item={item}
+									/>
+								))
+							}
+							
+
 						</div>	
 					</div>
 					<div className="card-section">
@@ -88,41 +83,16 @@ const Dashboard = () => {
 							<button>Browse</button>
 						</div>
 						<div className="section-body">
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
-							<div className="set-item">
-								<h4>Popular English slangs</h4>
-								<div className="date-created">26/05/2020</div>
-								<div className="author">Dat Xanh</div>
-								<div className="empty">Empty</div>
-								<div className="completed">Not Yet</div>
-							</div>
+							{
+								MOCK_DATA
+								.filter((item) => item.author.id !== 11 && !item.empty)
+								.map((item) => (
+									<SetItem
+										key={item.id}
+										item={item}
+									/>
+								))
+							}
 						</div>	
 					</div>
 				</div>

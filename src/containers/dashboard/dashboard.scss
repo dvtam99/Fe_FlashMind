@@ -61,7 +61,62 @@
 	width: calc((100% - 60px) / 3);
 	margin-bottom: 20px;
 	background: #fff;
-	box-shadow: 0 0 5px 2px #9a9a9a;
+    box-shadow: 0 0 5px 2px #9a9a9a;
+    padding: 10px;
+    position: relative;
+    .avatar{
+        margin-left: -10px;
+        margin-right: -10px;
+        margin-top: -10px;
+        img{
+            width: 100%;
+        }
+    }
+    .set-content{
+        h4{
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .date-created {
+            font-size: 12px;
+            color: #adadad;
+            text-align: right;
+        }
+        .author{
+            font-size: 14px;
+        }
+        .empty{
+            font-size: 14px;
+            span[role="img"] {
+                color: red;
+            }
+        }
+        .finish{
+            font-size: 14px;
+            span[role="img"] {
+                color: green;
+            }
+            &.not-yet{
+                span[role="img"] {
+                    color: orange;
+                }
+            }
+        }
+        span[role="img"] {
+            margin-right: 5px;
+            min-width: 21px;
+        }
+        .edit{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #999;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .section-title {

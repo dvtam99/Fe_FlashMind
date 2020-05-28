@@ -1,0 +1,88 @@
+.dashboard-wrapper{
+	display: flex;
+    height: calc(100vh - 86px);
+}
+.sidebar{
+	width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 0 5px 2px #9a9a9a;
+	.sidebar-item {
+		padding: 10px 20px;
+		border-bottom: 1px dashed #eaeaea;
+	}
+}
+.sidebar-item:hover{
+	background: #f9dbbd;
+	cursor: pointer;
+}
+.sidebar-footer {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+}
+.mainbar {
+    width: 100%;
+    padding-left: 30px;
+	padding-top: 10px;
+	display: flex;
+    flex-direction: column;
+}
+.mainbar-content{
+	flex: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+    padding-top: 10px;
+}
+.filterBar{
+	margin-bottom: 20px;
+}
+.filterBar form label {
+    margin-left: 5px;
+    margin-right: 15px;
+}
+.card-section{
+	margin-bottom: 25px;
+}
+
+.section-body{
+	display: flex;
+    margin-left: -10px;
+    margin-right: -10px;
+    flex-wrap: wrap;
+}
+.set-item{
+	margin: 0 10px;
+	width: calc((100% - 60px) / 3);
+	margin-bottom: 20px;
+	background: #fff;
+	box-shadow: 0 0 5px 2px #9a9a9a;
+}
+
+.section-title {
+    text-align: center;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.section-title button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 14px;
+    border: none;
+    padding: 3px 15px;
+    border-radius: 15px;
+    background: #f38e9c;
+    color: #fff;
+    margin-top: calc(-27px / 2);
+}
+.section-title h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+}

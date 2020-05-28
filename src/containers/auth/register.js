@@ -3,7 +3,7 @@ import { Form, Button, Modal, Alert } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { register } from "../../api/auth";
-import {useAsync} from "react-hook-async";
+import { useAsync } from "react-hook-async";
 
 const SignInSchema = Yup.object().shape({
   username: Yup.string()
@@ -81,8 +81,8 @@ const Register = ({ onMoveToLogin }) => {
 
       <div className="loginCard ">
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label>UserName</Form.Label>
+          <Form.Group controlId="formBasicUsername" className="text-left">
+            <Form.Label>User Name</Form.Label>
             <Form.Control
               type="text"
               onChange={formik.handleChange}
@@ -96,7 +96,7 @@ const Register = ({ onMoveToLogin }) => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group controlId="formBasicPassword" className="text-left">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -112,7 +112,10 @@ const Register = ({ onMoveToLogin }) => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group controlId="formBasicConfirmPassword">
+          <Form.Group
+            controlId="formBasicConfirmPassword"
+            className="text-left"
+          >
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
@@ -120,7 +123,7 @@ const Register = ({ onMoveToLogin }) => {
               name="confirmPassword"
               isInvalid={formik.errors.confirmPassword}
               value={formik.values.confirmPassword}
-              placeholder="confirmPassword"
+              placeholder="Confirm Password"
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.confirmPassword}
@@ -146,7 +149,11 @@ const Register = ({ onMoveToLogin }) => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Button variant="primary" type="submit" style={{ width: "60%" }}>
+          <Button
+            className="m-color border-none"
+            type="submit"
+            style={{ width: "60%" }}
+          >
             Register
           </Button>
           <Form.Label>

@@ -70,8 +70,8 @@ const Login = ({ onMoveToRegister }) => {
       </Modal>
       <div className="loginCard ">
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label>UserName</Form.Label>
+          <Form.Group controlId="formBasicUsername" className="text-left">
+            <Form.Label>User Name</Form.Label>
             <Form.Control
               type="text"
               onChange={formik.handleChange}
@@ -84,7 +84,7 @@ const Login = ({ onMoveToRegister }) => {
               {formik.errors.username}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group controlId="formBasicPassword" className="text-left">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -101,7 +101,11 @@ const Login = ({ onMoveToRegister }) => {
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me!" />
           </Form.Group>
-          <Button variant="primary" type="submit" style={{ width: "60%" }}>
+          <Button
+            className="m-color border-none"
+            type="submit"
+            style={{ width: "60%" }}
+          >
             Login
           </Button>
           <Form.Label>
@@ -109,7 +113,7 @@ const Login = ({ onMoveToRegister }) => {
             <span className="link" onClick={onMoveToRegister}>
               Register
             </span>
-            now!
+            &nbsp; now!
           </Form.Label>
         </Form>
       </div>

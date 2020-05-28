@@ -1,4 +1,270 @@
 export const MOCK_DATA = [
+  // USER EMPTY SETS
+    {
+      "id": 11,
+      "title": "Angular core concepts",
+      "avatar": "https://i.picsum.photos/id/241/300/200.jpg",
+      "date_created": "13/06/2019",
+      "author": { "id": 11, "name": "Vũ Quốc Đạt" },
+      "empty": true,
+      "finish": false,
+      "folder": [
+        { "folder_id": 1, "folder_title": "Coding" }
+      ],
+      "detail": []
+  },
+  {
+      "id": 12,
+      "title": "Philosopy basics",
+      "avatar": "https://i.picsum.photos/id/341/300/200.jpg",
+      "date_created": "14/07/2019",
+      "author": { "id": 11, "name": "Vũ Quốc Đạt" },
+      "empty": true,
+      "finish": false,
+      "folder": [],
+      "detail": []
+  },
+  {
+      "id": 13,
+      "title": "Tongue twister english words",
+      "avatar": "https://i.picsum.photos/id/441/300/200.jpg",
+      "date_created": "12/06/2019",
+      "author": { "id": 11, "name": "Vũ Quốc Đạt" },
+      "empty": true,
+      "finish": false,
+      "folder": [
+        { "folder_id": 1, "folder_title": "English" }
+      ],
+      "detail": []
+  },
+
+  // USER NOT EMPTY SETS
+  {
+    "id": 14,
+    "title": "Speed & Angels",
+    "avatar": "https://i.picsum.photos/id/145/300/200.jpg",
+    "date_created": "14/06/2019",
+    "author": { "id": 11, "name": "Vũ Quốc Đạt" },
+    "empty": false,
+    "finish": false,
+    "folder": [
+      { "folder_id": 1, "folder_title": "Rosabel" },
+      { "folder_id": 2, "folder_title": "Emanuel" },
+      { "folder_id": 3, "folder_title": "Edie" }
+    ],
+    "detail": [
+      {
+        "card_id": 1,
+        "card_title": "Graphic Designer",
+        "card_desc": "Torus fracture of upper end of right ulna, subsequent encounter for fracture with routine healing",
+        "card_completed": true
+      },
+      {
+        "card_id": 2,
+        "card_title": "Nurse",
+        "card_desc": "Molluscum contagiosum",
+        "card_completed": true
+      },
+      {
+        "card_id": 3,
+        "card_title": "Geologist II",
+        "card_desc": "Unspecified physeal fracture of unspecified metatarsal, initial encounter for closed fracture",
+        "card_completed": false
+      },
+      {
+        "card_id": 4,
+        "card_title": "Account Representative III",
+        "card_desc": "Maternal care for disproportion due to unusually large fetus, not applicable or unspecified",
+        "card_completed": false
+      },
+      {
+        "card_id": 5,
+        "card_title": "Administrative Officer",
+        "card_desc": "Toxic effect of chromium and its compounds, assault, subsequent encounter",
+        "card_completed": false
+      },
+      {
+        "card_id": 6,
+        "card_title": "Marketing Manager",
+        "card_desc": "NIHSS score 11",
+        "card_completed": true
+      },
+      {
+        "card_id": 7,
+        "card_title": "Geologist II",
+        "card_desc": "Poisoning by chloramphenicol group, undetermined, subsequent encounter",
+        "card_completed": false
+      },
+      {
+        "card_id": 8,
+        "card_title": "Geologist III",
+        "card_desc": "Other specified malignant neoplasm of skin of scalp and neck",
+        "card_completed": false
+      },
+      {
+        "card_id": 9,
+        "card_title": "Clinical Specialist",
+        "card_desc": "Other abnormalities of heart beat",
+        "card_completed": true
+      },
+      {
+        "card_id": 10,
+        "card_title": "Systems Administrator I",
+        "card_desc": "Fistula, right foot",
+        "card_completed": false
+      },
+      {
+        "card_id": 11,
+        "card_title": "Community Outreach Specialist",
+        "card_desc": "Person on outside of car injured in collision with other type car in nontraffic accident, initial encounter",
+        "card_completed": false
+      },
+      {
+        "card_id": 12,
+        "card_title": "Structural Analysis Engineer",
+        "card_desc": "War operations involving explosion of guided missile, military personnel, initial encounter",
+        "card_completed": false
+      },
+      {
+        "card_id": 13,
+        "card_title": "Engineer II",
+        "card_desc": "Unspecified physeal fracture of left calcaneus, sequela",
+        "card_completed": true
+      },
+      {
+        "card_id": 14,
+        "card_title": "Budget/Accounting Analyst II",
+        "card_desc": "Dislocation of tarsometatarsal joint of left foot, initial encounter",
+        "card_completed": false
+      },
+      {
+        "card_id": 15,
+        "card_title": "Help Desk Operator",
+        "card_desc": "Other sideroblastic anemias",
+        "card_completed": false
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Harem",
+    "avatar": "https://i.picsum.photos/id/146/300/200.jpg",
+    "date_created": "29/08/2019",
+    "author": { "id": 11, "name": "Vũ Quốc Đạt" },
+    "empty": false,
+    "finish": true,
+    "folder": [
+      { "folder_id": 1, "folder_title": "Chrysa" },
+      { "folder_id": 2, "folder_title": "Percival" },
+      { "folder_id": 3, "folder_title": "Kordula" }
+    ],
+    "detail": [
+      {
+        "card_id": 18,
+        "card_title": "Cost Accountant",
+        "card_desc": "Essential fructosuria",
+        "card_completed": true
+      },
+      {
+        "card_id": 19,
+        "card_title": "Registered Nurse",
+        "card_desc": "Inhalant dependence with inhalant-induced psychotic disorder, unspecified",
+        "card_completed": true
+      },
+      {
+        "card_id": 20,
+        "card_title": "Accountant IV",
+        "card_desc": "Unspecified physeal fracture of lower end of right tibia",
+        "card_completed": true
+      },
+      {
+        "card_id": 21,
+        "card_title": "Staff Scientist",
+        "card_desc": "Unspecified fracture of shaft of right tibia, subsequent encounter for open fracture type I or II with delayed healing",
+        "card_completed": true
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Whiplash",
+    "avatar": "https://i.picsum.photos/id/247/300/200.jpg",
+    "date_created": "02/05/2020",
+    "author": { "id": 11, "name": "Vũ Quốc Đạt" },
+    "empty": false,
+    "finish": false,
+    "folder": [{ "folder_id": 1, "folder_title": "Vicky" }],
+    "detail": [
+      {
+        "card_id": 1,
+        "card_title": "Research Assistant IV",
+        "card_desc": "Type 1 diabetes mellitus with mild nonproliferative diabetic retinopathy with macular edema, left eye",
+        "card_completed": true
+      },
+      {
+        "card_id": 2,
+        "card_title": "Graphic Designer",
+        "card_desc": "Burn of first degree of multiple right fingers (nail), including thumb, initial encounter",
+        "card_completed": true
+      },
+      {
+        "card_id": 3,
+        "card_title": "Speech Pathologist",
+        "card_desc": "Poisoning by antimalarials and drugs acting on other blood protozoa, accidental (unintentional), initial encounter",
+        "card_completed": false
+      },
+      {
+        "card_id": 4,
+        "card_title": "Legal Assistant",
+        "card_desc": "Term delivery with preterm labor, unspecified trimester, fetus 3",
+        "card_completed": false
+      },
+      {
+        "card_id": 5,
+        "card_title": "Developer IV",
+        "card_desc": "Unspecified focal traumatic brain injury with loss of consciousness of 1 hour to 5 hours 59 minutes, sequela",
+        "card_completed": false
+      },
+      {
+        "card_id": 6,
+        "card_title": "Speech Pathologist",
+        "card_desc": "Malignant neoplasm of other and unspecified major salivary glands",
+        "card_completed": true
+      },
+      {
+        "card_id": 7,
+        "card_title": "Software Consultant",
+        "card_desc": "Unspecified injury of right external jugular vein, sequela",
+        "card_completed": true
+      },
+      {
+        "card_id": 8,
+        "card_title": "Safety Technician I",
+        "card_desc": "Other and unspecified water transport accidents",
+        "card_completed": false
+      },
+      {
+        "card_id": 9,
+        "card_title": "Chemical Engineer",
+        "card_desc": "Melanocytic nevi of upper limb, including shoulder",
+        "card_completed": true
+      },
+      {
+        "card_id": 10,
+        "card_title": "Engineer I",
+        "card_desc": "Salter-Harris Type II physeal fracture of lower end of radius, right arm",
+        "card_completed": false
+      },
+      {
+        "card_id": 11,
+        "card_title": "Accounting Assistant IV",
+        "card_desc": "Pressure collapse of lung due to anesthesia during pregnancy, second trimester",
+        "card_completed": true
+      }
+    ]
+  },
+
+  // ALL SETS
   {
     "id": 1,
     "title": "Speed & Angels",
@@ -6,7 +272,7 @@ export const MOCK_DATA = [
     "date_created": "14/06/2019",
     "author": { "id": 1, "name": "Adaline Anning" },
     "empty": false,
-    "finish": true,
+    "finish": false,
     "folder": [
       { "folder_id": 1, "folder_title": "Rosabel" },
       { "folder_id": 2, "folder_title": "Emanuel" },
@@ -1050,60 +1316,6 @@ export const MOCK_DATA = [
         "card_id": 27,
         "card_title": "Graphic Designer",
         "card_desc": "Legal intervention involving injury by handgun, bystander injured, subsequent encounter",
-        "card_completed": false
-      }
-    ]
-  },
-  {
-    "id": 11,
-    "title": "Kika",
-    "avatar": "https://robohash.org/eosimpeditquia.jpg?size=300x200&set=set1",
-    "date_created": "27/12/2019",
-    "author": { "id": 11, "name": "Rutherford Keynd" },
-    "empty": true,
-    "finish": false,
-    "folder": [{ "folder_id": 1, "folder_title": "Alvie" }],
-    "detail": [
-      {
-        "card_id": 1,
-        "card_title": "Dental Hygienist",
-        "card_desc": "Underdosing of other opioids, sequela",
-        "card_completed": true
-      },
-      {
-        "card_id": 2,
-        "card_title": "Automation Specialist III",
-        "card_desc": "Vasculitis limited to the skin, unspecified",
-        "card_completed": false
-      },
-      {
-        "card_id": 3,
-        "card_title": "Cost Accountant",
-        "card_desc": "Pedestrian on foot injured in collision with heavy transport vehicle or bus in traffic accident, subsequent encounter",
-        "card_completed": true
-      },
-      {
-        "card_id": 4,
-        "card_title": "Database Administrator IV",
-        "card_desc": "Contusion of unspecified great toe without damage to nail, subsequent encounter",
-        "card_completed": true
-      },
-      {
-        "card_id": 5,
-        "card_title": "Assistant Media Planner",
-        "card_desc": "Corrosion of second degree of unspecified forearm",
-        "card_completed": false
-      },
-      {
-        "card_id": 6,
-        "card_title": "Librarian",
-        "card_desc": "Sickle-cell disorders",
-        "card_completed": true
-      },
-      {
-        "card_id": 7,
-        "card_title": "VP Accounting",
-        "card_desc": "Other fish poisoning, assault, initial encounter",
         "card_completed": false
       }
     ]

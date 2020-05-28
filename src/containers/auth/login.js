@@ -98,7 +98,8 @@ const Login = ({ onMoveToRegister }) => {
               {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
+          
+		  <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me!" />
           </Form.Group>
           <Button
@@ -108,6 +109,7 @@ const Login = ({ onMoveToRegister }) => {
           >
             Login
           </Button>
+
           <Form.Label>
             You don't have an account? &nbsp;
             <span className="link" onClick={onMoveToRegister}>
@@ -115,8 +117,11 @@ const Login = ({ onMoveToRegister }) => {
             </span>
             &nbsp; now!
           </Form.Label>
-        </Form>
+        
+		</Form>
+
       </div>
+
     </div>
   );
 };

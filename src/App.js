@@ -12,13 +12,12 @@ function App() {
   const [authUser, setAuthUser] = useState(null);
   return (
 	  <AuthContext.Provider value={{ authUser, setAuthUser }}>
-		
-			<div className="App">
-				<Header />
-				
-				<Dashboard />
-			
-			</div>
+			<Router>
+				<div className="App">
+					<Header />
+					<Route path="/dashboard" component={Dashboard} />
+				</div>
+			</Router>
     </AuthContext.Provider>
 
   );

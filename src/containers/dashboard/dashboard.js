@@ -1,11 +1,38 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button, Modal } from "react-bootstrap";
 import { MOCK_DATA } from '../../data/MOCK_DATA';
+
+import AddSetCardForm from './AddSetCardForm';
 import SetItem from './setItem';
-import './dashboard.scss'
+
+import './dashboard.scss';
+
 const Dashboard = () => {
+	const [modalShow, setModalShow] = useState(false);
+
+	const AddCardSetModal = (props) => {
+		return (
+		  <div>
+			<Modal
+			  {...props}
+			  size="lg"
+			  aria-labelledby="contained-modal-title-vcenter"
+			  centered
+			>
+			  <Modal.Header closeButton>
+				<Modal.Title id="contained-modal-title-vcenter">Add 3 new set of flashcard</Modal.Title>
+			  </Modal.Header>
+			  <Modal.Body>
+				<AddSetCardForm />
+			  </Modal.Body>
+			</Modal>
+		  </div>
+		);
+	};
   return (
     <Container>
+		<AddCardSetModal show={modalShow} onHide={() => setModalShow(false)} />
+
 		<div className="dashboard-wrapper">
 			<div className="sidebar">
 				<div className="sidebar-item">FlashCard</div>
@@ -43,7 +70,7 @@ const Dashboard = () => {
 					<div className="card-section">
 						<div className="section-title">
 							<h3>Your own flashcard</h3>
-							<button>New</button>
+							<button onClick={() => setModalShow(true)}>New</button>
 						</div>
 						<div className="section-body">
 

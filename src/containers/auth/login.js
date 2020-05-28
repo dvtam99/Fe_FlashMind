@@ -51,6 +51,7 @@ const Login = ({ onMoveToRegister }) => {
 
   return (
     <div className="d-flex justify-content-center">
+
       <Modal show={failureModalVisible} centered>
         <Modal.Body className="alert-danger text-center">
           <Alert variant="danger" className="border-0">
@@ -68,8 +69,11 @@ const Login = ({ onMoveToRegister }) => {
           </Button>
         </Modal.Body>
       </Modal>
+
       <div className="loginCard ">
+		  
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
+
           <Form.Group controlId="formBasicUsername">
             <Form.Label>UserName</Form.Label>
             <Form.Control
@@ -84,7 +88,8 @@ const Login = ({ onMoveToRegister }) => {
               {formik.errors.username}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group controlId="formBasicPassword">
+          
+		  <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -98,12 +103,15 @@ const Login = ({ onMoveToRegister }) => {
               {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
+          
+		  <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me!" />
           </Form.Group>
-          <Button variant="primary" type="submit" style={{ width: "60%" }}>
+          
+		  <Button variant="primary" type="submit" style={{ width: "60%" }}>
             Login
           </Button>
+
           <Form.Label>
             You don't have an account? &nbsp;
             <span className="link" onClick={onMoveToRegister}>
@@ -111,8 +119,11 @@ const Login = ({ onMoveToRegister }) => {
             </span>
             now!
           </Form.Label>
-        </Form>
+        
+		</Form>
+
       </div>
+
     </div>
   );
 };

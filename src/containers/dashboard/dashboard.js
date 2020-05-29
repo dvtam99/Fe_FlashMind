@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
+import {Link } from "react-router-dom";
 import { MOCK_DATA } from '../../data/MOCK_DATA';
 
 import AddSetCardForm from './AddSetCardForm';
@@ -93,7 +94,9 @@ const Dashboard = () => {
 					<div className="card-section">
 						<div className="section-title">
 							<h3>Your own flashcard</h3>
-							<button onClick={() => setAddSetCardModalShow(true)}>New</button>
+							<Link to="/flashcard/new">
+								<button>New</button>
+							</Link>
 						</div>
 						<div className="section-body">
 

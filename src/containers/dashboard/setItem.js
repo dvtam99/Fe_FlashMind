@@ -10,7 +10,8 @@ const SetItem = (props) => {
             </div>
 
             <div className="set-content">
-                <h4>{title}</h4>
+            
+                <h4><a href="/flashcard/detail">{title}</a></h4>
 
                 <div className="date-created">{date_created}</div>
 

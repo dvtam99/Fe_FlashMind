@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Login from "./login";
 import Register from "./register";
 
-const Auth = () => {
+const Auth = (onHide) => {
   const [haveAccount, setHaveAccount] = useState(true);
   return (
     <div>
       {haveAccount ? (
-        <Login onMoveToRegister={() => setHaveAccount(false)} />
+        <Login onHide={onHide} onMoveToRegister={() => setHaveAccount(false)} />
       ) : (
         <Register onMoveToLogin={() => setHaveAccount(true)} />
       )}

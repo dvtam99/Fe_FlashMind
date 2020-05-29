@@ -45,7 +45,8 @@ const SetItem = (props) => {
                 }
 
                 <div className="edit" title="Edit this  set">
-                    <span role="img" aria-label="edit-image">🧹</span>Edit
+                    <span role="img" aria-label="edit-image">🧹</span>
+                    <a href="/flashcard/new">Edit</a>
                 </div>
 
             </div>

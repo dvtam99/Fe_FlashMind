@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useAsync } from "react-hook-async";
 
 import { login } from "../../api/auth";
-
+import { useHistory } from "react-router-dom";
 import authCtx from "../../contexts/auth";
 
 const SignInSchema = Yup.object().shape({
@@ -21,11 +21,16 @@ const SignInSchema = Yup.object().shape({
 });
 
 const Login = ({ onMoveToRegister }) => {
+  const history = useHistory();
   const { setAuthUser } = useContext(authCtx);
 
   const [loginApiData, fetchLogin] = useAsync(null, login);
 
   const [failureModalVisible, setFailureModalVisible] = useState(false);
+
+  const moveToDashBoard = () => {
+    history.push("/dashboard");
+  };
 
   const formik = useFormik({
     validationSchema: SignInSchema,
@@ -41,6 +46,7 @@ const Login = ({ onMoveToRegister }) => {
             localStorage.setItem("jwt", authUser.token);
           }
           setAuthUser(authUser);
+          moveToDashBoard();
         })
         .catch((e) => {
           console.log(e.message);
@@ -98,8 +104,8 @@ const Login = ({ onMoveToRegister }) => {
               {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          
-		  <Form.Group controlId="formBasicCheckbox">
+
+          <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Remember me!" />
           </Form.Group>
           <Button
@@ -117,11 +123,8 @@ const Login = ({ onMoveToRegister }) => {
             </span>
             &nbsp; now!
           </Form.Label>
-        
-		</Form>
-
+        </Form>
       </div>
-
     </div>
   );
 };

@@ -7,6 +7,7 @@ import AuthContext from "./contexts/auth";
 import { Dashboard } from "./containers/dashboard";
 import HomePage from "./components/homepage";
 import AddForm from "./components/addform";
+import DetailSet from "./components/detailset";
 
 
 
@@ -20,6 +21,7 @@ function App() {
 						<Route path="/" exact component={HomePage} />
 						<Route path="/dashboard" component={Dashboard} />
 						<Route path="/flashcard/new" component={AddForm} />
+						<Route path="/flashcard/detail" component={DetailSet} />
 					</Switch>
 				</div>
     </AuthContext.Provider>

@@ -139,11 +139,106 @@ code {
     padding: 15px 0;
     background-color: #f38375;
   }
-
-
 }
 
+.set-detail-learn{
+  background: #fff;
+  box-shadow: 0px 1px 5px 0px black;
+  padding: 25px 0;
+  position: relative;
+  .set-detail-wrapper{
+    display: flex;
+    .set-detail-info{
+      width: 40%;
+      margin-right: 15px;
+    }
+    .set-detail-slide{
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      .slide-wrapp {
+        width: 100%;
+        flex: auto;
+        margin-bottom: 10px;
+        .slide-item{
+          height: 100%;
+          position: relative;
+         overflow: hidden;
+         .keyword {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 20px;
+            font-weight: bold;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: bisque;
+          }
+          .mota {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            background: yellow;
+            transition: all 0.5s;
+          }
+        }
+      }
+      .slide-controls {
+        display: flex;
+        .ctrl span:last-child {
+          margin-left: 10px;
+        }
+        .cpleted {
+          flex: auto;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
 
+.set-detail-more {
+  background: #fff;
+  padding: 25px 0;
+  .item {
+    display: flex;
+    padding: 10px 45px 10px 15px;
+    box-shadow: 0 0 5px black;
+    position: relative;
+    margin-bottom: 10px;
+    .stt{
+      width: 30px;
+    }
+    .name{
+      width: 200px;
+      margin-right: 10px;
+    }
+    .descptn{
+      flex: auto;
+      margin-right: 10px;
+    }
+    .thumb {
+      width: 100px;
+    }
+    .more-dots {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      height: 10px;
+  }
+  }
+}
 
 .btnLogin {
   position: absolute;

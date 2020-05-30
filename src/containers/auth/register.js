@@ -33,6 +33,8 @@ const Register = ({ onMoveToLogin }) => {
       username: "",
       password: "",
       confirmPassword: "",
+      bio: "",
+      education: "",
       policy: false,
     },
     onSubmit: (values) => {
@@ -129,6 +131,34 @@ const Register = ({ onMoveToLogin }) => {
               {formik.errors.confirmPassword}
             </Form.Control.Feedback>
           </Form.Group>
+
+          <Form.Group controlId="formBasicPassword" className="text-left">
+            <Form.Label>Bio</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="bio"
+              value={formik.values.bio}
+              placeholder="Bio"
+            />
+
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword" className="text-left">
+            <Form.Label>Education</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="education"
+              isInvalid={formik.errors.password}
+              value={formik.values.education}
+              placeholder="Education"
+            />
+          </Form.Group>
+
           <Form.Group controlId="formBasicCheckbox">
             <p style={{ display: "inline-flex" }}>
               <Form.Check

@@ -23,7 +23,7 @@ const Header = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Auth/>
+            <Auth onHide={props.onHide} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="info" onClick={props.onHide}>
@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <>
       <Navbar>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/dashboard">
           <b className="m-4">
             <img src={logo} alt="" className="logo" />
           </b>

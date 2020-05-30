@@ -20,7 +20,7 @@ const SignInSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Login = ({ onMoveToRegister }) => {
+const Login = (props) => {
   const history = useHistory();
   const { setAuthUser } = useContext(authCtx);
 
@@ -47,6 +47,7 @@ const Login = ({ onMoveToRegister }) => {
           }
           setAuthUser(authUser);
           moveToDashBoard();
+          props.onHide();
         })
         .catch((e) => {
           console.log(e.message);
@@ -106,7 +107,13 @@ const Login = ({ onMoveToRegister }) => {
           </Form.Group>
 
           <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Remember me!" />
+            <Form.Check
+              type="checkbox"
+              label="Remember me"
+              name="rememberMe"
+              value={formik.values.rememberMe}
+              onChange={formik.handleChange}
+            />
           </Form.Group>
           <Button
             className="m-color border-none"
@@ -118,7 +125,7 @@ const Login = ({ onMoveToRegister }) => {
 
           <Form.Label>
             You don't have an account? &nbsp;
-            <span className="link" onClick={onMoveToRegister}>
+            <span className="link" onClick={props.onMoveToRegister}>
               Register
             </span>
             &nbsp; now!

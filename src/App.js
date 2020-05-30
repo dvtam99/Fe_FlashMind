@@ -8,6 +8,7 @@ import { useAsync } from "react-hook-async";
 import { Dashboard } from "./containers/dashboard";
 import HomePage from "./components/homepage";
 import AddForm from "./components/addform";
+import EditForm from "./components/editform";
 import DetailSet from "./components/detailset";
 import { me } from "./api/profile";
 import Setting from "./components/setting";
@@ -34,7 +35,8 @@ function App() {
           <Route path="/" exact component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/flashcard/new" component={AddForm} />
-          <Route path="/flashcard/detail" component={DetailSet} />
+          <Route path="/flashcard/edit" component={EditForm} />
+          <Route path="/setCard/:slug" component={DetailSet} />
           <Route path="/setting" component={Setting} />
           <Route path="/profile" component={Profile} />
         </Switch>

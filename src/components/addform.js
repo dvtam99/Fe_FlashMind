@@ -3,22 +3,30 @@ import React, { useState, useContext, useEffect } from "react";
 import { createSetCard } from '../api/flashcard';
 import authCtx from '../contexts/auth';
 import { Input, Textarea } from "./CustomeUI";
-
+import {useAsync} from "react-hook-async"
+import { uploadFile } from "../api/file";
 const AddForm = () => {
   const { authUser } = useContext(authCtx);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [share, setShare] = useState(false);
-  const [avatar, setAvatar] = useState('#');
+  const [avatar, setAvatar] = useState('public/demo.jpg');
 
   const [cardKeyword, setCardKeyword] = useState('');
   const [cardDesc, setCardDesc] = useState('');
 
   const [cardDetailArr, setCardDetailArr] = useState([]);
-
+  const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
   const [postingStatus, setPostingStatus] = useState(false);
-
+// debugger
+  const onChooseImage = (event) => {
+    console.log(event)
+    if (event.target.files.length < 1) return;
+    callUploadFileApi(event.target.files[0], authUser.token).then((res) =>
+      setAvatar(res.data)
+    );
+  };
   function handleSave() {
     if (!title || !description) {
       alert('Phai nhap title, description');
@@ -29,7 +37,7 @@ const AddForm = () => {
         description,
         date_created: (new Date()).toISOString(),
         folder: [],
-        empty: true,
+        empty: cardDetailArr.length === 0 ? true : false,
         share,
         avatar,
         detail: cardDetailArr
@@ -124,11 +132,18 @@ const AddForm = () => {
               <label>Ảnh đại diện cho bộ thẻ</label>
               <input
                 type="file"
-                onChange={
-                  (e) => setAvatar(`${process.env.REACT_APP_API_DOMAIN}/public/images/${e.target.files[0].name}`)
-                }
+                onChange={onChooseImage}
+                
               />
             </div>
+            <img
+                src={process.env.REACT_APP_API_DOMAIN +
+                  "/" +
+                  avatar}
+                alt=""
+                style={{ width: "60px", height: "60px" }}
+                className="border rounded-circle"
+              />
           </div>
         </div>
       </div>

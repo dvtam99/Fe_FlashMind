@@ -3,12 +3,14 @@ import { Container, Button, Modal } from "react-bootstrap";
 import { MOCK_DATA } from '../../data/MOCK_DATA';
 
 import AddSetCardForm from './AddSetCardForm';
+import AddCardItemForm from './AddCardItemForm';
 import SetItem from './setItem';
 
 import './dashboard.scss';
 
 const Dashboard = () => {
-	const [modalShow, setModalShow] = useState(false);
+	const [AddSetCardModalShow, setAddSetCardModalShow] = useState(false);
+	const [AddCardItemModalShow, setAddCardItemModalShow] = useState(false);
 
 	const AddCardSetModal = (props) => {
 		return (
@@ -29,9 +31,30 @@ const Dashboard = () => {
 		  </div>
 		);
 	};
+
+	const AddCardItemModal = (props) => {
+		return (
+		  <div>
+			<Modal
+			  {...props}
+			  size="lg"
+			  aria-labelledby="contained-modal-title-vcenter"
+			  centered
+			>
+			  <Modal.Header closeButton>
+				<Modal.Title id="contained-modal-title-vcenter">Add more flashcard</Modal.Title>
+			  </Modal.Header>
+			  <Modal.Body>
+				<AddCardItemForm />
+			  </Modal.Body>
+			</Modal>
+		  </div>
+		);
+	};
   return (
     <Container>
-		<AddCardSetModal show={modalShow} onHide={() => setModalShow(false)} />
+		<AddCardSetModal show={AddSetCardModalShow} onHide={() => setAddSetCardModalShow(false)} />
+		<AddCardItemModal show={AddCardItemModalShow} onHide={() => setAddCardItemModalShow(false)} />
 
 		<div className="dashboard-wrapper">
 			<div className="sidebar">
@@ -70,7 +93,7 @@ const Dashboard = () => {
 					<div className="card-section">
 						<div className="section-title">
 							<h3>Your own flashcard</h3>
-							<button onClick={() => setModalShow(true)}>New</button>
+							<button onClick={() => setAddSetCardModalShow(true)}>New</button>
 						</div>
 						<div className="section-body">
 
@@ -84,6 +107,7 @@ const Dashboard = () => {
 									<SetItem
 										key={item.id}
 										item={item}
+
 									/>
 								))
 							}

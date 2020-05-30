@@ -23,7 +23,7 @@ const Header = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Auth />
+            <Auth/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="info" onClick={props.onHide}>

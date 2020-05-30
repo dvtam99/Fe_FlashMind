@@ -10,6 +10,8 @@ import HomePage from "./components/homepage";
 import AddForm from "./components/addform";
 import DetailSet from "./components/detailset";
 import { me } from "./api/profile";
+import Setting from "./components/setting";
+import Profile from "./components/setting/profile";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
@@ -35,6 +37,8 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/flashcard/new" component={AddForm} />
           <Route path="/flashcard/detail" component={DetailSet} />
+          <Route path="/setting" component={Setting} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </div>
     </AuthContext.Provider>

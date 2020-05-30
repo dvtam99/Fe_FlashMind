@@ -1,9 +1,11 @@
 import React, { useContext, useState, useRef } from "react";
 import { Popover, PopoverHeader, PopoverBody, Button } from "reactstrap";
 // import { Link } from "react-router-dom";
+import Setting from "../setting/index";
 import defaultUser from "./avatar.jpg";
 import authCtx from "../../contexts/auth";
 import "../../css/avatar.css";
+import { Link } from "react-router-dom";
 const defaultSize = 40;
 
 const sizeScale = {
@@ -33,9 +35,9 @@ const Avatar = ({ size, src}) => {
       >
         <PopoverHeader>@{authUser.user.username}</PopoverHeader>
         <PopoverBody className="d-flex flex-column">
-          <Button color="info" className="mb-2">
-            Profile
-          </Button>
+          <Link to="/setting" color="info" className="mb-2">
+            Setting
+          </Link>
           <Button color="info" className="mb-2">
             Setting
           </Button>

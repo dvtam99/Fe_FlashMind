@@ -39,7 +39,9 @@ const Register = ({ onMoveToLogin }) => {
     },
     onSubmit: (values) => {
       fetchRegister(values.username, values.password)
-        .then(() => setSuccessModalVisible(true))
+        .then(() => {
+          setSuccessModalVisible(true)
+        })
         .catch(() => {
           setFailureModalVisible(true);
         });
@@ -57,7 +59,10 @@ const Register = ({ onMoveToLogin }) => {
           <Button
             variant="success"
             size="sm"
-            onClick={() => setSuccessModalVisible(false)}
+            onClick={() => {
+              setSuccessModalVisible(false)
+              onMoveToLogin()
+            }}
           >
             Confirm
           </Button>

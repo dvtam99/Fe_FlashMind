@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: "Roboto Mono", monospace;
+  font-family: "Montserrat";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", "Montserrat"
     monospace;
 }
 .inline-flex {

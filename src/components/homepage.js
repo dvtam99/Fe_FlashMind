@@ -5,7 +5,7 @@ const HomePage = () => {
     <>
       <div id ="introduce-body" >
         <div className="left-body">
-            <div className="title">
+            <div className="title" style={{fontWeight:"900"}}>
                 <h2> Vươn tới</h2>
                 <h2> phiên bản tốt hơn</h2>
                 <h2> của chính bạn</h2>

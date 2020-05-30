@@ -19,7 +19,7 @@ const Header = () => {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Login or Register
+              Đăng nhập hoặc đăng ký
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -44,8 +44,8 @@ const Header = () => {
           </b>
         </Navbar.Brand>
         <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light">Search</Button>
+          <FormControl type="text" placeholder="VD: javascript" className="mr-sm-2" />
+          <Button variant="outline-light">Tìm kiếm</Button>
         </Form>
         {!authUser ? (
           <span
@@ -54,7 +54,7 @@ const Header = () => {
             }}
             className="spanLogin"
           >
-            Login or Register
+            Đăng nhập hoặc đăng ký
           </span>
         ) : (
           <Avatar size="xl" src={authUser.user.photoUrl} />

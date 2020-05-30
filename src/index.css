@@ -113,22 +113,22 @@ code {
   font-weight: 600;
 }
 
-#navbar .content .inp-search {
+.inp-search {
   padding: 5px 10px;
   border-radius: 10px;
   border: none;
 }
-#navbar .content .inp-search::placeholder {
+.inp-search::placeholder {
   color: #cacaca;
 }
-#navbar .content .bnt-search {
+.bnt-search {
   padding: 1px;
   border-radius: 50%;
   border: 2px solid white;
   background-color: transparent;
   transform: translateY(3px);
 }
-#navbar .content .bnt-search i {
+.bnt-search i {
   color: white;
   font-size: 20px;
   width: 25px;

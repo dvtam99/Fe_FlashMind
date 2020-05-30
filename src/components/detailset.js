@@ -1,7 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Prompt,
+    useParams,
+    useLocation
+  } from "react-router-dom";
 
 const DetailSet = () => {
+    const [error, setError] = useState(null);
+	const [isLoaded, setIsLoaded] = useState(false);
+    const [result, setResult] = useState(null);
+    
+    let { slug } = useParams();
+
     const [slideActive, setSlideActive] = useState(0);
+
+
     function handlePrev () {
         if(slideActive === 0){
             return
@@ -10,62 +28,61 @@ const DetailSet = () => {
         }
     }
     function handleNext () {
-        if(slideActive === 4){
+        if(slideActive === result.length - 1){
             return
         } else {
             setSlideActive(slideActive + 1);
         }
     }
+
+    useEffect(() => {
+		fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`, {
+			method: 'get',
+			// headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
+		})
+			.then(
+				res => res.json()
+			)
+			.then(
+				(result) => {
+                    setIsLoaded(true);
+                    console.log(result);
+                    
+					setResult(result);
+				},
+				(error) => {
+					setIsLoaded(true);
+					setError(error);
+				}
+			)
+    }, []);
+
+if (!result) return null
   return (
     <>
       <div className="set-detail-learn">
         <div className="container">
           <div className="set-detail-wrapper">
             <div className="set-detail-info">
-              <h1>Tạo nhóm thẻ mới</h1>
-              <span>Created at: 20/05/2020</span>
+              <h1>{result.title}</h1>
+              <span>Created at: {result.date_create}</span>
               <p>
-                Là thành viên của bộ phận phát triển phần mềm, bạn sẽ nghiên cứu
-                và phát triển các ứng dụng thông tin giải trí trên ô tô, các hệ
-                thống thông tin dẫn đường (AVN), hệ thống thông tin và cảnh báo
-                về tình trạng xe (Cluster) và các hệ thống viễn thông
-                (Telematics).
+                {result.description}
               </p>
             </div>
 
             <div className="set-detail-slide">
                 <div className="slide-wrapp">
-                   <SlideItem 
-                        key={0}
-                        active={slideActive === 0}
-                        keyword={'Keyword here'}
-                        description={'description here'}
-                   />
-                   <SlideItem 
-                        key={1}
-                        active={slideActive === 1}
-                        keyword={'Keyword 1 here'}
-                        description={'description 1 here'}
-                   />
-                   <SlideItem 
-                        key={2}
-                        active={slideActive === 2}
-                        keyword={'Keyword 2 here'}
-                        description={'description 2 here'}
-                   />
-                   <SlideItem 
-                        key={3}
-                        active={slideActive === 3}
-                        keyword={'Keyword 3 here'}
-                        description={'description 3 here'}
-                   />
-                   <SlideItem 
-                        key={4}
-                        active={slideActive === 4}
-                        keyword={'Keyword 4 here'}
-                        description={'description 4 here'}
-                   />
-
+                    {
+                        result.detail.map((item, idx) => (
+                            <SlideItem 
+                                 key={idx}
+                                 active={slideActive === idx}
+                                 keyword={item.card_title}
+                                 description={item.card_desc}
+                            />
+                        ))
+                    }
                 </div>
                 <div className="slide-controls">
                     <div className="ctrl">

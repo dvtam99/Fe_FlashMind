@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useAsync } from "react-hook-async";
 
 import authCtx from "../contexts/auth";
-
+import ReactLoading from "react-loading";
 import HomePage from "../components/homepage"
 
 import { me } from "../api/profile";
@@ -22,7 +22,11 @@ const withAuth = (WrappedComponent) => (props) => {
   }, [authUser, fetchProfile, setAuthUser]);
 
   if (profileApi.loading) {
-    return <div>loading...</div>;
+    return (
+      <div className="loading">
+        <ReactLoading type="spin" color="#ffa5ab" />
+      </div>
+    );
   }
   if (authUser !== null) {
     // eslint-disable-next-line react/jsx-props-no-spreading

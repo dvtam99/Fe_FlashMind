@@ -148,3 +148,21 @@ code {
   border-radius: 50%;
   border: 1px solid white;
 }
+.icon {
+  color: rgb(255, 165, 171);
+  margin: 5px;
+  font-size: 16px;
+}
+.font {
+  font-size: 16px;
+}
+.io:hover {
+  background-color: #fadbd8;
+  color: rgb(255, 165, 171) !important;
+  text-decoration: none !important;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

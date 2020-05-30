@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Navbar, Form, FormControl, Button, Modal } from "react-bootstrap";
 
-
 import Auth from "../../containers/auth";
 import Avatar from "../avatar/index";
 import logo from "./flashmind-logo.png";
@@ -9,7 +8,6 @@ import authCtx from "../../contexts/auth";
 import {loadData} from "../../api/search"
 import {useAsync} from "react-hook-async"
 import "../../css/header.css"
-
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);

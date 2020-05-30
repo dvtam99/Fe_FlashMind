@@ -18,7 +18,6 @@ function App() {
 
   const [profileApi, fetchProfile] = useAsync(null, me);
   useEffect(() => {
-    debugger;
     if (!authUser) {
       const jwt = localStorage.getItem("jwt");
       if (jwt) {
@@ -26,7 +25,6 @@ function App() {
       }
     }
   }, [authUser, fetchProfile, setAuthUser]);
-
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>

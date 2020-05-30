@@ -3,7 +3,7 @@ import { Container, Button, Modal } from "react-bootstrap";
 import {Link } from "react-router-dom";
 import { MOCK_DATA } from '../../data/MOCK_DATA';
 
-
+import withAuth from "../../hoc/authHoc"
 
 import AddSetCardForm from './AddSetCardForm';
 import AddCardItemForm from './AddCardItemForm';
@@ -158,4 +158,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withAuth(Dashboard);

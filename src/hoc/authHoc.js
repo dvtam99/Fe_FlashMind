@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { useAsync } from "react-hook-async";
 
 import authCtx from "../contexts/auth";
-import Auth from "../containers/auth";
+
+import HomePage from "../components/homepage"
 
 import { me } from "../api/profile";
 
@@ -21,14 +22,14 @@ const withAuth = (WrappedComponent) => (props) => {
   }, [authUser, fetchProfile, setAuthUser]);
 
   if (profileApi.loading) {
-    return <div>loading</div>;
+    return <div>loading...</div>;
   }
   if (authUser !== null) {
     // eslint-disable-next-line react/jsx-props-no-spreading
     return <WrappedComponent {...props} />;
   }
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Auth {...props} />;
+  return <HomePage {...props} />;
 };
 
 export default withAuth;

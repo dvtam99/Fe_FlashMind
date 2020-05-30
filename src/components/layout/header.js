@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Navbar, Form, FormControl, Button, Modal } from "react-bootstrap";
 
 
@@ -6,11 +6,27 @@ import Auth from "../../containers/auth";
 import Avatar from "../avatar/index";
 import logo from "./flashmind-logo.png";
 import authCtx from "../../contexts/auth";
+import {loadData} from "../../api/search"
+import {useAsync} from "react-hook-async"
+import "../../css/header.css"
 
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
   const { authUser } = useContext(authCtx);
+  const [value, setValue] = useState(null)
+  const [searchApiData, fetchSearchSetCard] = useAsync(null, loadData);
+   
+useEffect(() => {
+  fetchSearchSetCard(value)
+  .then((setCard) => {          
+    console.log(setCard)
+  })
+  .catch((e) => {
+    console.log(e.message);
+  });
+}, [value]);
+
   const AuthModal = (props) => {
     return (
       <div>
@@ -47,8 +63,15 @@ const Header = () => {
           </b>
         </Navbar.Brand>
         <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" className = "inp-search"/>
-          <Button variant="outline-light">Search</Button>
+          <FormControl type="text" placeholder="Search" value={value} 
+          onChange={e=>setValue(e.target.value)} 
+          className = "inp-search my-3"/>
+          <Button 
+            variant="outline-light" 
+            className ="bnt-search"
+            >
+              <i class="material-icons">search</i>
+          </Button>
         </Form>
         {!authUser ? (
           <span

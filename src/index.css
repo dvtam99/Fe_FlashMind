@@ -156,7 +156,13 @@ code {
 .font {
   font-size: 16px;
 }
-a:hover {
-  background-color: rgb(255, 165, 171);
-  color: whitesmoke !important;
+.io:hover {
+  background-color: #fadbd8;
+  color: rgb(255, 165, 171) !important;
+  text-decoration: none !important;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }

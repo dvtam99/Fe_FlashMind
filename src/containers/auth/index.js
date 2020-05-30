@@ -12,7 +12,10 @@ const Auth = (props) => {
           onMoveToRegister={() => setHaveAccount(false)}
         />
       ) : (
-        <Register onMoveToLogin={() => setHaveAccount(true)} />
+        <Register 
+          
+          onMoveToLogin={() => setHaveAccount(true)}
+         />
       )}
     </div>
   );

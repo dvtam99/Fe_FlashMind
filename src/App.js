@@ -15,7 +15,6 @@ function App() {
   const [authUser, setAuthUser] = useState(null);
 
   const [profileApi, fetchProfile] = useAsync(null, me);
-
   useEffect(() => {
     debugger;
     if (!authUser) {
@@ -25,6 +24,7 @@ function App() {
       }
     }
   }, [authUser, fetchProfile, setAuthUser]);
+
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>

@@ -16,10 +16,14 @@ const sizeScale = {
   xl: 1.5,
 };
 
-const Avatar = ({ size, src, onClick }) => {
+const Avatar = ({ size, src}) => {
   const [show, setShow] = useState(false);
-  const { authUser } = useContext(authCtx);
+  const { authUser, setAuthUser } = useContext(authCtx);
 
+  const onClickLogOut=()=>{
+    localStorage.setItem("jwt", null);
+    setAuthUser(null)
+  }
   const url = src ? `${process.env.REACT_APP_API_DOMAIN}/${src}` : defaultUser;
   return (
     <>
@@ -36,6 +40,9 @@ const Avatar = ({ size, src, onClick }) => {
           </Link>
           <Button color="info" className="mb-2">
             Setting
+          </Button>
+          <Button color="info" className="mb-2" onClick = {onClickLogOut}>
+            Logout
           </Button>
         </PopoverBody>
       </Popover>

@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Navbar, Form, FormControl, Button, Modal } from "react-bootstrap";
 
+
 import Auth from "../../containers/auth";
 import Avatar from "../avatar/index";
 import logo from "./flashmind-logo.png";
 import authCtx from "../../contexts/auth";
+
+
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
   const { authUser } = useContext(authCtx);
@@ -44,7 +47,7 @@ const Header = () => {
           </b>
         </Navbar.Brand>
         <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" className = "inp-search"/>
           <Button variant="outline-light">Search</Button>
         </Form>
         {!authUser ? (

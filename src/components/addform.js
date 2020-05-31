@@ -39,6 +39,7 @@ const AddForm = () => {
         folder: [],
         empty: cardDetailArr.length === 0 ? true : false,
         share,
+        finish: false,
         avatar,
         detail: cardDetailArr
       }

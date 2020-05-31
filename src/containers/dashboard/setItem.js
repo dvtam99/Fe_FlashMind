@@ -2,6 +2,25 @@ import React from "react";
 
 const SetItem = (props) => {
     const {avatar, title, date_created, author, empty, detail, slug} = props.item;
+function handleDelete() {
+    alert('Are you sure?');
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
+    method: 'delete',
+    body: JSON.stringify(props.item)
+    })
+    .then(
+        res => res.json()
+    )
+    .then(
+        (result) => {
+        alert('Xoa thanh cong');
+        document.location.reload();
+        },
+        (error) => {
+        console.log(error.message);
+        }
+    )
+}
     return (
         <div className="set-item">
 
@@ -47,7 +66,11 @@ const SetItem = (props) => {
 
                 <div className="edit" title="Edit this  set">
                     <span role="img" aria-label="edit-image">🧹</span>
-                    <a href="/flashcard/edit">Edit</a>
+                    <a href={`/flashcard/edit/${slug}`}>Edit</a>
+                </div>
+                <div className="delete" title="Delete this set" onClick={handleDelete}>
+                    <span role="img" aria-label="edit-image">🔴</span>
+                    Delete
                 </div>
 
             </div>

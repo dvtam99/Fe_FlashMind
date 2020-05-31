@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { useAsync } from "react-hook-async";
+import ReactLoading from "react-loading";
 
 import authCtx from "../contexts/auth";
 import Auth from "../containers/auth";
-import ReactLoading from "react-loading";
 
 import { me } from "../api/profile";
 

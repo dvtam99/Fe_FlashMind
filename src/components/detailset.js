@@ -5,11 +5,11 @@ import {
   Switch,
   Route,
   Link,
-  Prompt,
   useParams,
+  Prompt,
   useLocation,
 } from "react-router-dom";
-import { Form } from "reactstrap";
+import Loading from "../components/layout/loading";
 
 const DetailSet = () => {
   const [error, setError] = useState(null);
@@ -58,6 +58,7 @@ const DetailSet = () => {
   if (!result) return null;
   return (
     <>
+      <Loading show={isLoaded} />
       <div className="set-detail-learn">
         <Row>
           <Col sm={2}>
@@ -109,7 +110,7 @@ const DetailSet = () => {
             </div>
           </Col>
         </Row>
-        <hr />
+        <hr width="80%" />
         <Row className="mb-5">
           <div className="pl-5 ml-5">
             <img

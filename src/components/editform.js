@@ -6,6 +6,7 @@ import { useAsync } from "react-hook-async";
 import { uploadFile } from "../api/file";
 import { updateSetCard } from "../api/flashcard";
 
+import withAuth from "../hoc/authHoc";
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +34,7 @@ const EditForm = () => {
   const [cardDesc, setCardDesc] = useState("");
   const [postingStatus, setPostingStatus] = useState(false);
   const [updateApiData, fetchUpdateApiData] = useAsync(null, updateSetCard);
+
   const onChooseImage = (event) => {
     console.log(event);
     if (event.target.files.length < 1) return;
@@ -265,4 +267,4 @@ const EditForm = () => {
   }
 };
 
-export default EditForm;
+export default withAuth(EditForm);

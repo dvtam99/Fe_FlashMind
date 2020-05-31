@@ -13,6 +13,7 @@ import DetailSet from "./components/detailset";
 import { me } from "./api/profile";
 import Setting from "./components/setting";
 import Profile from "./components/setting/profile";
+import Auth from "./containers/auth/index";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
@@ -38,6 +39,7 @@ function App() {
           <Route path="/flashcard/edit/:slug" component={EditForm} />
           <Route path="/setCard/:slug" component={DetailSet} />
           <Route path="/setting" component={Setting} />
+          <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
         </Switch>
       </div>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import withAuth from "../../hoc/authHoc";
 import SetItem from "./setItem";
 import authCtx from "../../contexts/auth";
-
+import Loading from "../../components/layout/loading";
 import "./dashboard.scss";
 
 const Dashboard = () => {
@@ -36,7 +36,7 @@ const Dashboard = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Loading show={isLoaded} />;
   } else {
     // console.log(article);
     return (

@@ -171,3 +171,11 @@ code {
 .p0 {
   padding: 0px;
 }
+.break {
+  border-radius: 5px;
+  height: 35px;
+  width: 3px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: #fadbd8;
+}

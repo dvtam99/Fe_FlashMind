@@ -3,8 +3,7 @@ import { useAsync } from "react-hook-async";
 import ReactLoading from "react-loading";
 
 import authCtx from "../contexts/auth";
-import ReactLoading from "react-loading";
-import HomePage from "../components/homepage"
+import HomePage from "../components/homepage";
 
 import { me } from "../api/profile";
 

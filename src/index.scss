@@ -12,49 +12,49 @@ code {
     monospace;
 }
 
-.App{
-	height: 100vh;
+.App {
+  height: 100vh;
 }
 #introduce-body {
-    height: calc(100% - 86px);
-    overflow: hidden;
-    display: flex;
+  height: calc(100% - 86px);
+  overflow: hidden;
+  display: flex;
 }
 
 #introduce-body > div {
-    width: 50%;
+  width: 50%;
 }
-.left-body{
-	color: #fff;
-	background-color: #AC4659;
-	padding: 75px 150px;
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
+.left-body {
+  color: #fff;
+  background-color: #ac4659;
+  padding: 75px 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.right-body{
-	background-color: #DA627D;
-	color: #fff;
+.right-body {
+  background-color: #da627d;
+  color: #fff;
 }
 
 #introduce-body .left-body button {
-    background-color: #F38375;
-    border-radius: 5px;
-    padding: 15px;
-    border: none;
-    color: white;
-    margin: 30px 0px;
-    font-weight: bold;
+  background-color: #f38375;
+  border-radius: 5px;
+  padding: 15px;
+  border: none;
+  color: white;
+  margin: 30px 0px;
+  font-weight: bold;
 }
 
-#introduce-body .right-body .content{
-	text-align: center;
-    margin-top: 50px;
+#introduce-body .right-body .content {
+  text-align: center;
+  margin-top: 50px;
 }
-#introduce-body .right-body .content ul{
-	text-align: left;
-    width: 70%;
-    margin: 0 auto;
+#introduce-body .right-body .content ul {
+  text-align: left;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .set-meta {
@@ -65,24 +65,26 @@ code {
   .set-meta-wrapper {
     display: flex;
   }
-  .set-avatar{
+  .set-avatar {
     width: 150px;
     height: 100px;
   }
-  .set-meta-form{
+  .set-meta-form {
     flex: auto;
     padding-right: 200px;
-    input[type="text"], textarea{
+    input[type="text"],
+    textarea {
       display: block;
       width: 100%;
     }
-    label[for="set-title"], label[for="set-desc"]{
+    label[for="set-title"],
+    label[for="set-desc"] {
       display: block;
     }
     textarea {
       height: 100px;
     }
-    input[type="checkbox"]{
+    input[type="checkbox"] {
       margin-right: 5px;
     }
   }
@@ -91,7 +93,7 @@ code {
 .set-detail {
   background: #f4f4f4;
   padding: 25px 0;
-  .card-detail-item{
+  .card-detail-item {
     box-shadow: 0 0 5px black;
     background: #fff;
     margin-bottom: 15px;
@@ -99,7 +101,7 @@ code {
       display: flex;
       padding: 10px 15px;
       border-bottom: 1px solid #ddd;
-      & > div{
+      & > div {
         width: 100px;
         text-align: right;
       }
@@ -107,33 +109,33 @@ code {
         flex: auto;
       }
     }
-    .body{
+    .body {
       padding: 15px;
       display: flex;
-      .keyword{
+      .keyword {
         width: 200px;
         margin-right: 15px;
-        input{
+        input {
           width: 100%;
         }
       }
-      .description{
+      .description {
         flex: auto;
-        textarea{
+        textarea {
           width: 100%;
         }
       }
-      .photo{
+      .photo {
         width: 100px;
         margin-left: 15px;
       }
     }
-    &.add-card{
+    &.add-card {
       padding: 15px;
       text-align: center;
     }
   }
-  button.finish{
+  button.finish {
     display: block;
     width: 100%;
     padding: 15px 0;
@@ -141,18 +143,20 @@ code {
   }
 }
 
-.set-detail-learn{
+.set-detail-learn {
   background: #fff;
   box-shadow: 0px 1px 5px 0px black;
   padding: 25px 0;
-  position: relative;
-  .set-detail-wrapper{
+  //position: relative;
+  height: 500px;
+  .set-detail-wrapper {
     display: flex;
-    .set-detail-info{
-      width: 40%;
+    .set-detail-info {
+      width: 30%;
       margin-right: 15px;
     }
-    .set-detail-slide{
+    .set-detail-slide {
+      height: 400px;
       flex: auto;
       display: flex;
       flex-direction: column;
@@ -160,11 +164,11 @@ code {
         width: 100%;
         flex: auto;
         margin-bottom: 10px;
-        .slide-item{
+        .slide-item {
           height: 100%;
           position: relative;
-         overflow: hidden;
-         .keyword {
+          overflow: hidden;
+          .keyword {
             height: 100%;
             display: flex;
             justify-content: center;
@@ -217,14 +221,14 @@ code {
     box-shadow: 0 0 5px black;
     position: relative;
     margin-bottom: 10px;
-    .stt{
+    .stt {
       width: 30px;
     }
-    .name{
+    .name {
       width: 200px;
       margin-right: 10px;
     }
-    .descptn{
+    .descptn {
       flex: auto;
       margin-right: 10px;
     }
@@ -236,7 +240,7 @@ code {
       top: 0;
       right: 15px;
       height: 10px;
-  }
+    }
   }
 }
 
@@ -284,7 +288,11 @@ code {
 }
 
 @media (min-width: 1200px) {
-  .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1080px;
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1080px;
   }
 }

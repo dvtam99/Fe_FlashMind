@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 .inline-flex {
   display: inline-flex;
@@ -18,7 +18,7 @@ code {
   right: 70px;
 }
 .logo {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   width: 250px;
 }
 
@@ -164,4 +164,10 @@ code {
   position: absolute;
   top: 50%;
   left: 50%;
+}
+.d-grid {
+  display: grid;
+}
+.p0 {
+  padding: 0px;
 }

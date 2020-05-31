@@ -35,7 +35,7 @@ function App() {
           <Route path="/" exact component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/flashcard/new" component={AddForm} />
-          <Route path="/flashcard/edit" component={EditForm} />
+          <Route path="/flashcard/edit/:slug" component={EditForm} />
           <Route path="/setCard/:slug" component={DetailSet} />
           <Route path="/setting" component={Setting} />
           <Route path="/profile" component={Profile} />

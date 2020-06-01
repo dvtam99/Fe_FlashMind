@@ -59,7 +59,7 @@ code {
 
 .set-meta {
   background: #fff;
-  box-shadow: 0px 1px 5px 0px black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 25px 0;
   position: relative;
   .set-meta-wrapper {
@@ -94,7 +94,7 @@ code {
   background: #f4f4f4;
   padding: 25px 0;
   .card-detail-item {
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #fff;
     margin-bottom: 15px;
     .header {
@@ -145,7 +145,7 @@ code {
 
 .set-detail-learn {
   background: #fff;
-  box-shadow: 0px 1px 5px 0px black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 25px 0;
   //position: relative;
   height: 500px;
@@ -218,7 +218,7 @@ code {
   .item {
     display: flex;
     padding: 10px 45px 10px 15px;
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: relative;
     margin-bottom: 10px;
     .stt {

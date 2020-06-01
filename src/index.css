@@ -191,3 +191,12 @@ code {
 .text {
   color: white;
 }
+.control {
+  position: absolute;
+  right: 150px;
+}
+.icon-ctrl {
+  color: rgb(255, 165, 171);
+  margin: 5px;
+  font-size: 30 px;
+}

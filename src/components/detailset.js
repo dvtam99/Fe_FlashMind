@@ -112,21 +112,35 @@ const DetailSet = () => {
         </Row>
         <hr width="80%" />
         <Row className="mb-5">
-          <div className="pl-5 ml-5">
-            <img
-              src={
-                process.env.REACT_APP_API_DOMAIN + "/" + result.author.photoUrl
-              }
-              alt=""
-              style={{ width: "60px", height: "60px" }}
-              className="border rounded-circle"
-            />
-            <span className="position-absolute ml-2">
-              <p style={{ color: "#BDC3C7", margin: "0px" }}>Created by</p>
-              <p>{result.author.username}</p>
-            </span>
-            <div>{result.description}</div>
-          </div>
+          <Col sm={6}>
+            <div className="pl-5 ml-5">
+              <img
+                src={
+                  process.env.REACT_APP_API_DOMAIN +
+                  "/" +
+                  result.author.photoUrl
+                }
+                alt=""
+                style={{ width: "60px", height: "60px" }}
+                className="border rounded-circle"
+              />
+              <span className="position-absolute ml-2">
+                <p style={{ color: "#BDC3C7", margin: "0px" }}>Created by</p>
+                <p>{result.author.username}</p>
+              </span>
+              <div>{result.description}</div>
+            </div>
+          </Col>
+          <Col sm={6}>
+            <div className="control">
+              <i class="material-icons icon-ctrl" title="Edit this card">
+                edit
+              </i>
+              <i class="material-icons icon-ctrl" title="Delete this card">
+                delete
+              </i>
+            </div>
+          </Col>
         </Row>
       </div>
 

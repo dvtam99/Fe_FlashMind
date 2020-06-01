@@ -40,7 +40,7 @@ const Dashboard = () => {
   } else {
     // console.log(article);
     return (
-      <Container>
+      <div className = "mx-5">
         <div className="dashboard-wrapper">
           <div className="sidebar">
             <div className="sidebar-item">FlashCard</div>
@@ -79,9 +79,9 @@ const Dashboard = () => {
             <div className="mainbar-content">
               <div className="card-section">
                 <div className="section-title">
-                  <h3>Your own flashcard</h3>
+                  <h2>Your own flashcard</h2>
                   <Link to="/flashcard/new">
-                    <button>New</button>
+                    <button>New +</button>
                   </Link>
                 </div>
                 <div className="section-body">
@@ -96,7 +96,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     );
   }
 };

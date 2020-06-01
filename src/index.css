@@ -179,3 +179,24 @@ code {
   margin-right: 15px;
   background-color: #fadbd8;
 }
+.large_icon {
+  font-size: 68px;
+  color: lightpink;
+}
+.card_setting {
+  width: 100%;
+  height: 100%;
+  background-color: #f5b7b1;
+}
+.text {
+  color: white;
+}
+.control {
+  position: absolute;
+  right: 150px;
+}
+.icon-ctrl {
+  color: rgb(255, 165, 171);
+  margin: 5px;
+  font-size: 30 px;
+}

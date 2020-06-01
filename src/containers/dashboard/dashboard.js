@@ -7,6 +7,11 @@ import authCtx from "../../contexts/auth";
 import Loading from "../../components/layout/loading";
 import "./dashboard.scss";
 
+const style = {
+  fontSize: "24px",
+  color: "lightPink",
+  margin: "10px",
+};
 const Dashboard = () => {
   const { authUser } = useContext(authCtx);
   const [error, setError] = useState(null);
@@ -40,7 +45,7 @@ const Dashboard = () => {
   } else {
     // console.log(article);
     return (
-      <div className = "mx-5">
+      <div className="mx-5">
         <div className="dashboard-wrapper">
           <div className="sidebar">
             <div className="sidebar-item">FlashCard</div>
@@ -52,7 +57,15 @@ const Dashboard = () => {
                 <li>ReactJS</li>
               </ul>
             </div>
-            <div className="sidebar-footer">@2020 FlashMind</div>
+            <div className="sidebar-footer">
+              <a href="#">Privacy Policy</a>
+              <p>@2020 FlashMind</p>
+              <p className="text-center">
+                <i class="fa fa-facebook" style={style}></i>
+                <i class="fa fa-twitter" style={style}></i>
+                <i class="fa fa-instagram" style={style}></i>
+              </p>
+            </div>
           </div>
           <div className="mainbar">
             <div className="filterBar">

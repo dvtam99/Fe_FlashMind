@@ -145,10 +145,9 @@ code {
 
 .set-detail-learn {
   background: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 25px 0;
-  //position: relative;
+  padding: 25px;
   height: 500px;
+
   .set-detail-wrapper {
     display: flex;
     .set-detail-info {
@@ -161,13 +160,17 @@ code {
       display: flex;
       flex-direction: column;
       .slide-wrapp {
-        width: 100%;
+        width: 80%;
         flex: auto;
         margin-bottom: 10px;
         .slide-item {
+          text-align: center;
+          padding: 50px;
           height: 100%;
           position: relative;
           overflow: hidden;
+          box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.15);
+          border-radius: 0.3125rem;
           .keyword {
             height: 100%;
             display: flex;
@@ -181,7 +184,7 @@ code {
             top: 0;
             left: 0;
             z-index: 1;
-            background: bisque;
+            background: white;
           }
           .mota {
             display: flex;
@@ -193,7 +196,7 @@ code {
             position: absolute;
             left: 0;
             z-index: 2;
-            background: yellow;
+            background: bisque;
             transition: all 0.5s;
           }
         }
@@ -201,7 +204,8 @@ code {
       .slide-controls {
         display: flex;
         .ctrl span:last-child {
-          margin-left: 10px;
+          //margin-left: 10px;
+          text-align: center;
         }
         .cpleted {
           flex: auto;
@@ -213,7 +217,6 @@ code {
 }
 
 .set-detail-more {
-  background: #fff;
   padding: 25px 0;
   .item {
     display: flex;

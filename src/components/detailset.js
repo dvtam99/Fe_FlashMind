@@ -15,6 +15,7 @@ const DetailSet = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [result, setResult] = useState(null);
+  const [index, setIndex] = useState(1);
 
   let { slug } = useParams();
 
@@ -24,14 +25,16 @@ const DetailSet = () => {
     if (slideActive === 0) {
       return;
     } else {
+      setIndex(index - 1);
       setSlideActive(slideActive - 1);
     }
   }
   function handleNext() {
-    if (slideActive === result.length - 1) {
+    if (slideActive >= result.detail.length - 1) {
       return;
     } else {
       setSlideActive(slideActive + 1);
+      setIndex(index + 1);
     }
   }
 
@@ -60,10 +63,10 @@ const DetailSet = () => {
     <>
       <Loading show={isLoaded} />
       <div className="set-detail-learn">
+        <h3 className="ml-5 mt-5">{result.title}</h3>
         <Row>
           <Col sm={2}>
             <div className="set-detail-info ml-5 mt-3 d-grid ">
-              <h3>{result.title}</h3>
               <Link to="/setting" className="p-2 io" block>
                 <i class="material-icons icon">settings</i>
                 Flashcard
@@ -90,6 +93,7 @@ const DetailSet = () => {
                     {result.detail.map((item, idx) => (
                       <SlideItem
                         key={idx}
+                        index={idx}
                         active={slideActive === idx}
                         keyword={item.card_title}
                         description={item.card_desc}
@@ -98,12 +102,28 @@ const DetailSet = () => {
                   </div>
                   <div className="slide-controls">
                     <div className="ctrl">
-                      <span onClick={handlePrev}>prev</span>
-                      <span onClick={handleNext}>next</span>
+                      <span onClick={handlePrev}>
+                        <i
+                          className="fa fa-arrow-left icon-ctrl"
+                          title="Previous question"
+                        ></i>
+                      </span>
+                      <span className="text-ctrl">
+                        {index + "/" + result.detail.length}
+                      </span>
+                      <span onClick={handleNext}>
+                        <i
+                          className="fa fa-arrow-right icon-ctrl"
+                          title="Next question"
+                        ></i>
+                      </span>
                     </div>
-                    <div className="cpleted">
-                      <span>mark as completed</span>
-                    </div>
+                    <span className="float-right icon-check">
+                      <i
+                        class="fa fa-check icon-ctrl"
+                        title="I have remember this question"
+                      ></i>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -133,6 +153,7 @@ const DetailSet = () => {
           </Col>
           <Col sm={6}>
             <div className="control">
+              <i class="fa fa-share icon-ctrl" title="Share this question"></i>
               <i class="material-icons icon-ctrl" title="Edit this card">
                 edit
               </i>
@@ -144,9 +165,13 @@ const DetailSet = () => {
         </Row>
       </div>
 
-      <div className="set-detail-more">
-        <div className="container mt-5 pt-5">
-          <h2>Flashcard có liên quan</h2>
+      <div className="set-detail-more mt-5 pt-5">
+        <div className="container mt-5 pt-5 bg-f4">
+          <h3 className="mt-5">Terms in this set ({result.detail.length})</h3>
+          {result.detail.map((item, idx) => (
+            <QuestionItem keyword={item.card_title} desc={item.card_desc} />
+          ))}
+          <h3 className="mt-5">Flashcard có liên quan</h3>
           <div className="item">
             <span className="stt">1</span>
             <span className="name">Name</span>
@@ -185,8 +210,11 @@ const SlideItem = (props) => {
       style={{ display: props.active ? "block" : "none" }}
     >
       <div className="keyword" onClick={() => setTopPosition("0px")}>
-        <h3>{props.keyword}</h3>
-        <small>Click to see description!</small>
+        <h3>
+          {props.keyword}
+          {props.index}
+        </h3>
+        <small className="guide">Click to see description!</small>
       </div>
       <div
         className="mota text-align-center"
@@ -194,7 +222,19 @@ const SlideItem = (props) => {
         onClick={() => setTopPosition("100%")}
       >
         <p className="m-5">{props.description}</p>
-        <small>Click to close description!</small>
+        <small className="guide">Click to close key word!</small>
+      </div>
+    </div>
+  );
+};
+const QuestionItem = (props) => {
+  return (
+    <div>
+      <div className="item">
+        <span className="name">{props.keyword}</span>
+        <span className="descptn">{props.desc}</span>
+        <span className="thumb">Ảnh đại diện</span>
+        <span className="more-dots">...</span>
       </div>
     </div>
   );

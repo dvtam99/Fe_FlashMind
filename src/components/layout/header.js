@@ -77,7 +77,10 @@ const Header = () => {
           )}
 
           <Button className="bnt-search" onClick={() => setSearch(!search)}>
-            <i class="material-icons" style={{ width: "31px", height: "25px" }}>
+            <i
+              className="material-icons"
+              style={{ width: "31px", height: "25px" }}
+            >
               search
             </i>
           </Button>

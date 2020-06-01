@@ -59,7 +59,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar>
+      <Navbar sticky="top">
         <Navbar.Brand href="/dashboard">
           <b className="m-4">
             <img src={logo} alt="" className="logo" />

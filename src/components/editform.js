@@ -55,7 +55,7 @@ const EditForm = () => {
 
   function handlePushCardItem() {
     if (cardKeyword === "" || cardDesc === "") {
-      alert("phai nhap day du thong tin");
+      alert("Bạn phải nhập đầy đủ thông tin!");
       return;
     } else {
       setCardDetailArr([
@@ -83,7 +83,7 @@ const EditForm = () => {
 
   function handleUpdate() {
     if (!title || !description) {
-      alert("Phai nhap title, description");
+      alert("Bạn phải nhập title, mô tả");
       return;
     } else {
       const data = {
@@ -104,21 +104,6 @@ const EditForm = () => {
       });
     }
   }
-
-  //a sua cho e cho nay la show len modal nhe
-  // useEffect(() => {
-  //   if (updateApiData.loading) {
-  //     return (
-  //       <div className="loading">
-  //         <ReactLoading type="spin" color="#ffa5ab" />
-  //       </div>
-  //     );
-  //   }
-  //   if (updateApiData.error) {
-  //     return <div>Error: {updateApiData.error.message}</div>;
-  //   }
-  // }, [updateApiData.loading, updateApiData.error]);
-
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`)
@@ -156,6 +141,7 @@ const EditForm = () => {
   } else {
     return (
       <>
+      
         <div className="set-meta">
           <div className="container">
             <div className="set-meta-wrapper">
@@ -247,8 +233,14 @@ const EditForm = () => {
             </div>
 
             <button className="finish" onClick={handleUpdate}>
-              {!postingStatus ? "Update!" : "Updating..."}
+              {!updateApiData.loading ? "Update!" : "Updating..."}
             </button>
+            {
+              updateApiData.error && 
+              <div className="loading">
+                <div>Error: {updateApiData.error.message}</div>
+              </div>
+            }
           </div>
         </div>
       </>

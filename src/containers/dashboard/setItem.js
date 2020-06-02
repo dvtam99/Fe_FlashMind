@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import ReactLoading from "react-loading";
-import authCtx from "../../contexts/auth";
-import { useAsync } from "react-hook-async";
 
-import { deleteSetCard } from "../../api/flashcard";
+import { Button, Modal, Alert } from "react-bootstrap";
+import authCtx from "../../contexts/auth";
 
 
 
@@ -11,25 +9,38 @@ const SetItem = (props) => {
     const {_id, avatar, title, date_created, author, empty, detail, slug} = props.item;
     const { authUser } = useContext(authCtx);
 
-    const [deleteApiData, fetchDeleteApiData] = useAsync(null, deleteSetCard);
+    const [confirmModal, showConfirmModal] = useState(false);
 
-function handleDelete() {
-      const data = {
-        _id:_id,
-      };
-      console.log(data)
-      fetchDeleteApiData(authUser.token, data).then((res) => {
-    if(res.success){
-        alert("Delete successfully");
-        document.location.reload();
-    }else{
-        alert("Errr");
-        document.location.reload();
+    function handleDelete() {
+        showConfirmModal(false);
+        const data = {_id}
+        fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authUser.token}`,
+            },
+            body: JSON.stringify(data)
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then(
+            (result) => {
+                document.location.pathname = "/dashboard";
+                },
+                (error) => {
+                console.log(error.message);
+            }
+        );
     }
-      });
-  }
+    
     return (
-        <div className="set-item">
+        <>
+            
+            <ConfirmModal show={confirmModal} onHide={handleDelete} />
+            
+            <div className="set-item">
 
             <div className="avatar">
                 <img src={process.env.REACT_APP_API_DOMAIN + "/" + avatar} alt="avatar" />
@@ -75,7 +86,7 @@ function handleDelete() {
                     <span role="img" aria-label="edit-image">🧹</span>
                     <a href={`/flashcard/edit/${slug}`}>Edit</a>
                 </div>
-                <div className="delete" title="Delete this set" onClick={handleDelete}>
+                <div className="delete" title="Delete this set" onClick={()=> showConfirmModal(true)}>
                     <span role="img" aria-label="edit-image">🔴</span>
                     Delete
                 </div>
@@ -83,7 +94,33 @@ function handleDelete() {
             </div>
 
         </div>
+        </>
     );
 };
 
 export default SetItem;
+
+const ConfirmModal = (props) => {
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+                Chú ý
+            </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <p>Bạn có chắc chắn muốn xóa bộ flashcard này? Lưu ý rằng, việc xóa này sẽ không thể khôi phục được.</p>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="info" onClick={props.onHide}>
+                Tôi hiểu!
+            </Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}

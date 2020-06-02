@@ -6,6 +6,9 @@ import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../api/file";
 import withAuth from "../hoc/authHoc";
+
+import "./editform.scss";
+
 const AddForm = () => {
   const { authUser } = useContext(authCtx);
 

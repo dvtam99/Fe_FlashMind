@@ -5,28 +5,35 @@ import { useAsync } from "react-hook-async";
 
 import { deleteSetCard } from "../../api/flashcard";
 
-
-
 const SetItem = (props) => {
-    const {_id, avatar, title, date_created, author, empty, detail, slug} = props.item;
-    const { authUser } = useContext(authCtx);
+  const {
+    _id,
+    avatar,
+    title,
+    date_created,
+    author,
+    empty,
+    detail,
+    slug,
+  } = props.item;
+  const { authUser } = useContext(authCtx);
+  const currentUser = authUser.user.username;
+  const [deleteApiData, fetchDeleteApiData] = useAsync(null, deleteSetCard);
 
-    const [deleteApiData, fetchDeleteApiData] = useAsync(null, deleteSetCard);
-
-function handleDelete() {
-      const data = {
-        _id:_id,
-      };
-      console.log(data)
-      fetchDeleteApiData(authUser.token, data).then((res) => {
-    if(res.success){
+  function handleDelete() {
+    const data = {
+      _id: _id,
+    };
+    console.log(data);
+    fetchDeleteApiData(authUser.token, data).then((res) => {
+      if (res.success) {
         alert("Delete successfully");
         document.location.reload();
-    }else{
+      } else {
         alert("Errr");
         document.location.reload();
-    }
-      });
+      }
+    });
   }
   return (
     <div className="set-item">

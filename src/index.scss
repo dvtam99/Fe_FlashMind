@@ -57,98 +57,11 @@ code {
   margin: 0 auto;
 }
 
-.set-meta {
-  background: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 25px 0;
-  position: relative;
-  .set-meta-wrapper {
-    display: flex;
-  }
-  .set-avatar {
-    width: 150px;
-    height: 100px;
-  }
-  .set-meta-form {
-    flex: auto;
-    padding-right: 200px;
-    input[type="text"],
-    textarea {
-      display: block;
-      width: 100%;
-    }
-    label[for="set-title"],
-    label[for="set-desc"] {
-      display: block;
-    }
-    textarea {
-      height: 100px;
-    }
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  }
-}
-
-.set-detail {
-  background: #f4f4f4;
-  padding: 25px 0;
-  .card-detail-item {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background: #fff;
-    margin-bottom: 15px;
-    .header {
-      display: flex;
-      padding: 10px 15px;
-      border-bottom: 1px solid #ddd;
-      & > div {
-        width: 100px;
-        text-align: right;
-      }
-      & > span {
-        flex: auto;
-      }
-    }
-    .body {
-      padding: 15px;
-      display: flex;
-      .keyword {
-        width: 200px;
-        margin-right: 15px;
-        input {
-          width: 100%;
-        }
-      }
-      .description {
-        flex: auto;
-        textarea {
-          width: 100%;
-        }
-      }
-      .photo {
-        width: 100px;
-        margin-left: 15px;
-      }
-    }
-    &.add-card {
-      padding: 15px;
-      text-align: center;
-    }
-  }
-  button.finish {
-    display: block;
-    width: 100%;
-    padding: 15px 0;
-    background-color: #f38375;
-  }
-}
-
 .set-detail-learn {
   background: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 25px 0;
-  //position: relative;
-  height: 500px;
+  padding: 25px;
+  height: 700px;
+
   .set-detail-wrapper {
     display: flex;
     .set-detail-info {
@@ -161,13 +74,17 @@ code {
       display: flex;
       flex-direction: column;
       .slide-wrapp {
-        width: 100%;
+        width: 80%;
         flex: auto;
         margin-bottom: 10px;
         .slide-item {
+          text-align: center;
+          padding: 50px;
           height: 100%;
           position: relative;
           overflow: hidden;
+          box-shadow: 0 0.3125rem 1rem 0 rgba(0, 0, 0, 0.15);
+          border-radius: 0.3125rem;
           .keyword {
             height: 100%;
             display: flex;
@@ -181,7 +98,7 @@ code {
             top: 0;
             left: 0;
             z-index: 1;
-            background: bisque;
+            background: white;
           }
           .mota {
             display: flex;
@@ -193,7 +110,7 @@ code {
             position: absolute;
             left: 0;
             z-index: 2;
-            background: yellow;
+            background: bisque;
             transition: all 0.5s;
           }
         }
@@ -201,7 +118,8 @@ code {
       .slide-controls {
         display: flex;
         .ctrl span:last-child {
-          margin-left: 10px;
+          //margin-left: 10px;
+          text-align: center;
         }
         .cpleted {
           flex: auto;
@@ -213,23 +131,29 @@ code {
 }
 
 .set-detail-more {
-  background: #fff;
   padding: 25px 0;
   .item {
     display: flex;
     padding: 10px 45px 10px 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08);
     position: relative;
     margin-bottom: 10px;
-    .stt {
-      width: 30px;
+    margin-top: 10px;
+    border-radius: 2px;
+    background-color: white;
+    .break {
+      width: 2px;
+      height: 40px;
+      background-color: #f4f4f9;
     }
     .name {
-      width: 200px;
+      padding: 10px 0 10px 0;
+      width: 30%;
       margin-right: 10px;
     }
     .descptn {
-      flex: auto;
+      padding: 10px 0 10px 0;
+      width: 70%;
       margin-right: 10px;
     }
     .thumb {
@@ -257,10 +181,6 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.no-focus:focus {
-  box-shadow: unset;
 }
 
 .link {

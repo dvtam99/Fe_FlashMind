@@ -19,3 +19,14 @@ export const updateSetCard = (token, createPostPayload) =>
       },
     })
     .then((res) => res.data);
+
+    // Cái này a vừa thêm vào
+export const deleteSetCard = (token, payload) =>
+axios 
+  .delete("/setCard", payload, {
+    headers: {
+      // eslint-disable-next-line prefer-template
+      Authorization: "Bearer " + token,
+    },
+  })
+  .then((res) => res.data);

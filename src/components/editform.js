@@ -11,29 +11,27 @@ import "./editform.scss";
 import Modal from "../components/modal";
 
 import withAuth from "../hoc/authHoc";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Prompt,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const EditForm = () => {
+
   const { authUser } = useContext(authCtx);
+
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [result, setResult] = useState(null);
+
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
+
   let { slug } = useParams();
+  
   const [id, setID] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [share, setShare] = useState(false);
   const [avatar, setAvatar] = useState("public/demo.jpg");
   const [cardDetailArr, setCardDetailArr] = useState([]);
+
   const [cardKeyword, setCardKeyword] = useState("");
   const [cardDesc, setCardDesc] = useState("");
   const [postingStatus, setPostingStatus] = useState(false);
@@ -41,7 +39,7 @@ const EditForm = () => {
   const [modalShow, setModalShow] = useState(false);
   const [message, setMessage] = useState("");
   const onChooseImage = (event) => {
-    console.log(event);
+    // console.log(event);
     if (event.target.files.length < 1) return;
     callUploadFileApi(event.target.files[0], authUser.token).then((res) =>
       setAvatar(res.data)
@@ -68,7 +66,6 @@ const EditForm = () => {
       setCardDetailArr([
         ...cardDetailArr,
         {
-          card_id: cardDetailArr.length + 1,
           card_title: cardKeyword,
           card_desc: cardDesc,
           card_completed: false,
@@ -77,6 +74,16 @@ const EditForm = () => {
       setCardDesc("");
       setCardKeyword("");
     }
+  }
+
+  function handleDeleteCardItem(index) {
+
+	const coppyArr = [...cardDetailArr];
+
+	coppyArr.splice(index, 1);
+
+	setCardDetailArr(coppyArr);
+	
   }
 
   function handleUpdate() {
@@ -104,20 +111,6 @@ const EditForm = () => {
     }
   }
 
-  //a sua cho e cho nay la show len modal nhe
-  // useEffect(() => {
-  //   if (updateApiData.loading) {
-  //     return (
-  //       <div className="loading">
-  //         <ReactLoading type="spin" color="#ffa5ab" />
-  //       </div>
-  //     );
-  //   }
-  //   if (updateApiData.error) {
-  //     return <div>Error: {updateApiData.error.message}</div>;
-  //   }
-  // }, [updateApiData.loading, updateApiData.error]);
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`)
       .then((res) => res.json())
@@ -139,7 +132,7 @@ const EditForm = () => {
           setError(error);
         }
       );
-  }, []);
+  },[]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -305,3 +298,69 @@ const EditForm = () => {
 };
 
 export default withAuth(EditForm);
+
+const CardDetailItem = (props) => {
+
+	const {stt, handleDelete, handleUpdateKeyword, handleUpdateDesc, title, desc, placeholder_title, placeholder_desc} = props;
+	const [show, setShow] = useState(true);
+
+	return (
+		<div className="card-detail-item">
+			<div className="header">
+				<span>Card #{stt}</span>
+				<div>
+					{
+						show ? <span 
+								className="collapse-icon" 
+								title="Collapse this card" 
+								role="img" 
+								aria-label="collapse-icon"
+								onClick={() => setShow(!show)}
+							>🔺
+							</span>
+							: <span 
+								className="collapse-icon" 
+								title="Open this card" 
+								role="img" 
+								aria-label="collapse-icon"
+								onClick={() => setShow(!show)}
+							>🔻
+							</span>
+					}
+					<span 
+						className="delete-icon" 
+						onClick={handleDelete} 
+						title="Delete this card!" 
+						role="img" 
+						aria-label="delete-icon"
+					>🖤
+					</span>
+				</div>
+			</div>
+			<div className="body" style={{display: show ? 'flex' : 'none'}}>
+
+				<div className="keyword">
+					<label>Thuật ngữ</label>
+					<Input
+						type="text"
+						placeholder={placeholder_title}
+						value={title}
+						onBlur={handleUpdateKeyword}
+					/>
+				</div>
+
+				<div className="description">
+					<label>Mô tả</label>
+					<Textarea
+						placeholder={placeholder_desc}
+						value={desc}
+						onBlur={handleUpdateDesc}
+					/>
+				</div>
+
+				<div className="photo">Hinh anh minh hoa</div>
+				
+			</div>
+		</div>
+	);
+};

@@ -1,33 +1,32 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import ReactLoading from "react-loading";
 import authCtx from "../../contexts/auth";
+import { useAsync } from "react-hook-async";
+
+import { deleteSetCard } from "../../api/flashcard";
+
+
+
 const SetItem = (props) => {
-  const { authUser } = useContext(authCtx);
-  const currentUser = authUser.user.username;
-  const {
-    avatar,
-    title,
-    date_created,
-    author,
-    empty,
-    detail,
-    slug,
-  } = props.item;
-  function handleDelete() {
-    alert("Are you sure?");
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
-      method: "delete",
-      body: JSON.stringify(props.item),
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          alert("Xoa thanh cong");
-          document.location.reload();
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+    const {_id, avatar, title, date_created, author, empty, detail, slug} = props.item;
+    const { authUser } = useContext(authCtx);
+
+    const [deleteApiData, fetchDeleteApiData] = useAsync(null, deleteSetCard);
+
+function handleDelete() {
+      const data = {
+        _id:_id,
+      };
+      console.log(data)
+      fetchDeleteApiData(authUser.token, data).then((res) => {
+    if(res.success){
+        alert("Delete successfully");
+        document.location.reload();
+    }else{
+        alert("Errr");
+        document.location.reload();
+    }
+      });
   }
   return (
     <div className="set-item">

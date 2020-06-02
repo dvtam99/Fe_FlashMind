@@ -5,6 +5,9 @@ import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../api/file";
 import { updateSetCard } from "../api/flashcard";
+import { Form} from "react-bootstrap"
+
+import "./editform.scss";
 
 import withAuth from "../hoc/authHoc";
 import {
@@ -146,31 +149,35 @@ const EditForm = () => {
   } else if (!result) {
     return null;
   } else {
-    return (
+    return ( 
       <>
         <div className="set-meta">
           <div className="container">
             <div className="set-meta-wrapper">
               <div className="set-meta-form">
-                <h1>Update set card!</h1>
+                <h1 className = "py-5">Update set card!</h1>
 
+                <form>
+
+                <label htmlFor="set-title">Tiêu đề</label>
                 <input
+                  className = "border-grey"
                   type="text"
                   value={title}
                   id="set-title"
                   placeholder="Nhập tiêu đề, ví dụ: Lịch sử Đông Dương, bài 1"
                   onChange={(e) => setTitle(e.target.value)}
-                />
+                /><br />
 
-                <label htmlFor="set-title">Tiêu đề</label>
-
+                <label htmlFor="set-desc">Mô tả</label>
                 <textarea
+                  className = "border-grey"
                   value={description}
                   id="set-desc"
-                  placeholder="Nhập tiêu đề, ví dụ: Lịch sử Đông Dương, bài 1"
+                  placeholder="Nhập mô tả, ví dụ: Lịch sử Đông Dương, bài 1"
                   onChange={(e) => setDescription(e.target.value)}
-                />
-                <label htmlFor="set-desc">Mô tả</label>
+                />      
+                <br />         
 
                 <input
                   type="checkbox"
@@ -179,19 +186,26 @@ const EditForm = () => {
                   value={1}
                   onChange={(e) => setShare(e.target.checked)}
                 />
-                <label htmlFor="set-public">Public?</label>
-              </div>
+                <label htmlFor="set-public">Public ?</label>
+            </form>
+          </div>
 
+      <div>
               <div className="set-avatar">
-                <label>Ảnh đại diện cho bộ thẻ</label>
-                <input type="file" onChange={onChooseImage} />
-              </div>
-              <img
+              <div className = "avt">
+                  <p>Ảnh đại diện cho bộ thẻ</p>
+                  <img
                 src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
                 alt=""
                 style={{ width: "60px", height: "60px" }}
                 className="border rounded-circle"
               />
+              </div>
+                
+                <input type="file" onChange={onChooseImage} />
+              </div>
+              
+          </div>
             </div>
           </div>
         </div>
@@ -204,15 +218,15 @@ const EditForm = () => {
                 <div key={idx} className="card-detail-item">
                   <div className="header">
                     <span>Card item {idx + 1}</span>
-                    <div>
-                      <span>^</span>
-                      <span>x</span>
-                    </div>
+                    <button className = "clear">
+                        <i class="material-icons">clear</i>
+                    </button>
                   </div>
                   <div className="body">
                     <div className="keyword">
                       <label>Thuật ngữ</label>
                       <Input
+                      className = "border-grey"
                         type="text"
                         placeholder="Ví dụ: Stateless component"
                         value={item.card_title}
@@ -222,6 +236,7 @@ const EditForm = () => {
                     <div className="description">
                       <label>Mô tả</label>
                       <Textarea
+                      className = "border-grey"
                         placeholder="Nhap mo ta"
                         value={item.card_desc}
                         onBlur={(e) => handleUpdateDesc(e.target.value, idx)}
@@ -237,6 +252,7 @@ const EditForm = () => {
                 <div className="keyword">
                   <label>Thuật ngữ</label>
                   <input
+                  className = "border-grey"
                     type="text"
                     placeholder="Ví dụ: Stateless component"
                     value={cardKeyword}
@@ -246,15 +262,20 @@ const EditForm = () => {
                 <div className="description">
                   <label>Mô tả</label>
                   <textarea
+                  className = "border-grey"
                     placeholder="Ví dụ: lorrem ipssum"
                     value={cardDesc}
                     onChange={(e) => setCardDesc(e.target.value)}
                   />
                 </div>
-                <button className="addthis" onClick={handlePushCardItem}>
+                
+              </div>
+              <div className = "bnt-add">
+              <button className="addThis" onClick={handlePushCardItem}>
                   Add this card!
                 </button>
               </div>
+              
             </div>
 
             <button className="finish" onClick={handleUpdate}>

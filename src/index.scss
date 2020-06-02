@@ -221,18 +221,25 @@ code {
   .item {
     display: flex;
     padding: 10px 45px 10px 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08);
     position: relative;
     margin-bottom: 10px;
-    .stt {
-      width: 30px;
+    margin-top: 10px;
+    border-radius: 2px;
+    background-color: white;
+    .break {
+      width: 2px;
+      height: 40px;
+      background-color: #f4f4f9;
     }
     .name {
-      width: 200px;
+      padding: 10px 0 10px 0;
+      width: 30%;
       margin-right: 10px;
     }
     .descptn {
-      flex: auto;
+      padding: 10px 0 10px 0;
+      width: 70%;
       margin-right: 10px;
     }
     .thumb {

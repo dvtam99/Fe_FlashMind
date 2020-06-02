@@ -232,8 +232,9 @@ const QuestionItem = (props) => {
     <div>
       <div className="item">
         <span className="name">{props.keyword}</span>
+        <span className="break"></span>
         <span className="descptn">{props.desc}</span>
-        <span className="thumb">Ảnh đại diện</span>
+        {/* <span className="thumb">Ảnh đại diện</span> */}
         <span className="more-dots">...</span>
       </div>
     </div>

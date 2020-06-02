@@ -8,10 +8,12 @@ export const login = (username, password) =>
     })
     .then((res) => res.data);
 
-export const register = (username, password) =>
+export const register = (username, password, bio, education) =>
   axios
     .post("/auth/register", {
       username,
       password,
+      bio,
+      education,
     })
     .then((res) => res.data);

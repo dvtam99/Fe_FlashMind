@@ -12,6 +12,7 @@ import {
 import { FacebookShareButton } from "react-share";
 import Loading from "../components/layout/loading";
 import authCtx from "../contexts/auth";
+import { ConfirmModal } from "../containers/dashboard/setItem";
 
 const DetailSet = () => {
   const [error, setError] = useState(null);
@@ -21,6 +22,8 @@ const DetailSet = () => {
   const { authUser } = useContext(authCtx);
   const currentUser = authUser ? authUser.user.username : null;
   let { slug } = useParams();
+  const [_id, setId] = useState(null);
+  const [confirmModal, showConfirmModal] = useState(false);
 
   const [slideActive, setSlideActive] = useState(0);
 
@@ -31,6 +34,30 @@ const DetailSet = () => {
       setIndex(index - 1);
       setSlideActive(slideActive - 1);
     }
+  }
+  function handleDelete() {
+    showConfirmModal(false);
+    const data = { _id };
+    debugger;
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authUser.token}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then(
+        (result) => {
+          document.location.pathname = "/dashboard";
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
   }
   function handleNext() {
     if (slideActive >= result.detail.length - 1) {
@@ -50,7 +77,7 @@ const DetailSet = () => {
       .then(
         (result) => {
           setIsLoaded(true);
-          console.log(result);
+          setId(result._id);
 
           setResult(result);
         },
@@ -64,6 +91,8 @@ const DetailSet = () => {
   if (!result) return null;
   return (
     <>
+      <ConfirmModal show={confirmModal} onHide={handleDelete} />
+
       <Loading show={isLoaded} />
       <div className="set-detail-learn">
         <h3 className="ml-5 mt-5">{result.title}</h3>
@@ -165,7 +194,11 @@ const DetailSet = () => {
                       edit
                     </i>
                   </a>
-                  <i class="material-icons icon-ctrl" title="Delete this card">
+                  <i
+                    onClick={() => showConfirmModal(true)}
+                    class="material-icons icon-ctrl"
+                    title="Delete this card"
+                  >
                     delete
                   </i>
                 </>

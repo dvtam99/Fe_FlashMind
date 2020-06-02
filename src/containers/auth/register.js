@@ -38,9 +38,14 @@ const Register = ({ onMoveToLogin }) => {
       policy: false,
     },
     onSubmit: (values) => {
-      fetchRegister(values.username, values.password)
+      fetchRegister(
+        values.username,
+        values.password,
+        values.bio,
+        values.education
+      )
         .then(() => {
-          setSuccessModalVisible(true)
+          setSuccessModalVisible(true);
         })
         .catch(() => {
           setFailureModalVisible(true);
@@ -60,8 +65,8 @@ const Register = ({ onMoveToLogin }) => {
             variant="success"
             size="sm"
             onClick={() => {
-              setSuccessModalVisible(false)
-              onMoveToLogin()
+              setSuccessModalVisible(false);
+              onMoveToLogin();
             }}
           >
             Confirm
@@ -143,12 +148,13 @@ const Register = ({ onMoveToLogin }) => {
               type="text"
               onChange={formik.handleChange}
               name="bio"
+              isInvalid={formik.errors.bio}
               value={formik.values.bio}
               placeholder="Bio"
             />
 
             <Form.Control.Feedback type="invalid">
-              {formik.errors.password}
+              {formik.errors.bio}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -158,12 +164,14 @@ const Register = ({ onMoveToLogin }) => {
               type="text"
               onChange={formik.handleChange}
               name="education"
-              isInvalid={formik.errors.password}
+              isInvalid={formik.errors.education}
               value={formik.values.education}
               placeholder="Education"
             />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.education}
+            </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group controlId="formBasicCheckbox">
             <p style={{ display: "inline-flex" }}>
               <Form.Check

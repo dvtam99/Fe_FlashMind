@@ -21,6 +21,7 @@ const SetItem = (props) => {
   function handleDelete() {
     showConfirmModal(false);
     const data = { _id };
+    debugger;
     fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
       method: "delete",
       headers: {
@@ -129,7 +130,7 @@ const SetItem = (props) => {
 
 export default SetItem;
 
-const ConfirmModal = (props) => {
+export const ConfirmModal = (props) => {
   return (
     <Modal
       {...props}
@@ -142,8 +143,8 @@ const ConfirmModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         <p>
-          Bạn có chắc chắn muốn xóa bộ flashcard này? Lưu ý rằng, việc xóa này
-          sẽ không thể khôi phục được.
+          Are you sure you want to delete this flashcard? Note that, this
+          deletion will not be recoverable.
         </p>
       </Modal.Body>
       <Modal.Footer>

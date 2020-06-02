@@ -6,7 +6,6 @@ import { useAsync } from "react-hook-async";
 import { uploadFile } from "../api/file";
 import { updateSetCard } from "../api/flashcard";
 import { Form } from "react-bootstrap";
-
 import "./editform.scss";
 import Modal from "../components/modal";
 

@@ -220,10 +220,7 @@ const SlideItem = (props) => {
       style={{ display: props.active ? "block" : "none" }}
     >
       <div className="keyword" onClick={() => setTopPosition("0px")}>
-        <h3>
-          {props.keyword}
-          {props.index}
-        </h3>
+        <h3>{props.keyword}</h3>
         <small className="guide">Click to see description!</small>
       </div>
       <div

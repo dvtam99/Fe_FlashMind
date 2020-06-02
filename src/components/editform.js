@@ -14,7 +14,6 @@ import withAuth from "../hoc/authHoc";
 import { useParams } from "react-router-dom";
 
 const EditForm = () => {
-
   const { authUser } = useContext(authCtx);
 
   const [error, setError] = useState(null);
@@ -24,7 +23,7 @@ const EditForm = () => {
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
 
   let { slug } = useParams();
-  
+
   const [id, setID] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -77,13 +76,11 @@ const EditForm = () => {
   }
 
   function handleDeleteCardItem(index) {
+    const coppyArr = [...cardDetailArr];
 
-	const coppyArr = [...cardDetailArr];
+    coppyArr.splice(index, 1);
 
-	coppyArr.splice(index, 1);
-
-	setCardDetailArr(coppyArr);
-	
+    setCardDetailArr(coppyArr);
   }
 
   function handleUpdate() {
@@ -132,7 +129,7 @@ const EditForm = () => {
           setError(error);
         }
       );
-  },[]);
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -230,35 +227,21 @@ const EditForm = () => {
             {cardDetailArr.length > 0 &&
               cardDetailArr.map((item, idx) => (
                 // card-detail-item
-                <div key={idx} className="card-detail-item">
-                  <div className="header">
-                    <span>Card item {idx + 1}</span>
-                    <button className="clear">
-                      <i class="material-icons">clear</i>
-                    </button>
-                  </div>
-                  <div className="body">
-                    <div className="card-edit">
-                      <input
-                        className="border-input"
-                        type="text"
-                        placeholder="Enter term"
-                        value={item.card_title}
-                        onChange={(e) =>
-                          handleUpdateKeyword(e.target.value, idx)
-                        }
-                      />
-                    </div>
-                    <div className="card-edit">
-                      <input
-                        className="border-input"
-                        placeholder="Enter Definition"
-                        value={item.card_desc}
-                        onChange={(e) => handleUpdateDesc(e.target.value, idx)}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <CardDetailItem
+                  key={item._id}
+                  stt={idx + 1}
+                  placeholder_title="Nhập keyword, ví dụ: reactjs"
+                  title={item.card_title}
+                  placeholder_desc="Là một thư viện UI phát triển bởi Facebook"
+                  desc={item.card_desc}
+                  handleDelete={() => handleDeleteCardItem(idx)}
+                  handleUpdateKeyword={(e) =>
+                    handleUpdateKeyword(e.target.value, idx)
+                  }
+                  handleUpdateDesc={(e) =>
+                    handleUpdateDesc(e.target.value, idx)
+                  }
+                />
               ))}
 
             <div className="card-detail-item">
@@ -300,67 +283,75 @@ const EditForm = () => {
 export default withAuth(EditForm);
 
 const CardDetailItem = (props) => {
+  const {
+    key,
+    stt,
+    handleDelete,
+    handleUpdateKeyword,
+    handleUpdateDesc,
+    title,
+    desc,
+    placeholder_title,
+    placeholder_desc,
+  } = props;
+  const [show, setShow] = useState(true);
+  return (
+    <div key={key} className="card-detail-item">
+      <div className="header">
+        <span>Card item {stt}</span>
+        <div>
+          {show ? (
+            <span
+              className="collapse-icon"
+              title="Collapse this card"
+              role="img"
+              aria-label="collapse-icon"
+              onClick={() => setShow(!show)}
+            >
+              🔺
+            </span>
+          ) : (
+            <span
+              className="collapse-icon"
+              title="Open this card"
+              role="img"
+              aria-label="collapse-icon"
+              onClick={() => setShow(!show)}
+            >
+              🔻
+            </span>
+          )}
 
-	const {stt, handleDelete, handleUpdateKeyword, handleUpdateDesc, title, desc, placeholder_title, placeholder_desc} = props;
-	const [show, setShow] = useState(true);
-
-	return (
-		<div className="card-detail-item">
-			<div className="header">
-				<span>Card #{stt}</span>
-				<div>
-					{
-						show ? <span 
-								className="collapse-icon" 
-								title="Collapse this card" 
-								role="img" 
-								aria-label="collapse-icon"
-								onClick={() => setShow(!show)}
-							>🔺
-							</span>
-							: <span 
-								className="collapse-icon" 
-								title="Open this card" 
-								role="img" 
-								aria-label="collapse-icon"
-								onClick={() => setShow(!show)}
-							>🔻
-							</span>
-					}
-					<span 
-						className="delete-icon" 
-						onClick={handleDelete} 
-						title="Delete this card!" 
-						role="img" 
-						aria-label="delete-icon"
-					>🖤
-					</span>
-				</div>
-			</div>
-			<div className="body" style={{display: show ? 'flex' : 'none'}}>
-
-				<div className="keyword">
-					<label>Thuật ngữ</label>
-					<Input
-						type="text"
-						placeholder={placeholder_title}
-						value={title}
-						onBlur={handleUpdateKeyword}
-					/>
-				</div>
-
-				<div className="description">
-					<label>Mô tả</label>
-					<Textarea
-						placeholder={placeholder_desc}
-						value={desc}
-						onBlur={handleUpdateDesc}
-					/>
-				</div>
-
-				<div className="photo">Hinh anh minh hoa</div>
-				
-			</div>
-		</div>
-	);
+          <button
+            className="clear"
+            onClick={handleDelete}
+            title="Delete this card!"
+          >
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+      </div>
+      {show && (
+        <div className="body">
+          <div className="card-edit">
+            <input
+              className="border-input"
+              type="text"
+              placeholder="Enter term"
+              value={title}
+              onChange={handleUpdateKeyword}
+            />
+          </div>
+          <div className="card-edit">
+            <input
+              className="border-input"
+              placeholder="Enter Definition"
+              value={desc}
+              onChange={handleUpdateDesc}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };

@@ -5,9 +5,10 @@ import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../api/file";
 import { updateSetCard } from "../api/flashcard";
-import { Form} from "react-bootstrap"
+import { Form } from "react-bootstrap";
 
 import "./editform.scss";
+import Modal from "../components/modal";
 
 import withAuth from "../hoc/authHoc";
 import {
@@ -37,7 +38,8 @@ const EditForm = () => {
   const [cardDesc, setCardDesc] = useState("");
   const [postingStatus, setPostingStatus] = useState(false);
   const [updateApiData, fetchUpdateApiData] = useAsync(null, updateSetCard);
-
+  const [modalShow, setModalShow] = useState(false);
+  const [message, setMessage] = useState("");
   const onChooseImage = (event) => {
     console.log(event);
     if (event.target.files.length < 1) return;
@@ -60,8 +62,8 @@ const EditForm = () => {
 
   function handlePushCardItem() {
     if (cardKeyword === "" || cardDesc === "") {
-      alert("phai nhap day du thong tin");
-      return;
+      setMessage("You must enter something");
+      setModalShow(true);
     } else {
       setCardDetailArr([
         ...cardDetailArr,
@@ -79,8 +81,8 @@ const EditForm = () => {
 
   function handleUpdate() {
     if (!title || !description) {
-      alert("Phai nhap title, description");
-      return;
+      setMessage("You must enter title and description");
+      setModalShow(true);
     } else {
       const data = {
         _id: id,
@@ -95,7 +97,8 @@ const EditForm = () => {
       };
       fetchUpdateApiData(authUser.token, data).then((res) => {
         setPostingStatus(false);
-        alert("Update successfully");
+        setMessage("Update successfully");
+        setModalShow(true);
         document.location.pathname = "/dashboard";
       });
     }
@@ -149,63 +152,82 @@ const EditForm = () => {
   } else if (!result) {
     return null;
   } else {
-    return ( 
+    return (
       <>
+        {modalShow && (
+          <Modal
+            show={modalShow}
+            message={message}
+            onHide={() => setModalShow(false)}
+          ></Modal>
+        )}
         <div className="set-meta">
+          <div className="header-edit">
+            <h3>Update set card!</h3>
+            <button className="finish" onClick={handleUpdate}>
+              {!postingStatus ? "Update!" : "Updating..."}
+            </button>
+          </div>
+          {/* <div className="header-edit2">
+            <h3>Update set card!</h3>
+            <button className="finish2" onClick={handleUpdate}>
+              {!postingStatus ? "Update!" : "Updating..."}
+            </button>
+          </div> */}
           <div className="container">
             <div className="set-meta-wrapper">
               <div className="set-meta-form">
-                <h1 className = "py-5">Update set card!</h1>
-
                 <form>
+                  <h3>Update set card!</h3>
+                  <label htmlFor="set-title">Title</label>
+                  <input
+                    className="border-input"
+                    type="text"
+                    value={title}
+                    id="set-title"
+                    placeholder="Title"
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <br />
 
-                <label htmlFor="set-title">Tiêu đề</label>
-                <input
-                  className = "border-grey"
-                  type="text"
-                  value={title}
-                  id="set-title"
-                  placeholder="Nhập tiêu đề, ví dụ: Lịch sử Đông Dương, bài 1"
-                  onChange={(e) => setTitle(e.target.value)}
-                /><br />
+                  <label htmlFor="set-desc">Description</label>
+                  <textarea
+                    className="border-grey"
+                    value={description}
+                    id="set-desc"
+                    placeholder="Description"
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                  <br />
 
-                <label htmlFor="set-desc">Mô tả</label>
-                <textarea
-                  className = "border-grey"
-                  value={description}
-                  id="set-desc"
-                  placeholder="Nhập mô tả, ví dụ: Lịch sử Đông Dương, bài 1"
-                  onChange={(e) => setDescription(e.target.value)}
-                />      
-                <br />         
-
-                <input
-                  type="checkbox"
-                  id="set-public"
-                  checked={share}
-                  value={1}
-                  onChange={(e) => setShare(e.target.checked)}
-                />
-                <label htmlFor="set-public">Public ?</label>
-            </form>
-          </div>
-
-      <div>
-              <div className="set-avatar">
-              <div className = "avt">
-                  <p>Ảnh đại diện cho bộ thẻ</p>
-                  <img
-                src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
-                alt=""
-                style={{ width: "60px", height: "60px" }}
-                className="border rounded-circle"
-              />
+                  <input
+                    type="checkbox"
+                    id="set-public"
+                    checked={share}
+                    value={1}
+                    onChange={(e) => setShare(e.target.checked)}
+                  />
+                  <label htmlFor="set-public">Public ?</label>
+                  <button className="btn-update" onClick={handleUpdate}>
+                    {!postingStatus ? "Update!" : "Updating..."}
+                  </button>
+                </form>
               </div>
-                
-                <input type="file" onChange={onChooseImage} />
+
+              <div>
+                <div className="set-avatar">
+                  <div className="avt">
+                    <img
+                      src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
+                      alt=""
+                      style={{ width: "600px", height: "340px" }}
+                      className="border rounded"
+                    />
+                  </div>
+
+                  <input type="file" onChange={onChooseImage} />
+                </div>
               </div>
-              
-          </div>
             </div>
           </div>
         </div>
@@ -218,69 +240,63 @@ const EditForm = () => {
                 <div key={idx} className="card-detail-item">
                   <div className="header">
                     <span>Card item {idx + 1}</span>
-                    <button className = "clear">
-                        <i class="material-icons">clear</i>
+                    <button className="clear">
+                      <i class="material-icons">clear</i>
                     </button>
                   </div>
                   <div className="body">
-                    <div className="keyword">
-                      <label>Thuật ngữ</label>
-                      <Input
-                      className = "border-grey"
+                    <div className="card-edit">
+                      <input
+                        className="border-input"
                         type="text"
-                        placeholder="Ví dụ: Stateless component"
+                        placeholder="Enter term"
                         value={item.card_title}
-                        onBlur={(e) => handleUpdateKeyword(e.target.value, idx)}
+                        onChange={(e) =>
+                          handleUpdateKeyword(e.target.value, idx)
+                        }
                       />
                     </div>
-                    <div className="description">
-                      <label>Mô tả</label>
-                      <Textarea
-                      className = "border-grey"
-                        placeholder="Nhap mo ta"
+                    <div className="card-edit">
+                      <input
+                        className="border-input"
+                        placeholder="Enter Definition"
                         value={item.card_desc}
-                        onBlur={(e) => handleUpdateDesc(e.target.value, idx)}
+                        onChange={(e) => handleUpdateDesc(e.target.value, idx)}
                       />
                     </div>
-                    <div className="photo">Hinh anh minh hoa</div>
                   </div>
                 </div>
               ))}
 
             <div className="card-detail-item">
+              <div className="header">
+                <span>Card item {cardDetailArr.length + 1}</span>
+              </div>
               <div className="body">
-                <div className="keyword">
-                  <label>Thuật ngữ</label>
+                <div className="card-edit">
                   <input
-                  className = "border-grey"
+                    className="border-input"
                     type="text"
-                    placeholder="Ví dụ: Stateless component"
+                    placeholder="Enter term"
                     value={cardKeyword}
                     onChange={(e) => setCardKeyword(e.target.value)}
                   />
                 </div>
-                <div className="description">
-                  <label>Mô tả</label>
-                  <textarea
-                  className = "border-grey"
-                    placeholder="Ví dụ: lorrem ipssum"
+                <div className="card-edit">
+                  <input
+                    className="border-input"
+                    placeholder="Enter Definition"
                     value={cardDesc}
                     onChange={(e) => setCardDesc(e.target.value)}
                   />
                 </div>
-                
               </div>
-              <div className = "bnt-add">
-              <button className="addThis" onClick={handlePushCardItem}>
+              <div className="bnt-add">
+                <button className="addThis" onClick={handlePushCardItem}>
                   Add this card!
                 </button>
               </div>
-              
             </div>
-
-            <button className="finish" onClick={handleUpdate}>
-              {!postingStatus ? "Update!" : "Updating..."}
-            </button>
           </div>
         </div>
       </>

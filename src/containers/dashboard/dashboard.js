@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Container, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import withAuth from "../../hoc/authHoc";
 import SetItem from "./setItem";
@@ -17,11 +16,13 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const currentId = authUser ? authUser.user._id : null;
   const [resultArr, setResultArr] = useState([]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
       method: "get",
+      //body: { _id: currentId },
       // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
     })
       .then((res) => res.json())
@@ -101,9 +102,10 @@ const Dashboard = () => {
                   {/* BEGIN SET ITEM */}
 
                   {/* USER EMPTY SET DISPLAY FIRST */}
-                  {resultArr.map((item) => (
-                    <SetItem key={item.id} item={item} />
-                  ))}
+                  {resultArr &&
+                    resultArr.map((item) => (
+                      <SetItem key={item.id} item={item} />
+                    ))}
                 </div>
               </div>
             </div>

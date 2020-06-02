@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Row } from "react-bootstrap";
 import {
   BrowserRouter as Router,
@@ -11,13 +11,15 @@ import {
 } from "react-router-dom";
 import { FacebookShareButton } from "react-share";
 import Loading from "../components/layout/loading";
+import authCtx from "../contexts/auth";
 
 const DetailSet = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [result, setResult] = useState(null);
   const [index, setIndex] = useState(1);
-
+  const { authUser } = useContext(authCtx);
+  const currentUser = authUser ? authUser.user.username : null;
   let { slug } = useParams();
 
   const [slideActive, setSlideActive] = useState(0);
@@ -68,21 +70,21 @@ const DetailSet = () => {
         <Row>
           <Col sm={2}>
             <div className="set-detail-info ml-5 mt-3 d-grid ">
-              <Link to="/setting" className="p-2 io" block>
-                <i class="material-icons icon">settings</i>
+              <Link to={`/setCard/${slug}`} className="p-2 io" block>
+                <i class="fa fa-clone icon"></i>
                 Flashcard
               </Link>
-              <Link to="/profile" className="p-2 io">
-                <i class="material-icons icon">person</i> Learn
+              <Link to="#" className="p-2 io">
+                <i class="fa fa-book icon"></i> Learn
               </Link>
               <Link to="#" className="p-2 io">
-                <i class="material-icons icon">live_help</i> Write
+                <i class="fa fa-pencil-square-o icon"></i> Write
               </Link>
-              <Link to="/profile" className="p-2 io">
-                <i class="material-icons icon">settings_brightness</i> Game
+              <Link to="#" className="p-2 io">
+                <i class="fa fa-gamepad icon"></i> Game
               </Link>
-              <Link to="/profile" className="p-2 io">
-                <i class="material-icons icon">settings_brightness</i> Test
+              <Link to="#" className="p-2 io">
+                <i class="fa fa-file-text icon"></i> Test
               </Link>
               <FacebookShareButton url={slug}></FacebookShareButton>
             </div>
@@ -156,15 +158,18 @@ const DetailSet = () => {
           <Col sm={6}>
             <div className="control">
               <i class="fa fa-share icon-ctrl" title="Share this question"></i>
-
-              <a href={`/flashcard/edit/${result.slug}`}>
-                <i class="material-icons icon-ctrl" title="Edit this card">
-                  edit
-                </i>
-              </a>
-              <i class="material-icons icon-ctrl" title="Delete this card">
-                delete
-              </i>
+              {currentUser === result.author.username ? (
+                <>
+                  <a href={`/flashcard/edit/${result.slug}`}>
+                    <i class="material-icons icon-ctrl" title="Edit this card">
+                      edit
+                    </i>
+                  </a>
+                  <i class="material-icons icon-ctrl" title="Delete this card">
+                    delete
+                  </i>
+                </>
+              ) : null}
             </div>
           </Col>
         </Row>

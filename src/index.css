@@ -225,3 +225,14 @@ code {
 .bg-f4 {
   background: #f4f4f4;
 }
+.border-input {
+  width: 90%;
+  border: none;
+  border-bottom: 2px solid #da627d;
+}
+.card-edit {
+  width: 50%;
+}
+a:hover {
+  text-decoration: none;
+}

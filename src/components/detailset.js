@@ -9,6 +9,7 @@ import {
   Prompt,
   useLocation,
 } from "react-router-dom";
+import { FacebookShareButton } from "react-share";
 import Loading from "../components/layout/loading";
 
 const DetailSet = () => {
@@ -83,6 +84,7 @@ const DetailSet = () => {
               <Link to="/profile" className="p-2 io">
                 <i class="material-icons icon">settings_brightness</i> Test
               </Link>
+              <FacebookShareButton url={slug}></FacebookShareButton>
             </div>
           </Col>
           <Col sm={10}>
@@ -154,9 +156,12 @@ const DetailSet = () => {
           <Col sm={6}>
             <div className="control">
               <i class="fa fa-share icon-ctrl" title="Share this question"></i>
-              <i class="material-icons icon-ctrl" title="Edit this card">
-                edit
-              </i>
+
+              <a href={`/flashcard/edit/${result.slug}`}>
+                <i class="material-icons icon-ctrl" title="Edit this card">
+                  edit
+                </i>
+              </a>
               <i class="material-icons icon-ctrl" title="Delete this card">
                 delete
               </i>

@@ -198,5 +198,30 @@ code {
 .icon-ctrl {
   color: rgb(255, 165, 171);
   margin: 5px;
-  font-size: 30 px;
+  font-size: 30px !important;
+}
+.icon-check {
+  color: rgb(255, 165, 171);
+  font-size: 30px !important;
+}
+.ctrl {
+  width: 80%;
+  text-align: center;
+}
+.guide {
+  position: absolute;
+  bottom: 10px;
+  color: #cacaca;
+}
+.text-ctrl {
+  color: rgb(255, 165, 171);
+  margin: 20px;
+  font-size: 24px !important;
+}
+.icon-check {
+  position: absolute;
+  right: 310px;
+}
+.bg-f4 {
+  background: #f4f4f4;
 }

@@ -170,8 +170,8 @@ const DetailSet = () => {
         </Row>
       </div>
 
-      <div className="set-detail-more mt-5 pt-5">
-        <div className="container mt-5 pt-5 bg-f4">
+      <div className="set-detail-more bg-f4">
+        <div className="container ">
           <h3 className="mt-5">Terms in this set ({result.detail.length})</h3>
           {result.detail.map((item, idx) => (
             <QuestionItem keyword={item.card_title} desc={item.card_desc} />

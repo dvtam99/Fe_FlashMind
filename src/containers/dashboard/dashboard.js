@@ -44,7 +44,6 @@ const Dashboard = () => {
   } else if (!isLoaded) {
     return <Loading show={isLoaded} />;
   } else {
-    // console.log(article);
     return (
       <div className="mx-5">
         <div className="dashboard-wrapper">

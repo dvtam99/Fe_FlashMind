@@ -5,9 +5,8 @@ import authCtx from "../contexts/auth";
 import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../api/file";
+import Modal from "../components/modal";
 import withAuth from "../hoc/authHoc";
-
-import "./editform.scss";
 
 const AddForm = () => {
   const { authUser } = useContext(authCtx);
@@ -19,11 +18,11 @@ const AddForm = () => {
 
   const [cardKeyword, setCardKeyword] = useState("");
   const [cardDesc, setCardDesc] = useState("");
-
+  const [modalShow, setModalShow] = useState(false);
+  const [message, setMessage] = useState("");
   const [cardDetailArr, setCardDetailArr] = useState([]);
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
   const [postingStatus, setPostingStatus] = useState(false);
-  // debugger
   const onChooseImage = (event) => {
     console.log(event);
     if (event.target.files.length < 1) return;
@@ -33,8 +32,8 @@ const AddForm = () => {
   };
   function handleSave() {
     if (!title || !description) {
-      alert("Phai nhap title, description");
-      return;
+      setMessage("You must enter title and description");
+      setModalShow(true);
     } else {
       const data = {
         title,
@@ -47,7 +46,6 @@ const AddForm = () => {
         avatar,
         detail: cardDetailArr,
       };
-      // console.log(data);
 
       fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
         method: "post",
@@ -65,11 +63,12 @@ const AddForm = () => {
           (result) => {
             console.log(result.date_created);
             setPostingStatus(false);
-            alert("Tao bai bo flashcard thanh cong");
-            document.location.pathname = "/dashboard";
+            setMessage("Create set successful");
+            setModalShow(true);
           },
           (error) => {
-            console.log(error.message);
+            setMessage(error.message);
+            setModalShow(true);
           }
         );
     }
@@ -85,11 +84,17 @@ const AddForm = () => {
     copyArr[idx].card_desc = val;
     setCardDetailArr(copyArr);
   }
+  function handleDeleteCardItem(index) {
+    const coppyArr = [...cardDetailArr];
 
+    coppyArr.splice(index, 1);
+
+    setCardDetailArr(coppyArr);
+  }
   function handlePushCardItem() {
     if (cardKeyword === "" || cardDesc === "") {
-      alert("phai nhap day du thong tin");
-      return;
+      setMessage("You must enter term and definition");
+      setModalShow(true);
     } else {
       setCardDetailArr([
         ...cardDetailArr,
@@ -106,28 +111,42 @@ const AddForm = () => {
   }
   return (
     <>
+      {modalShow && (
+        <Modal
+          show={modalShow}
+          message={message}
+          onHide={() => {
+            setModalShow(false);
+            document.location.pathname = "/dashboard";
+          }}
+        ></Modal>
+      )}
       <div className="set-meta">
         <div className="container">
           <div className="set-meta-wrapper">
             <div className="set-meta-form">
-              <h1>Tạo nhóm thẻ mới</h1>
+              <h1>Add new set</h1>
 
+              <label htmlFor="set-title">Title</label>
               <input
+                className="border-input"
                 type="text"
                 value={title}
                 id="set-title"
-                placeholder="Nhập tiêu đề, ví dụ: Lịch sử Đông Dương, bài 1"
+                placeholder="Title"
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <label htmlFor="set-title">Tiêu đề</label>
+              <br />
 
+              <label htmlFor="set-desc">Description</label>
               <textarea
+                className="border-grey"
                 value={description}
                 id="set-desc"
-                placeholder="Nhập tiêu đề, ví dụ: Lịch sử Đông Dương, bài 1"
+                placeholder="Description"
                 onChange={(e) => setDescription(e.target.value)}
               />
-              <label htmlFor="set-desc">Mô tả</label>
+              <br />
 
               <input
                 type="checkbox"
@@ -139,16 +158,20 @@ const AddForm = () => {
               <label htmlFor="set-public">Public?</label>
             </div>
 
-            <div className="set-avatar">
-              <label>Ảnh đại diện cho bộ thẻ</label>
-              <input type="file" onChange={onChooseImage} />
+            <div>
+              <div className="set-avatar">
+                <div className="avt">
+                  <img
+                    src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
+                    alt=""
+                    style={{ width: "600px", height: "340px" }}
+                    className="border rounded"
+                  />
+                </div>
+
+                <input type="file" className="file" onChange={onChooseImage} />
+              </div>
             </div>
-            <img
-              src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
-              alt=""
-              style={{ width: "60px", height: "60px" }}
-              className="border rounded-circle"
-            />
           </div>
         </div>
       </div>
@@ -158,64 +181,51 @@ const AddForm = () => {
           {cardDetailArr.length > 0 &&
             cardDetailArr.map((item, idx) => (
               // card-detail-item
-              <div key={idx} className="card-detail-item">
-                <div className="header">
-                  <span>Card item {idx + 1}</span>
-                  <div>
-                    <span>^</span>
-                    <span>x</span>
-                  </div>
-                </div>
-                <div className="body">
-                  <div className="keyword">
-                    <label>Thuật ngữ</label>
-                    <Input
-                      type="text"
-                      placeholder="Ví dụ: Stateless component"
-                      value={item.card_title}
-                      onBlur={(e) => handleUpdateKeyword(e.target.value, idx)}
-                    />
-                  </div>
-                  <div className="description">
-                    <label>Mô tả</label>
-                    <Textarea
-                      placeholder="Nhap mo ta"
-                      value={item.card_desc}
-                      onBlur={(e) => handleUpdateDesc(e.target.value, idx)}
-                    />
-                  </div>
-                  <div className="photo">Hinh anh minh hoa</div>
-                </div>
-              </div>
+              <CardDetailItem
+                key={item._id}
+                stt={idx + 1}
+                title={item.card_title}
+                desc={item.card_desc}
+                handleDelete={() => handleDeleteCardItem(idx)}
+                handleUpdateKeyword={(e) =>
+                  handleUpdateKeyword(e.target.value, idx)
+                }
+                handleUpdateDesc={(e) => handleUpdateDesc(e.target.value, idx)}
+              />
             ))}
 
           <div className="card-detail-item">
+            <div className="header">
+              <span>Card item {cardDetailArr.length + 1}</span>
+            </div>
             <div className="body">
-              <div className="keyword">
-                <label>Thuật ngữ</label>
+              <div className="card-edit">
                 <input
+                  className="border-input"
                   type="text"
-                  placeholder="Ví dụ: Stateless component"
+                  placeholder="Enter term"
                   value={cardKeyword}
                   onChange={(e) => setCardKeyword(e.target.value)}
                 />
               </div>
-              <div className="description">
-                <label>Mô tả</label>
-                <textarea
-                  placeholder="Ví dụ: lorrem ipssum"
+              <div className="card-edit">
+                <input
+                  className="border-input"
+                  placeholder="Enter Definition"
                   value={cardDesc}
                   onChange={(e) => setCardDesc(e.target.value)}
                 />
               </div>
-              <button className="addthis" onClick={handlePushCardItem}>
+            </div>
+            <div className="bnt-add">
+              <button className="addThis" onClick={handlePushCardItem}>
                 Add this card!
               </button>
             </div>
           </div>
 
           <button
-            className="finish"
+            className="btn-update"
             onClick={handleSave}
             disabled={postingStatus}
           >
@@ -228,3 +238,75 @@ const AddForm = () => {
 };
 
 export default withAuth(AddForm);
+
+const CardDetailItem = (props) => {
+  const {
+    key,
+    stt,
+    handleDelete,
+    handleUpdateKeyword,
+    handleUpdateDesc,
+    title,
+    desc,
+  } = props;
+  const [show, setShow] = useState(true);
+  return (
+    <div key={key} className="card-detail-item">
+      <div className="header">
+        <span>Card item {stt}</span>
+        <div>
+          {show ? (
+            <span
+              className="collapse-icon"
+              title="Collapse this card"
+              role="img"
+              aria-label="collapse-icon"
+              onClick={() => setShow(!show)}
+            >
+              🔺
+            </span>
+          ) : (
+            <span
+              className="collapse-icon"
+              title="Open this card"
+              role="img"
+              aria-label="collapse-icon"
+              onClick={() => setShow(!show)}
+            >
+              🔻
+            </span>
+          )}
+
+          <button
+            className="clear"
+            onClick={handleDelete}
+            title="Delete this card!"
+          >
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+      </div>
+      {show && (
+        <div className="body">
+          <div className="card-edit">
+            <input
+              className="border-input"
+              type="text"
+              placeholder="Enter term"
+              value={title}
+              onChange={handleUpdateKeyword}
+            />
+          </div>
+          <div className="card-edit">
+            <input
+              className="border-input"
+              placeholder="Enter Definition"
+              value={desc}
+              onChange={handleUpdateDesc}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

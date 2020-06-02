@@ -103,7 +103,6 @@ const EditForm = () => {
         setPostingStatus(false);
         setMessage("Update successfully");
         setModalShow(true);
-        document.location.pathname = "/dashboard";
       });
     }
   }
@@ -148,7 +147,10 @@ const EditForm = () => {
           <Modal
             show={modalShow}
             message={message}
-            onHide={() => setModalShow(false)}
+            onHide={() => {
+              setModalShow(false);
+              document.location.pathname = "/dashboard";
+            }}
           ></Modal>
         )}
         <div className="set-meta">
@@ -158,12 +160,6 @@ const EditForm = () => {
               {!postingStatus ? "Update!" : "Updating..."}
             </button>
           </div>
-          {/* <div className="header-edit2">
-            <h3>Update set card!</h3>
-            <button className="finish2" onClick={handleUpdate}>
-              {!postingStatus ? "Update!" : "Updating..."}
-            </button>
-          </div> */}
           <div className="container">
             <div className="set-meta-wrapper">
               <div className="set-meta-form">
@@ -230,9 +226,7 @@ const EditForm = () => {
                 <CardDetailItem
                   key={item._id}
                   stt={idx + 1}
-                  placeholder_title="Nhập keyword, ví dụ: reactjs"
                   title={item.card_title}
-                  placeholder_desc="Là một thư viện UI phát triển bởi Facebook"
                   desc={item.card_desc}
                   handleDelete={() => handleDeleteCardItem(idx)}
                   handleUpdateKeyword={(e) =>
@@ -291,8 +285,6 @@ const CardDetailItem = (props) => {
     handleUpdateDesc,
     title,
     desc,
-    placeholder_title,
-    placeholder_desc,
   } = props;
   const [show, setShow] = useState(true);
   return (

@@ -226,13 +226,23 @@ code {
   background: #f4f4f4;
 }
 .border-input {
+  word-break: break-work;
   width: 90%;
   border: none;
   border-bottom: 2px solid #da627d;
 }
 .card-edit {
+  word-break: break-work;
   width: 50%;
 }
 a:hover {
   text-decoration: none;
+}
+input,
+textarea,
+button:focus {
+  outline: none;
+}
+.file {
+  background-color: rgb(255, 165, 171);
 }

@@ -5,10 +5,13 @@ import Profile from "./profile";
 import authCtx from "../../contexts/auth";
 import withAuth from "../../hoc/authHoc";
 
+import { Footer} from "../layout";
+
 const Setting = () => {
   const { authUser } = useContext(authCtx);
 
   return (
+    <>
     <Container className="my-5">
       <h3 className="display-4">
         Settings for <span className="code">@{authUser.user.username}</span>
@@ -89,6 +92,8 @@ const Setting = () => {
         </Col>
       </Row>
     </Container>
+    <Footer />
+    </>
   );
 };
 

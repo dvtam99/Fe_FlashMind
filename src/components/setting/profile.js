@@ -8,6 +8,7 @@ import { useAsync } from "react-hook-async";
 import Avatar from "../avatar";
 
 import authCtx from "../../contexts/auth";
+import { Footer} from "../layout";
 
 import { uploadFile } from "../../api/file";
 import { updateMe } from "../../api/profile";
@@ -39,11 +40,41 @@ const Profile = () => {
   };
 
   return (
+    <>
     <Container className="my-5">
       <h3 className="display-4">
         Profile: <span className="code">{authUser.user.username}</span>
       </h3>
       <Form onSubmit={formik.handleSubmit}>
+        
+        <Form.Group>
+          <Form.Label className="code">Photo</Form.Label>
+          <div className="align-items-center">
+            {uploadFileApi.loading ? (
+              "Loading ..."
+            ) : (
+            
+              <img
+                src={
+                  process.env.REACT_APP_API_DOMAIN +
+                  "/" +
+                  formik.values.photoUrl
+                }
+                alt=""
+                style={{ width: "80px", height: "80px" }}
+                className="border rounded-circle m-3"
+              /> 
+     
+            )}
+            <br />
+            <Form.Control
+              className="ml-3 bg-red"
+              type="file"
+              onChange={onChooseImage}
+            />
+          </div>
+        </Form.Group>
+
         <Form.Group>
           <Form.Label className="code">Bio</Form.Label>
           <Form.Control
@@ -52,30 +83,6 @@ const Profile = () => {
             value={formik.values.bio}
             onChange={formik.handleChange}
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label className="code">Photo</Form.Label>
-          <div className="d-flex align-items-center">
-            {uploadFileApi.loading ? (
-              "Loading ..."
-            ) : (
-              <img
-                src={
-                  process.env.REACT_APP_API_DOMAIN +
-                  "/" +
-                  formik.values.photoUrl
-                }
-                alt=""
-                style={{ width: "60px", height: "60px" }}
-                className="border rounded-circle"
-              />
-            )}
-            <Form.Control
-              className="ml-3 bg-red"
-              type="file"
-              onChange={onChooseImage}
-            />
-          </div>
         </Form.Group>
 
         <Form.Group>
@@ -88,12 +95,14 @@ const Profile = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Button className="code" type="submit">
+          <Button className="code color-pink" type="submit">
             Submit
           </Button>
         </Form.Group>
       </Form>
     </Container>
+  <Footer />
+  </>
   );
 };
 

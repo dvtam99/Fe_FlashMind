@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Login from "./login";
 import Register from "./register";
 
+
 const Auth = (props) => {
   const [haveAccount, setHaveAccount] = useState(true);
   return (

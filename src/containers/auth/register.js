@@ -178,11 +178,12 @@ const Register = ({ onMoveToLogin }) => {
                 type="checkbox"
                 name="policy"
                 value={formik.values.policy}
-                isInvalid={formik.errors.policy}
+                isInvalid={formik.errors.policy}         
                 onChange={formik.handleChange}
-                feedback="You must agree before submitting."
                 required
-              />
+              /> 
+    
+             
               I agree to the&nbsp;
               <span className="link">Terms of Use</span>&nbsp; and &nbsp;
               <span className="link"> Privacy Notice</span>

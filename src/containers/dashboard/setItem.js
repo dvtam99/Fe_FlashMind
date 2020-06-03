@@ -62,19 +62,11 @@ const SetItem = (props) => {
 
           <div className="date-created">{date_created}</div>
 
-          <div className="author">
-            <span role="img" aria-label="avatar-image">
-              👨‍🦱
-            </span>
-            {author.name}
-          </div>
+          
 
           {empty && (
-            <div className="empty">
-              <span role="img" aria-label="empty-image">
-                ⨂
-              </span>
-              (0/0)
+            <div className="empty">             
+              0/0 words learned
             </div>
           )}
 
@@ -87,36 +79,37 @@ const SetItem = (props) => {
                   : ""
               }`}
             >
-              <span role="img" aria-label="finish-image">
+              <span role="img" aria-label="finish-image" className = "m-2">
                 {detail.filter((item) => item.card_completed === true)
                   .length === detail.length
                   ? "✔"
                   : "U"}
               </span>
 
-              {`(${
+              {`${
                 detail.filter((item) => item.card_completed === true).length
-              }/${detail.length})`}
+              } / ${detail.length} words learned`}
             </div>
           )}
 
           {currentUser === author.username ? (
             <>
               <div className="edit" title="Edit this  set">
-                <span role="img" aria-label="edit-image">
-                  🧹
-                </span>
-                <a href={`/flashcard/edit/${slug}`}>Edit</a>
+                
+                <a href={`/flashcard/edit/${slug}`} className= "text-edit"><i class="material-icons icon-ctrl" title="Edit this card">
+                      edit
+                </i></a>
               </div>
               <div
                 className="delete"
                 title="Delete this set"
                 onClick={() => showConfirmModal(true)}
               >
-                <span role="img" aria-label="edit-image">
-                  🔴
-                </span>
-                Delete
+                
+                <i class="material-icons icon-ctrl" >
+                    delete
+                </i>
+   
               </div>
             </>
           ) : (

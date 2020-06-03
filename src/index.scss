@@ -131,7 +131,9 @@ code {
 }
 
 .set-detail-more {
-  padding: 25px 0;
+  .set-detail-body{
+    padding: 50px 100px;
+  }
   .item {
     display: flex;
     padding: 10px 45px 10px 15px;
@@ -216,3 +218,29 @@ code {
     max-width: 1080px;
   }
 }
+
+.footer {
+  background-color: #f38e9c;
+  color: white;
+  padding: 20px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+ 
+  ul {
+    list-style: none;
+  }
+  .aboutUse {
+    text-align: center;
+    padding-top: 25px;
+  }
+  .founder {
+    text-align: center;
+
+  }
+
+}
+.material-icons {
+  transform: translateY(5px);
+  padding: 5px;
+}
+

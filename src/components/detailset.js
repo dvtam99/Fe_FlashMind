@@ -13,6 +13,9 @@ import { FacebookShareButton } from "react-share";
 import Loading from "../components/layout/loading";
 import authCtx from "../contexts/auth";
 import { ConfirmModal } from "../containers/dashboard/setItem";
+import WithAuth from "../hoc/authHoc";
+
+import { Footer} from "../components/layout";
 
 const DetailSet = () => {
   const [error, setError] = useState(null);
@@ -115,7 +118,7 @@ const DetailSet = () => {
               <Link to="#" className="p-2 io">
                 <i class="fa fa-file-text icon"></i> Test
               </Link>
-              <FacebookShareButton url={slug}></FacebookShareButton>
+              {/* <FacebookShareButton url={slug}></FacebookShareButton> */}
             </div>
           </Col>
           <Col sm={10}>
@@ -163,10 +166,10 @@ const DetailSet = () => {
             </div>
           </Col>
         </Row>
-        <hr width="80%" />
-        <Row className="mb-5">
+
+        <Row>
           <Col sm={6}>
-            <div className="pl-5 ml-5">
+            <div className="ml-5 mt-5">
               <img
                 src={
                   process.env.REACT_APP_API_DOMAIN +
@@ -208,8 +211,8 @@ const DetailSet = () => {
         </Row>
       </div>
 
-      <div className="set-detail-more bg-f4">
-        <div className="container ">
+      <div className="set-detail-more mt-5">
+        <div className="set-detail-body bg-f4">
           <h3 className="mt-5">Terms in this set ({result.detail.length})</h3>
           {result.detail.map((item, idx) => (
             <QuestionItem keyword={item.card_title} desc={item.card_desc} />
@@ -238,11 +241,12 @@ const DetailSet = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
 
-export default DetailSet;
+export default WithAuth(DetailSet);
 
 const SlideItem = (props) => {
   const [topPosition, setTopPosition] = useState("100%");

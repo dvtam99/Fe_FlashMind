@@ -166,10 +166,10 @@ const DetailSet = () => {
             </div>
           </Col>
         </Row>
-
-        <Row>
+        <hr width="80%" />
+        <Row className="mb-5">
           <Col sm={6}>
-            <div className="ml-5 mt-5">
+            <div className="pl-5 ml-5">
               <img
                 src={
                   process.env.REACT_APP_API_DOMAIN +
@@ -211,8 +211,8 @@ const DetailSet = () => {
         </Row>
       </div>
 
-      <div className="set-detail-more mt-5">
-        <div className="set-detail-body bg-f4">
+      <div className="set-detail-more bg-f4">
+        <div className="container mb-2">
           <h3 className="mt-5">Terms in this set ({result.detail.length})</h3>
           {result.detail.map((item, idx) => (
             <QuestionItem keyword={item.card_title} desc={item.card_desc} />

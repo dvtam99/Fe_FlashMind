@@ -248,14 +248,8 @@ textarea,
 button:focus {
   outline: none;
 }
-.file {
-  background-color: rgb(255, 165, 171);
-}
+
 .color-pink {
-  background-color: #da627d !important;
-  border: none;
-}
-input #file-upload-button {
   background-color: #da627d !important;
   border: none;
 }

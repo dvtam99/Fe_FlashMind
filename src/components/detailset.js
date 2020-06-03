@@ -15,7 +15,7 @@ import authCtx from "../contexts/auth";
 import { ConfirmModal } from "../containers/dashboard/setItem";
 import WithAuth from "../hoc/authHoc";
 
-import { Footer} from "../components/layout";
+import { Footer } from "../components/layout";
 
 const DetailSet = () => {
   const [error, setError] = useState(null);
@@ -213,7 +213,7 @@ const DetailSet = () => {
 
       <div className="set-detail-more bg-f4">
         <div className="container mb-2">
-          <h3 className="mt-5">Terms in this set ({result.detail.length})</h3>
+          <h3 className="mt-3">Terms in this set ({result.detail.length})</h3>
           {result.detail.map((item, idx) => (
             <QuestionItem keyword={item.card_title} desc={item.card_desc} />
           ))}
@@ -232,7 +232,7 @@ const DetailSet = () => {
             <span className="thumb">Ảnh đại diện</span>
             <span className="more-dots">...</span>
           </div>
-          <div className="item">
+          <div className="item ">
             <span className="stt">3</span>
             <span className="name">Name</span>
             <span className="descptn">description</span>

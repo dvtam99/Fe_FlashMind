@@ -131,7 +131,8 @@ code {
 }
 
 .set-detail-more {
-  .set-detail-body{
+  padding: 10px;
+  .set-detail-body {
     padding: 50px 100px;
   }
   .item {
@@ -225,7 +226,7 @@ code {
   padding: 20px 100px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
- 
+
   ul {
     list-style: none;
   }
@@ -235,12 +236,9 @@ code {
   }
   .founder {
     text-align: center;
-
   }
-
 }
 .material-icons {
   transform: translateY(5px);
   padding: 5px;
 }
-

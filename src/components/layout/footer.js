@@ -7,7 +7,7 @@ const Footer = () => {
                 <h4>
                     FLASHMIND
                 </h4>
-                <p>Học hiệu quả bằng cách sử dụng flashcard mình tự tạo</p>
+                <p>Learn effectively using your own custom flashcards</p>
                
             </div>
             <div className = "founder" >

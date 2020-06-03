@@ -8,7 +8,7 @@ import { useAsync } from "react-hook-async";
 import Avatar from "../avatar";
 
 import authCtx from "../../contexts/auth";
-import { Footer} from "../layout";
+import { Footer } from "../layout";
 
 import { uploadFile } from "../../api/file";
 import { updateMe } from "../../api/profile";
@@ -41,68 +41,65 @@ const Profile = () => {
 
   return (
     <>
-    <Container className="my-5">
-      <h3 className="display-4">
-        Profile: <span className="code">{authUser.user.username}</span>
-      </h3>
-      <Form onSubmit={formik.handleSubmit}>
-        
-        <Form.Group>
-          <Form.Label className="code">Photo</Form.Label>
-          <div className="align-items-center">
-            {uploadFileApi.loading ? (
-              "Loading ..."
-            ) : (
-            
-              <img
-                src={
-                  process.env.REACT_APP_API_DOMAIN +
-                  "/" +
-                  formik.values.photoUrl
-                }
-                alt=""
-                style={{ width: "80px", height: "80px" }}
-                className="border rounded-circle m-3"
-              /> 
-     
-            )}
-            <br />
+      <Container className="my-5">
+        <h3 className="display-4">
+          Profile: <span className="code">{authUser.user.username}</span>
+        </h3>
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Group>
+            <Form.Label className="code">Photo</Form.Label>
+            <div className="align-items-center">
+              {uploadFileApi.loading ? (
+                "Loading ..."
+              ) : (
+                <img
+                  src={
+                    process.env.REACT_APP_API_DOMAIN +
+                    "/" +
+                    formik.values.photoUrl
+                  }
+                  alt=""
+                  style={{ width: "80px", height: "80px" }}
+                  className="border rounded-circle m-3"
+                />
+              )}
+              <br />
+              <Form.Control
+                className="ml-3 bg-red"
+                type="file"
+                onChange={onChooseImage}
+              />
+            </div>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label className="code">Bio</Form.Label>
             <Form.Control
-              className="ml-3 bg-red"
-              type="file"
-              onChange={onChooseImage}
+              type="text"
+              name="bio"
+              value={formik.values.bio}
+              onChange={formik.handleChange}
             />
-          </div>
-        </Form.Group>
+          </Form.Group>
 
-        <Form.Group>
-          <Form.Label className="code">Bio</Form.Label>
-          <Form.Control
-            type="text"
-            name="bio"
-            value={formik.values.bio}
-            onChange={formik.handleChange}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label className="code">Education</Form.Label>
-          <Form.Control
-            type="text"
-            name="education"
-            value={formik.values.education}
-            onChange={formik.handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Button className="code color-pink" type="submit">
-            Submit
-          </Button>
-        </Form.Group>
-      </Form>
-    </Container>
-  <Footer />
-  </>
+          <Form.Group>
+            <Form.Label className="code">Education</Form.Label>
+            <Form.Control
+              type="text"
+              name="education"
+              value={formik.values.education}
+              onChange={formik.handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Button className="code color-pink" type="submit">
+              Submit
+            </Button>
+          </Form.Group>
+        </Form>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

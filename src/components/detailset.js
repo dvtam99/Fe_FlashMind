@@ -265,8 +265,8 @@ const SlideItem = (props) => {
         style={{ top: topPosition }}
         onClick={() => setTopPosition("100%")}
       >
-        <p className="m-5">{props.description}</p>
-        <small className="guide">Click to close key word!</small>
+        <h3 className="m-5">{props.description}</h3>
+        <small className="guide">Click to see key word!</small>
       </div>
     </div>
   );

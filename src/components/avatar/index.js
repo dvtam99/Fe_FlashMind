@@ -23,6 +23,7 @@ const Avatar = ({ size, src }) => {
   const onClickLogOut = () => {
     localStorage.setItem("jwt", null);
     setAuthUser(null);
+    document.location = "/";
   };
   const url = src ? `${process.env.REACT_APP_API_DOMAIN}/${src}` : defaultUser;
   return (
@@ -42,7 +43,10 @@ const Avatar = ({ size, src }) => {
           <Link to="/profile" className="p-2 io">
             <i class="material-icons icon">person</i> Profile
           </Link>
-          <a href="https://www.facebook.com/groups/441154729911930/" className="p-2 io">
+          <a
+            href="https://www.facebook.com/groups/441154729911930/"
+            className="p-2 io"
+          >
             <i class="material-icons icon">live_help</i> Help Center
           </a>
           <Link to="/profile" className="p-2 io">

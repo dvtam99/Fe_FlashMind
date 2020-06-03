@@ -9,7 +9,7 @@ import { Form } from "react-bootstrap";
 import "./editform.scss";
 import Modal from "../components/modal";
 
-import {Footer} from "../components/layout";
+import { Footer } from "../components/layout";
 
 import withAuth from "../hoc/authHoc";
 import { useParams } from "react-router-dom";
@@ -154,6 +154,12 @@ const EditForm = () => {
             }}
           ></Modal>
         )}
+        <div className="header-edit">
+          <h3>Update set card!</h3>
+          <button className="finish" onClick={handleUpdate}>
+            {!postingStatus ? "Update!" : "Updating..."}
+          </button>
+        </div>
         <div className="set-meta">
           <div className="header-edit">
             <h3>Update set card!</h3>
@@ -270,7 +276,7 @@ const EditForm = () => {
             </div>
           </div>
         </div>
-      <Footer />
+        <Footer />
       </>
     );
   }

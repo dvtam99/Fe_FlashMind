@@ -13,7 +13,7 @@ const Footer = () => {
           <li>Đào Văn Tâm</li>
           <li>Vũ Quốc Đạt</li>
           <li>Lưu Thị Hoài Thu</li>
-          <li>Võ Hoàng Mai Anh</li>
+          <li>Võ Hằng Mai Anh</li>
         </ul>
       </div>
       <div className="contact">

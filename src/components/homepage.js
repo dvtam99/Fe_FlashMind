@@ -34,7 +34,7 @@ const HomePage = () => {
         <div className="right-body">
           <img src="/homepage.png" alt="img" width="100%" />
           <div className="content">
-            <h5>PlashMind dành cho ai?</h5>
+            <h5>FlashMind dành cho ai?</h5>
             <ul>
               <li>Cho những mọt sách ham học nhưng hay quên,</li>
               <li>Cho những người bạn nhiều khi mải ngủ quên học</li>

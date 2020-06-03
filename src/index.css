@@ -151,6 +151,7 @@ code {
   color: rgb(255, 165, 171);
   margin: 5px;
   font-size: 16px;
+  transform: translateY(5px);
 }
 .font {
   font-size: 16px;
@@ -182,6 +183,7 @@ code {
 .large_icon {
   font-size: 68px;
   color: lightpink;
+  transform: translateY(5px);
 }
 .card_setting {
   width: 100%;
@@ -199,10 +201,12 @@ code {
   color: rgb(255, 165, 171);
   margin: 5px;
   font-size: 30px !important;
+  transform: translateY(5px);
 }
 .icon-check {
   color: rgb(255, 165, 171);
   font-size: 30px !important;
+  transform: translateY(5px);
 }
 .ctrl {
   width: 80%;
@@ -221,6 +225,7 @@ code {
 .icon-check {
   position: absolute;
   right: 310px;
+  transform: translateY(5px);
 }
 .bg-f4 {
   background: #f4f4f4;
@@ -245,4 +250,12 @@ button:focus {
 }
 .file {
   background-color: rgb(255, 165, 171);
+}
+.color-pink {
+  background-color: #da627d !important;
+  border: none;
+}
+input #file-upload-button {
+  background-color: #da627d !important;
+  border: none;
 }

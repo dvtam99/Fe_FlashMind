@@ -220,15 +220,22 @@ code {
 .footer {
   background-color: #f38e9c;
   color: white;
-  padding: 50px 100px;
+  padding: 20px 100px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  h3 {
-    padding: 20px 0px;
-  }
+ 
   ul {
     list-style: none;
   }
+  .aboutUse {
+    text-align: center;
+    padding-top: 25px;
+  }
+  .founder {
+    text-align: center;
+
+  }
+
 }
 .material-icons {
   transform: translateY(5px);

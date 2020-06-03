@@ -62,12 +62,7 @@ const SetItem = (props) => {
 
           <div className="date-created">{date_created}</div>
 
-          <div className="author">
-            <span role="img" aria-label="avatar-image" className = "m-2">
-              👨‍🦱
-            </span>
-            {author.name}
-          </div>
+          
 
           {empty && (
             <div className="empty">             
@@ -100,10 +95,10 @@ const SetItem = (props) => {
           {currentUser === author.username ? (
             <>
               <div className="edit" title="Edit this  set">
-                <i class="material-icons icon-ctrl" title="Edit this card">
+                
+                <a href={`/flashcard/edit/${slug}`} className= "text-edit"><i class="material-icons icon-ctrl" title="Edit this card">
                       edit
-                </i>
-                <a href={`/flashcard/edit/${slug}`} className= "text-edit">Edit</a>
+                </i></a>
               </div>
               <div
                 className="delete"
@@ -114,7 +109,7 @@ const SetItem = (props) => {
                 <i class="material-icons icon-ctrl" >
                     delete
                 </i>
-                Delete
+   
               </div>
             </>
           ) : (

@@ -4,14 +4,14 @@ const Footer = () => {
     return (
         <div className = "footer">
             <div className = "aboutUse">
-                <h3>
+                <h4>
                     FLASHMIND
-                </h3>
+                </h4>
                 <p>Học hiệu quả bằng cách sử dụng flashcard mình tự tạo</p>
                
             </div>
-            <div cl>
-            <h3>Đồng sáng lập</h3>
+            <div className = "founder" >
+            <h4>Founder</h4>
                 <ul>
                     <li>Tâm</li>
                     <li>Đạt</li>
@@ -20,9 +20,9 @@ const Footer = () => {
                 </ul>
             </div>
             <div className = "contact">
-                <h3>
-                    Liên hệ với chúng tôi
-                </h3>
+                <h4>
+                    Contact
+                </h4>
                 <ul>
                     <li>
                         <i class="material-icons">edit_location</i>

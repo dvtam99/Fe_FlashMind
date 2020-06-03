@@ -8,6 +8,7 @@ import { useAsync } from "react-hook-async";
 import Avatar from "../avatar";
 
 import authCtx from "../../contexts/auth";
+import { Footer} from "../layout";
 
 import { uploadFile } from "../../api/file";
 import { updateMe } from "../../api/profile";
@@ -39,6 +40,7 @@ const Profile = () => {
   };
 
   return (
+    <>
     <Container className="my-5">
       <h3 className="display-4">
         Profile: <span className="code">{authUser.user.username}</span>
@@ -99,6 +101,8 @@ const Profile = () => {
         </Form.Group>
       </Form>
     </Container>
+  <Footer />
+  </>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import { Header, Footer } from "./components/layout";
+import { Header} from "./components/layout";
 
 
 import AuthContext from "./contexts/auth";
@@ -43,7 +43,7 @@ function App() {
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
         </Switch>
-        <Footer></Footer>
+        
       </div>
     </AuthContext.Provider>
   );

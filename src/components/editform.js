@@ -9,6 +9,8 @@ import { Form } from "react-bootstrap";
 import "./editform.scss";
 import Modal from "../components/modal";
 
+import {Footer} from "../components/layout";
+
 import withAuth from "../hoc/authHoc";
 import { useParams } from "react-router-dom";
 
@@ -268,6 +270,7 @@ const EditForm = () => {
             </div>
           </div>
         </div>
+      <Footer />
       </>
     );
   }

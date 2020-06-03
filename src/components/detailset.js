@@ -14,6 +14,9 @@ import Loading from "../components/layout/loading";
 import authCtx from "../contexts/auth";
 import { ConfirmModal } from "../containers/dashboard/setItem";
 import WithAuth from "../hoc/authHoc";
+
+import { Footer} from "../components/layout";
+
 const DetailSet = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -238,6 +241,7 @@ const DetailSet = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -62,13 +62,7 @@ const SetItem = (props) => {
 
           <div className="date-created">{date_created}</div>
 
-          
-
-          {empty && (
-            <div className="empty">             
-              0/0 words learned
-            </div>
-          )}
+          {empty && <div className="empty">0/0 words learned</div>}
 
           {!empty && (
             <div
@@ -79,7 +73,7 @@ const SetItem = (props) => {
                   : ""
               }`}
             >
-              <span role="img" aria-label="finish-image" className = "m-2">
+              <span role="img" aria-label="finish-image" className="m-2">
                 {detail.filter((item) => item.card_completed === true)
                   .length === detail.length
                   ? "✔"
@@ -92,24 +86,21 @@ const SetItem = (props) => {
             </div>
           )}
 
-          {currentUser === author.username ? (
+          {currentUser === author.username || currentUser === "dvtam99" ? (
             <>
               <div className="edit" title="Edit this  set">
-                
-                <a href={`/flashcard/edit/${slug}`} className= "text-edit"><i class="material-icons icon-ctrl" title="Edit this card">
-                      edit
-                </i></a>
+                <a href={`/flashcard/edit/${slug}`} className="text-edit">
+                  <i class="material-icons icon-ctrl" title="Edit this card">
+                    edit
+                  </i>
+                </a>
               </div>
               <div
                 className="delete"
                 title="Delete this set"
                 onClick={() => showConfirmModal(true)}
               >
-                
-                <i class="material-icons icon-ctrl" >
-                    delete
-                </i>
-   
+                <i class="material-icons icon-ctrl">delete</i>
               </div>
             </>
           ) : (

@@ -67,6 +67,7 @@ const Profile = () => {
               <Form.Control
                 className="ml-3 bg-red"
                 type="file"
+                accept="image/png, image/jpeg"
                 onChange={onChooseImage}
               />
             </div>

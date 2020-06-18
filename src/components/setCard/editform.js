@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
 import ReactLoading from "react-loading";
-import authCtx from "../contexts/auth";
+import authCtx from "../../contexts/auth";
 import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
-import { uploadFile } from "../api/file";
-import { updateSetCard } from "../api/flashcard";
+import { uploadFile } from "../../api/file";
+import { updateSetCard } from "../../api/flashcard";
 import { Form } from "react-bootstrap";
-import "./editform.scss";
-import Modal from "../components/modal";
+import "../editform.scss";
+import Modal from "../modal";
 
-import { Footer } from "../components/layout";
+import { Footer } from "../layout";
 
-import withAuth from "../hoc/authHoc";
+import withAuth from "../../hoc/authHoc";
 import { useParams } from "react-router-dom";
 
 const EditForm = () => {

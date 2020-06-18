@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 
-import { createSetCard } from "../api/flashcard";
-import authCtx from "../contexts/auth";
+import { createSetCard } from "../../api/flashcard";
+import authCtx from "../../contexts/auth";
 import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
-import { uploadFile } from "../api/file";
-import Modal from "../components/modal";
-import withAuth from "../hoc/authHoc";
+import { uploadFile } from "../../api/file";
+import Modal from "../modal";
+import withAuth from "../../hoc/authHoc";
 
-import { Footer } from "../components/layout";
+import { Footer } from "../layout";
 
 const AddForm = () => {
   const { authUser } = useContext(authCtx);

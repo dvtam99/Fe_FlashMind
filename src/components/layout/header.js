@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Navbar, Form, FormControl, Button, Modal } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Auth from "../../containers/auth";
 import Avatar from "../avatar/index";
 import logo from "./flashmind-logo.png";
@@ -46,7 +47,10 @@ const Header = () => {
   const { authUser } = useContext(authCtx);
   const [value, setValue] = useState(null);
   const [searchApiData, fetchSearchSetCard] = useAsync(null, loadData);
-
+  const history = useHistory();
+  const moveToDashboard = () => {
+    history.push("/dashboard");
+  };
   useEffect(() => {
     fetchSearchSetCard(value)
       .then((setCard) => {
@@ -60,7 +64,7 @@ const Header = () => {
   return (
     <>
       <Navbar sticky="top">
-        <Navbar.Brand href="/dashboard">
+        <Navbar.Brand onClick={moveToDashboard}>
           <b className="m-4">
             <img src={logo} alt="" className="logo" />
           </b>
@@ -88,11 +92,15 @@ const Header = () => {
           {!search && (
             <>
               <div className="break"></div>
-              <i
-                class="fa fa-plus"
-                style={style}
-                onClick={() => (document.location.pathname = "/flashcard/new")}
-              ></i>
+              <Link to="/flashcard/new">
+                <i
+                  class="fa fa-plus"
+                  style={style}
+                  // onClick={() =>
+                  //   (document.location.pathname = "/flashcard/new")
+                  // }
+                ></i>
+              </Link>
             </>
           )}
         </Form>

@@ -98,9 +98,6 @@ const Dashboard = () => {
                   </Link>
                 </div>
                 <div className="section-body">
-                  {/* BEGIN SET ITEM */}
-
-                  {/* USER EMPTY SET DISPLAY FIRST */}
                   {resultArr &&
                     resultArr.map((item) => (
                       <SetItem key={item.id} item={item} />

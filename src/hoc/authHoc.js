@@ -15,8 +15,11 @@ const withAuth = (WrappedComponent) => (props) => {
   useEffect(() => {
     if (!authUser) {
       const jwt = localStorage.getItem("jwt");
+      const ss = localStorage.getItem("session");
       if (jwt) {
         fetchProfile(jwt).then((user) => setAuthUser(user));
+      } else if (ss) {
+        fetchProfile(ss).then((user) => setAuthUser(user));
       }
     }
   }, [authUser, fetchProfile, setAuthUser]);

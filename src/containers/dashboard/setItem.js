@@ -1,9 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-
-import { Button, Modal, Alert } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 import authCtx from "../../contexts/auth";
 
 const SetItem = (props) => {
+  const history = useHistory();
+
   const {
     _id,
     avatar,
@@ -14,6 +16,9 @@ const SetItem = (props) => {
     detail,
     slug,
   } = props.item;
+  const moveToDetail = () => {
+    history.push(`/setCard/${slug}`);
+  };
   const { authUser } = useContext(authCtx);
   const currentUser = authUser.user.username;
   const [confirmModal, showConfirmModal] = useState(false);
@@ -57,7 +62,9 @@ const SetItem = (props) => {
 
         <div className="set-content">
           <h4>
-            <a href={`/setCard/${slug}`}>{title}</a>
+            <span onClick={moveToDetail} className="link">
+              {title}
+            </span>
           </h4>
 
           <div className="date-created">{date_created}</div>
@@ -86,7 +93,7 @@ const SetItem = (props) => {
             </div>
           )}
 
-          {currentUser === author.username || currentUser === "dvtam99" ? (
+          {/* {currentUser === author.username || currentUser === "dvtam99" ? (
             <>
               <div className="edit" title="Edit this  set">
                 <a href={`/flashcard/edit/${slug}`} className="text-edit">
@@ -105,7 +112,7 @@ const SetItem = (props) => {
             </>
           ) : (
             <div>&nbsp;</div>
-          )}
+          )} */}
         </div>
       </div>
     </>

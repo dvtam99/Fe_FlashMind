@@ -42,6 +42,7 @@ const Login = (props) => {
     onSubmit: (values) => {
       fetchLogin(values.username, values.password)
         .then((authUser) => {
+          localStorage.setItem("session", authUser.session);
           if (values.rememberMe) {
             localStorage.setItem("jwt", authUser.token);
           }

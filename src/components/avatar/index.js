@@ -25,6 +25,9 @@ const Avatar = ({ size, src }) => {
     setAuthUser(null);
     document.location = "/";
   };
+  const onClosePop = () => {
+    setShow(false);
+  };
   const url = src ? `${process.env.REACT_APP_API_DOMAIN}/${src}` : defaultUser;
   return (
     <>
@@ -35,7 +38,7 @@ const Avatar = ({ size, src }) => {
         toggle={() => setShow(!setShow)}
       >
         <PopoverHeader>@{authUser.user.username}</PopoverHeader>
-        <PopoverBody className="d-flex flex-column p-0 ">
+        <PopoverBody className="d-flex flex-column p-0 " onClick={onClosePop}>
           <Link to="/setting" className="p-2 io" block>
             <i class="material-icons icon">settings</i>
             Setting

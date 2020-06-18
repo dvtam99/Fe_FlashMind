@@ -10,12 +10,12 @@ import {
   useLocation,
 } from "react-router-dom";
 import { FacebookShareButton } from "react-share";
-import Loading from "../components/layout/loading";
-import authCtx from "../contexts/auth";
-import { ConfirmModal } from "../containers/dashboard/setItem";
-import WithAuth from "../hoc/authHoc";
+import Loading from "../layout/loading";
+import authCtx from "../../contexts/auth";
+import { ConfirmModal } from "../../containers/dashboard/setItem";
+import WithAuth from "../../hoc/authHoc";
 
-import { Footer } from "../components/layout";
+import { Footer } from "../layout";
 
 const DetailSet = () => {
   const [error, setError] = useState(null);
@@ -72,6 +72,7 @@ const DetailSet = () => {
   }
 
   useEffect(() => {
+    setIsLoaded(true);
     fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`, {
       method: "get",
       // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
@@ -79,13 +80,13 @@ const DetailSet = () => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
+          setIsLoaded(false);
           setId(result._id);
 
           setResult(result);
         },
         (error) => {
-          setIsLoaded(true);
+          setIsLoaded(false);
           setError(error);
         }
       );
@@ -98,7 +99,7 @@ const DetailSet = () => {
 
       <Loading show={isLoaded} />
       <div className="set-detail-learn">
-        <h3 className="ml-5 mt-5">{result.title}</h3>
+        <h3 className="ml-5 m-3 pb-2">{result.title}</h3>
         <Row>
           <Col sm={2}>
             <div className="set-detail-info ml-5 mt-3 d-grid ">
@@ -136,31 +137,35 @@ const DetailSet = () => {
                       />
                     ))}
                   </div>
-                  <div className="slide-controls">
-                    <div className="ctrl">
-                      <span onClick={handlePrev}>
+                  {result.detail.length > 0 ? (
+                    <div className="slide-controls">
+                      <div className="ctrl">
+                        <span onClick={handlePrev}>
+                          <i
+                            className="fa fa-arrow-left icon-ctrl"
+                            title="Previous question"
+                          ></i>
+                        </span>
+                        <span className="text-ctrl">
+                          {index + "/" + result.detail.length}
+                        </span>
+                        <span onClick={handleNext}>
+                          <i
+                            className="fa fa-arrow-right icon-ctrl"
+                            title="Next question"
+                          ></i>
+                        </span>
+                      </div>
+                      <span className="float-right icon-check">
                         <i
-                          className="fa fa-arrow-left icon-ctrl"
-                          title="Previous question"
-                        ></i>
-                      </span>
-                      <span className="text-ctrl">
-                        {index + "/" + result.detail.length}
-                      </span>
-                      <span onClick={handleNext}>
-                        <i
-                          className="fa fa-arrow-right icon-ctrl"
-                          title="Next question"
+                          class="fa fa-check icon-ctrl"
+                          title="I have remember this question"
                         ></i>
                       </span>
                     </div>
-                    <span className="float-right icon-check">
-                      <i
-                        class="fa fa-check icon-ctrl"
-                        title="I have remember this question"
-                      ></i>
-                    </span>
-                  </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
@@ -177,7 +182,12 @@ const DetailSet = () => {
                   result.author.photoUrl
                 }
                 alt=""
-                style={{ width: "60px", height: "60px" }}
+                style={{
+                  minWidth: "60px",
+                  minHeight: "60px",
+                  maxHeight: "60px",
+                  maxWidth: "60px",
+                }}
                 className="border rounded-circle"
               />
               <span className="position-absolute ml-2">
@@ -190,7 +200,7 @@ const DetailSet = () => {
           <Col sm={6}>
             <div className="control">
               <i class="fa fa-share icon-ctrl" title="Share this question"></i>
-              {currentUser === result.author.username ? (
+              {currentUser === result.author.username || "dvtam99" ? (
                 <>
                   <a href={`/flashcard/edit/${result.slug}`}>
                     <i class="material-icons icon-ctrl" title="Edit this card">

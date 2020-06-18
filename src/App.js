@@ -19,17 +19,17 @@ function App() {
   const [authUser, setAuthUser] = useState(null);
 
   const [profileApi, fetchProfile] = useAsync(null, me);
-  // useEffect(() => {
-  //   if (!authUser) {
-  //     const jwt = localStorage.getItem("jwt");
-  //     const ss = localStorage.getItem("session");
-  //     if (jwt) {
-  //       fetchProfile(jwt).then((user) => setAuthUser(user));
-  //     } else if (ss) {
-  //       fetchProfile(ss).then((user) => setAuthUser(user));
-  //     }
-  //   }
-  // }, [authUser, fetchProfile, setAuthUser]);
+  useEffect(() => {
+    if (!authUser) {
+      const jwt = localStorage.getItem("jwt");
+      const ss = localStorage.getItem("session");
+      if (jwt) {
+        fetchProfile(jwt).then((user) => setAuthUser(user));
+      } else if (ss) {
+        fetchProfile(ss).then((user) => setAuthUser(user));
+      }
+    }
+  }, [authUser, fetchProfile, setAuthUser]);
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>

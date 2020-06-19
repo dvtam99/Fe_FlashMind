@@ -1,12 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import ReactLoading from "react-loading";
 import authCtx from "../../contexts/auth";
-import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../../api/file";
-import { updateSetCard } from "../../api/flashcard";
-import { Form } from "react-bootstrap";
-import "../editform.scss";
+import { updateSetCard, getSetCard } from "../../api/flashcard";
+import "../../scss/editform.scss";
 import Modal from "../modal";
 
 import { Footer } from "../layout";
@@ -17,8 +15,6 @@ import { useParams } from "react-router-dom";
 const EditForm = () => {
   const { authUser } = useContext(authCtx);
 
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [result, setResult] = useState(null);
 
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
@@ -36,6 +32,7 @@ const EditForm = () => {
   const [cardDesc, setCardDesc] = useState("");
   const [postingStatus, setPostingStatus] = useState(false);
   const [updateApiData, fetchUpdateApiData] = useAsync(null, updateSetCard);
+  const [getSetCardData, fetchSetCardData] = useAsync(null, getSetCard);
   const [modalShow, setModalShow] = useState(false);
   const [message, setMessage] = useState("");
   const onChooseImage = (event) => {
@@ -109,34 +106,41 @@ const EditForm = () => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setResult(result);
-
-          // Update api result vào state
-          setID(result._id);
-          setTitle(result.title);
-          setDescription(result.description);
-          setShare(result.share);
-          setAvatar(result.avatar);
-          setCardDetailArr([...result.detail]);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    fetchSetCardData(slug).then((result) => {
+      setResult(result);
+      // Update api result vào state
+      setID(result._id);
+      setTitle(result.title);
+      setDescription(result.description);
+      setShare(result.share);
+      setAvatar(result.avatar);
+      setCardDetailArr([...result.detail]);
+    });
+    // fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`)
+    //   .then((res) => res.json())
+    //   .then(
+    //     (result) => {
+    //       setIsLoaded(true);
+    //       setResult(result);
+    //       // Update api result vào state
+    //       setID(result._id);
+    //       setTitle(result.title);
+    //       setDescription(result.description);
+    //       setShare(result.share);
+    //       setAvatar(result.avatar);
+    //       setCardDetailArr([...result.detail]);
+    //     },
+    //     (error) => {
+    //       setIsLoaded(true);
+    //       setError(error);
+    //     }
+    //   );
   }, []);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
+  if (getSetCardData.loading) {
     return (
       <div className="loading">
-        <ReactLoading type="spin" color="#ffa5ab" />
+        <ReactLoading type="spinningBubbles" color="#ffa5ab" />
       </div>
     );
   } else if (!result) {
@@ -152,7 +156,7 @@ const EditForm = () => {
               setModalShow(false);
               document.location.pathname = "/dashboard";
             }}
-          ></Modal>
+          />
         )}
         <div className="header-edit">
           <h3>Update set card!</h3>
@@ -208,14 +212,23 @@ const EditForm = () => {
               </div>
 
               <div>
-                <div className="set-avatar">
-                  <div className="avt">
-                    <img
-                      src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
-                      alt=""
-                      style={{ width: "600px", height: "340px" }}
-                      className="border rounded"
-                    />
+                <div className="set-avatar ">
+                  <div
+                    className="avt"
+                    style={{ width: "600px", height: "340px" }}
+                  >
+                    {uploadFileApi.loading ? (
+                      <div className="d-flex justify-content-center align-items-center">
+                        <ReactLoading type="bubbles" color="#ffa5ab" />
+                      </div>
+                    ) : (
+                      <img
+                        src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
+                        alt=""
+                        style={{ width: "600px", height: "340px" }}
+                        className="border rounded"
+                      />
+                    )}
                   </div>
 
                   <input type="file" onChange={onChooseImage} />
@@ -308,7 +321,7 @@ const CardDetailItem = (props) => {
               aria-label="collapse-icon"
               onClick={() => setShow(!show)}
             >
-              🔺
+              <i class="material-icons">keyboard_arrow_up</i>
             </span>
           ) : (
             <span
@@ -318,7 +331,7 @@ const CardDetailItem = (props) => {
               aria-label="collapse-icon"
               onClick={() => setShow(!show)}
             >
-              🔻
+              <i class="material-icons">keyboard_arrow_down</i>
             </span>
           )}
 

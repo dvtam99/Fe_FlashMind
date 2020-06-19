@@ -5,7 +5,7 @@ import authCtx from "../../contexts/auth";
 
 const SetItem = (props) => {
   const history = useHistory();
-
+  debugger;
   const {
     _id,
     avatar,
@@ -23,34 +23,34 @@ const SetItem = (props) => {
   const currentUser = authUser.user.username;
   const [confirmModal, showConfirmModal] = useState(false);
 
-  function handleDelete() {
-    showConfirmModal(false);
-    const data = { _id };
-    debugger;
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
-      method: "delete",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authUser.token}`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(
-        (result) => {
-          document.location.pathname = "/dashboard";
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }
+  // function handleDelete() {
+  //   showConfirmModal(false);
+  //   const data = { _id };
+  //   debugger;
+  //   fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
+  //     method: "delete",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${authUser.token}`,
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then(
+  //       (result) => {
+  //         document.location.pathname = "/dashboard";
+  //       },
+  //       (error) => {
+  //         console.log(error.message);
+  //       }
+  //     );
+  // }
 
   return (
     <>
-      <ConfirmModal show={confirmModal} onHide={handleDelete} />
+      {/* <ConfirmModal show={confirmModal} onHide={handleDelete} /> */}
 
       <div className="set-item">
         <div className="avatar">
@@ -67,31 +67,32 @@ const SetItem = (props) => {
             </span>
           </h4>
 
-          <div className="date-created">{date_created}</div>
+          <div className="status">
+            {empty && <div className="empty">0/0 words learned</div>}
 
-          {empty && <div className="empty">0/0 words learned</div>}
+            {!empty && (
+              <div
+                className={`finish ${
+                  detail.filter((item) => item.card_completed === true)
+                    .length !== detail.length
+                    ? "not-yet"
+                    : ""
+                }`}
+              >
+                <span role="img" aria-label="finish-image" className="m-2">
+                  {detail.filter((item) => item.card_completed === true)
+                    .length === detail.length
+                    ? "✔"
+                    : "U"}
+                </span>
 
-          {!empty && (
-            <div
-              className={`finish ${
-                detail.filter((item) => item.card_completed === true).length !==
-                detail.length
-                  ? "not-yet"
-                  : ""
-              }`}
-            >
-              <span role="img" aria-label="finish-image" className="m-2">
-                {detail.filter((item) => item.card_completed === true)
-                  .length === detail.length
-                  ? "✔"
-                  : "U"}
-              </span>
-
-              {`${
-                detail.filter((item) => item.card_completed === true).length
-              } / ${detail.length} words learned`}
-            </div>
-          )}
+                {`${
+                  detail.filter((item) => item.card_completed === true).length
+                } / ${detail.length} words learned`}
+              </div>
+            )}
+            <div className="date-created d-flex ">{author.username}</div>
+          </div>
 
           {/* {currentUser === author.username || currentUser === "dvtam99" ? (
             <>

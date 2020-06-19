@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { Header } from "./components/layout";
-
+import ReactLoading from "react-loading";
 import AuthContext from "./contexts/auth";
 import { useAsync } from "react-hook-async";
-import { Dashboard } from "./containers/dashboard";
+import { Dashboard } from "./components/dashboard";
 import HomePage from "./components/homepage";
-import AddForm from "./components/setCard/addform";
-import EditForm from "./components/setCard/editform";
-import DetailSet from "./components/setCard/detailset";
+import AddForm from "./components/setCard/addSetCard";
+import EditForm from "./components/setCard/editSetCard";
+import DetailSet from "./components/setCard/detailSetCard";
 import { me } from "./api/profile";
 import Setting from "./components/setting";
 import Profile from "./components/setting/profile";
-import Auth from "./containers/auth/index";
+import Auth from "./components/auth/index";
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
@@ -31,6 +31,13 @@ function App() {
     }
   }, [authUser, fetchProfile, setAuthUser]);
 
+  if (profileApi.loading) {
+    return (
+      <div className="loading">
+        <ReactLoading type="spin" color="#ffa5ab" />
+      </div>
+    );
+  }
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>
       <div className="App">

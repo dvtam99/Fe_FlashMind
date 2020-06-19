@@ -178,12 +178,10 @@ const Register = ({ onMoveToLogin }) => {
                 type="checkbox"
                 name="policy"
                 value={formik.values.policy}
-                isInvalid={formik.errors.policy}         
+                isInvalid={formik.errors.policy}
                 onChange={formik.handleChange}
                 required
-              /> 
-    
-             
+              />
               I agree to the&nbsp;
               <span className="link">Terms of Use</span>&nbsp; and &nbsp;
               <span className="link"> Privacy Notice</span>
@@ -197,8 +195,9 @@ const Register = ({ onMoveToLogin }) => {
             className="m-color border-none"
             type="submit"
             style={{ width: "60%" }}
+            disabled={registerApiData.loading}
           >
-            Register
+            {registerApiData.loading ? "Registering" : "Register"}
           </Button>
           <Form.Label>
             You have an account? &nbsp;

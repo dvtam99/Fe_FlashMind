@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import ReactLoading from "react-loading";
 import { createSetCard } from "../../api/flashcard";
 import authCtx from "../../contexts/auth";
-import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../../api/file";
 import Modal from "../modal";
@@ -162,13 +161,22 @@ const AddForm = () => {
 
             <div>
               <div className="set-avatar">
-                <div className="avt">
-                  <img
-                    src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
-                    alt=""
-                    style={{ width: "600px", height: "340px" }}
-                    className="border rounded"
-                  />
+                <div
+                  className="avt"
+                  style={{ width: "600px", height: "340px" }}
+                >
+                  {uploadFileApi.loading ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                      <ReactLoading type="bubbles" color="#ffa5ab" />
+                    </div>
+                  ) : (
+                    <img
+                      src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
+                      alt=""
+                      style={{ width: "600px", height: "340px" }}
+                      className="border rounded"
+                    />
+                  )}
                 </div>
 
                 <input type="file" className="file" onChange={onChooseImage} />

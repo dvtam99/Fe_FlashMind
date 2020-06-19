@@ -274,7 +274,7 @@ const CardDetailItem = (props) => {
               aria-label="collapse-icon"
               onClick={() => setShow(!show)}
             >
-              🔺
+              <i class="material-icons">keyboard_arrow_up</i>
             </span>
           ) : (
             <span
@@ -284,7 +284,7 @@ const CardDetailItem = (props) => {
               aria-label="collapse-icon"
               onClick={() => setShow(!show)}
             >
-              🔻
+              <i class="material-icons">keyboard_arrow_down</i>
             </span>
           )}
 

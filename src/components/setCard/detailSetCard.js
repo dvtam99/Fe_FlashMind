@@ -147,16 +147,17 @@ const DetailSet = () => {
                       <div className="ctrl">
                         <span onClick={handlePrev}>
                           <i
-                            className="fa fa-arrow-left icon-ctrl"
+                            className="fa fa-arrow-left icon-ctrl pointer"
                             title="Previous question"
                           ></i>
                         </span>
                         <span className="text-ctrl">
-                          {index + "/" + result.detail.length}
+                          {index} <span style={{ fontSize: "16px" }}>/</span>{" "}
+                          {result.detail.length}
                         </span>
                         <span onClick={handleNext}>
                           <i
-                            className="fa fa-arrow-right icon-ctrl"
+                            className="fa fa-arrow-right icon-ctrl pointer"
                             title="Next question"
                           ></i>
                         </span>
@@ -204,7 +205,10 @@ const DetailSet = () => {
           </Col>
           <Col sm={6}>
             <div className="control">
-              <i class="fa fa-share icon-ctrl" title="Share this question"></i>
+              <i
+                class="fa fa-share icon-ctrl pointer"
+                title="Share this question"
+              ></i>
               {currentUser === result.author.username || "dvtam99" ? (
                 <>
                   <Link to={`/flashcard/edit/${result.slug}`}>
@@ -214,7 +218,7 @@ const DetailSet = () => {
                   </Link>
                   <i
                     onClick={() => showConfirmModal(true)}
-                    class="material-icons icon-ctrl"
+                    class="material-icons icon-ctrl pointer"
                     title="Delete this card"
                   >
                     delete

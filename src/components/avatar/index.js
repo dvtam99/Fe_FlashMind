@@ -66,7 +66,7 @@ const Avatar = ({ size, src }) => {
         onClick={() => setShow(!show)}
         src={url}
         alt=""
-        className="border rounded-circle spanLogin"
+        className="border rounded-circle spanLogin pointer"
         style={{
           width: defaultSize * sizeScale[size],
           height: defaultSize * sizeScale[size],

@@ -1,7 +1,8 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Alert } from "react-bootstrap";
 
 const ModalNotice = (props) => {
+  debugger;
   return (
     <div>
       <Modal
@@ -12,10 +13,15 @@ const ModalNotice = (props) => {
         centered
       >
         <Modal.Header closeButton></Modal.Header>
-        <Modal.Body className="text-center">{props.message}</Modal.Body>
+        <Modal.Body className="text-center">
+          <Alert variant="success" className="border-0">
+            <Alert.Heading>{props.header}</Alert.Heading>
+            <p>{props.message}</p>
+          </Alert>
+        </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide} variant="info">
-            Close
+          <Button onClick={props.onHide} variant={props.variant || "info"}>
+            {props.button}
           </Button>
         </Modal.Footer>
       </Modal>

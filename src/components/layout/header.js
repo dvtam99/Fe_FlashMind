@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Navbar, Form, FormControl, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import Auth from "../../containers/auth";
+import Auth from "../auth";
 import Avatar from "../avatar/index";
 import logo from "./flashmind-logo.png";
 import authCtx from "../../contexts/auth";
@@ -63,9 +63,9 @@ const Header = () => {
 
   return (
     <>
-      <Navbar sticky="top">
+      <Navbar sticky="top" className="header">
         <Navbar.Brand onClick={moveToDashboard}>
-          <b className="m-4">
+          <b className="m-4 pointer">
             <img src={logo} alt="" className="logo" />
           </b>
         </Navbar.Brand>
@@ -76,7 +76,7 @@ const Header = () => {
               placeholder="Search"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="inp-search"
+              className="inp-search pointer"
             />
           )}
 
@@ -91,7 +91,7 @@ const Header = () => {
 
           {!search && (
             <>
-              <div className="break"></div>
+              <div className="break pointer"></div>
               <Link to="/flashcard/new">
                 <i
                   class="fa fa-plus"
@@ -109,7 +109,7 @@ const Header = () => {
             onClick={() => {
               setModalShow(true);
             }}
-            className="spanLogin"
+            className="spanLogin pointer"
           >
             Login or Register
           </span>

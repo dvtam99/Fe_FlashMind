@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import withAuth from "../../hoc/authHoc";
 import SetItem from "./setItem";
 import authCtx from "../../contexts/auth";
-import Loading from "../../components/layout/loading";
-import "./dashboard.scss";
+import ReactLoading from "react-loading";
+import { useAsync } from "react-hook-async";
+import { getAllSetCard } from "../../api/flashcard";
+import "../../scss/dashboard.scss";
 
 const style = {
   fontSize: "24px",
@@ -12,37 +14,40 @@ const style = {
   margin: "10px",
 };
 const Dashboard = () => {
-  const { authUser } = useContext(authCtx);
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const currentId = authUser ? authUser.user._id : null;
+  // const { authUser } = useContext(authCtx);
+  const [getSetCard, fetchGetSetCard] = useAsync(null, getAllSetCard);
+  // const currentId = authUser ? authUser.user._id : null;
   const [resultArr, setResultArr] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
-      method: "get",
-      //body: { _id: currentId },
-      // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setIsLoaded(true);
-          setResultArr(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    fetchGetSetCard().then((result) => {
+      setResultArr(result);
+    });
+    // fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
+    //   method: "get",
+    //   //body: { _id: currentId },
+    //   // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
+    // })
+    //   .then((res) => res.json())
+    //   .then(
+    //     (result) => {
+    //       console.log(result);
+    //       setIsLoaded(true);
+    //       setResultArr(result);
+    //     },
+    //     (error) => {
+    //       setIsLoaded(true);
+    //       setError(error);
+    //     }
+    //   );
   }, []);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <Loading show={isLoaded} />;
+  if (getSetCard.loading) {
+    return (
+      <div className="loading">
+        <ReactLoading type="spin" color="#ffa5ab" />
+      </div>
+    );
   } else {
     return (
       <div className="mx-5">

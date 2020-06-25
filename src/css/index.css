@@ -254,3 +254,12 @@ button:focus {
   background-color: #da627d !important;
   border: none;
 }
+.collapse-icon {
+  color: #f38e9c;
+}
+.collapse-icon:hover {
+  cursor: pointer;
+}
+.status {
+  display: flex;
+}

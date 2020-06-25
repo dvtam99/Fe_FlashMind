@@ -120,8 +120,9 @@ const Login = (props) => {
             className="m-color border-none"
             type="submit"
             style={{ width: "60%" }}
+            disabled={loginApiData.loading}
           >
-            Login
+            {loginApiData.loading ? "Logging in" : "Login"}
           </Button>
 
           <Form.Label>

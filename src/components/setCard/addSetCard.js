@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import ReactLoading from "react-loading";
 import { createSetCard } from "../../api/flashcard";
 import authCtx from "../../contexts/auth";
-import { Input, Textarea } from "./CustomeUI";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../../api/file";
 import Modal from "../modal";
@@ -11,6 +10,7 @@ import withAuth from "../../hoc/authHoc";
 import { Footer } from "../layout";
 
 const AddForm = () => {
+  let fileInput;
   const { authUser } = useContext(authCtx);
 
   const [title, setTitle] = useState("");
@@ -24,7 +24,7 @@ const AddForm = () => {
   const [message, setMessage] = useState("");
   const [cardDetailArr, setCardDetailArr] = useState([]);
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
-  const [postingStatus, setPostingStatus] = useState(false);
+  const [createSetCardData, fetchCreateSetCard] = useAsync(null, createSetCard);
   const onChooseImage = (event) => {
     console.log(event);
     if (event.target.files.length < 1) return;
@@ -48,31 +48,31 @@ const AddForm = () => {
         avatar,
         detail: cardDetailArr,
       };
-
-      fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authUser.token}`,
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          setPostingStatus(true);
-          return res.json();
-        })
-        .then(
-          (result) => {
-            console.log(result.date_created);
-            setPostingStatus(false);
-            setMessage("Create set successful");
-            setModalShow(true);
-          },
-          (error) => {
-            setMessage(error.message);
-            setModalShow(true);
-          }
-        );
+      fetchCreateSetCard(authUser.token, data);
+      // fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
+      //   method: "post",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${authUser.token}`,
+      //   },
+      //   body: JSON.stringify(data),
+      // })
+      //   .then((res) => {
+      //     setPostingStatus(true);
+      //     return res.json();
+      //   })
+      //   .then(
+      //     (result) => {
+      //       console.log(result.date_created);
+      //       setPostingStatus(false);
+      //       setMessage("Create set successful");
+      //       setModalShow(true);
+      //     },
+      //     (error) => {
+      //       setMessage(error.message);
+      //       setModalShow(true);
+      //     }
+      //   );
     }
   }
   function handleUpdateKeyword(val, idx) {
@@ -111,6 +111,13 @@ const AddForm = () => {
       setCardKeyword("");
     }
   }
+  // if (!createSetCardData.loading) {
+  //   return (
+  //     <div className="loading">
+  //       <ReactLoading type="bubbles" color="#ffa5ab" />
+  //     </div>
+  //   );
+  // } else
   return (
     <>
       {modalShow && (
@@ -123,7 +130,14 @@ const AddForm = () => {
           }}
         ></Modal>
       )}
+
       <div className="set-meta">
+        <div className="header-edit">
+          <h3>Add this set card!</h3>
+          <button className="finish" onClick={handleSave}>
+            {!createSetCardData.loading ? "Save!" : "Saving..."}
+          </button>
+        </div>
         <div className="container">
           <div className="set-meta-wrapper">
             <div className="set-meta-form">
@@ -162,16 +176,31 @@ const AddForm = () => {
 
             <div>
               <div className="set-avatar">
-                <div className="avt">
-                  <img
-                    src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
-                    alt=""
-                    style={{ width: "600px", height: "340px" }}
-                    className="border rounded"
-                  />
+                <div
+                  className="avt"
+                  style={{ width: "600px", height: "340px" }}
+                >
+                  {uploadFileApi.loading ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                      <ReactLoading type="bubbles" color="#ffa5ab" />
+                    </div>
+                  ) : (
+                    <img
+                      src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
+                      alt=""
+                      onClick={() => fileInput.click()}
+                      style={{ width: "600px", height: "340px" }}
+                      className="border rounded"
+                    />
+                  )}
                 </div>
-
-                <input type="file" className="file" onChange={onChooseImage} />
+                <input
+                  hidden
+                  type="file"
+                  className="file"
+                  ref={(file) => (fileInput = file)}
+                  onChange={onChooseImage}
+                />
               </div>
             </div>
           </div>
@@ -229,9 +258,9 @@ const AddForm = () => {
           <button
             className="btn-update"
             onClick={handleSave}
-            disabled={postingStatus}
+            disabled={createSetCardData.loading}
           >
-            {!postingStatus ? "Save!" : "Creating new set..."}
+            {!createSetCardData.loading ? "Save!" : "Creating new set..."}
           </button>
         </div>
       </div>
@@ -266,7 +295,7 @@ const CardDetailItem = (props) => {
               aria-label="collapse-icon"
               onClick={() => setShow(!show)}
             >
-              🔺
+              <i class="material-icons">keyboard_arrow_up</i>
             </span>
           ) : (
             <span
@@ -276,7 +305,7 @@ const CardDetailItem = (props) => {
               aria-label="collapse-icon"
               onClick={() => setShow(!show)}
             >
-              🔻
+              <i class="material-icons">keyboard_arrow_down</i>
             </span>
           )}
 

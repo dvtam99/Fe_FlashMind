@@ -9,17 +9,17 @@ import {
   Prompt,
   useLocation,
 } from "react-router-dom";
+import { useAsync } from "react-hook-async";
+import { getSetCard } from "../../api/flashcard";
 import { FacebookShareButton } from "react-share";
-import Loading from "../layout/loading";
+import ReactLoading from "react-loading";
 import authCtx from "../../contexts/auth";
-import { ConfirmModal } from "../../containers/dashboard/setItem";
+import { ConfirmModal } from "../dashboard/setItem";
 import WithAuth from "../../hoc/authHoc";
 
 import { Footer } from "../layout";
 
 const DetailSet = () => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [result, setResult] = useState(null);
   const [index, setIndex] = useState(1);
   const { authUser } = useContext(authCtx);
@@ -27,7 +27,7 @@ const DetailSet = () => {
   let { slug } = useParams();
   const [_id, setId] = useState(null);
   const [confirmModal, showConfirmModal] = useState(false);
-
+  const [getSetCardData, fetchSetCardData] = useAsync(null, getSetCard);
   const [slideActive, setSlideActive] = useState(0);
 
   function handlePrev() {
@@ -41,7 +41,6 @@ const DetailSet = () => {
   function handleDelete() {
     showConfirmModal(false);
     const data = { _id };
-    debugger;
     fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
       method: "delete",
       headers: {
@@ -72,32 +71,38 @@ const DetailSet = () => {
   }
 
   useEffect(() => {
-    setIsLoaded(true);
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`, {
-      method: "get",
-      // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
-    })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(false);
-          setId(result._id);
-
-          setResult(result);
-        },
-        (error) => {
-          setIsLoaded(false);
-          setError(error);
-        }
-      );
+    fetchSetCardData(slug).then((result) => {
+      setResult(result);
+      setId(result._id);
+    });
+    // fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard/${slug}`, {
+    //   method: "get",
+    //   // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
+    // })
+    //   .then((res) => res.json())
+    //   .then(
+    //     (result) => {
+    //       setIsLoaded(false);
+    //       setId(result._id);
+    //       setResult(result);
+    //     },
+    //     (error) => {
+    //       setIsLoaded(false);
+    //       setError(error);
+    //     }
+    //   );
   }, []);
-
-  if (!result) return null;
+  if (getSetCardData.loading) {
+    return (
+      <div className="loading">
+        <ReactLoading type="balls" color="#ffa5ab" />
+      </div>
+    );
+  } else if (!result) return null;
   return (
     <>
       <ConfirmModal show={confirmModal} onHide={handleDelete} />
 
-      <Loading show={isLoaded} />
       <div className="set-detail-learn">
         <h3 className="ml-5 m-3 pb-2">{result.title}</h3>
         <Row>
@@ -142,26 +147,21 @@ const DetailSet = () => {
                       <div className="ctrl">
                         <span onClick={handlePrev}>
                           <i
-                            className="fa fa-arrow-left icon-ctrl"
+                            className="fa fa-arrow-left icon-ctrl pointer"
                             title="Previous question"
                           ></i>
                         </span>
                         <span className="text-ctrl">
-                          {index + "/" + result.detail.length}
+                          {index} <span style={{ fontSize: "16px" }}>/</span>{" "}
+                          {result.detail.length}
                         </span>
                         <span onClick={handleNext}>
                           <i
-                            className="fa fa-arrow-right icon-ctrl"
+                            className="fa fa-arrow-right icon-ctrl pointer"
                             title="Next question"
                           ></i>
                         </span>
                       </div>
-                      <span className="float-right icon-check">
-                        <i
-                          class="fa fa-check icon-ctrl"
-                          title="I have remember this question"
-                        ></i>
-                      </span>
                     </div>
                   ) : (
                     ""
@@ -199,17 +199,20 @@ const DetailSet = () => {
           </Col>
           <Col sm={6}>
             <div className="control">
-              <i class="fa fa-share icon-ctrl" title="Share this question"></i>
+              <i
+                class="fa fa-share icon-ctrl pointer"
+                title="Share this question"
+              ></i>
               {currentUser === result.author.username || "dvtam99" ? (
                 <>
-                  <a href={`/flashcard/edit/${result.slug}`}>
+                  <Link to={`/flashcard/edit/${result.slug}`}>
                     <i class="material-icons icon-ctrl" title="Edit this card">
                       edit
                     </i>
-                  </a>
+                  </Link>
                   <i
                     onClick={() => showConfirmModal(true)}
-                    class="material-icons icon-ctrl"
+                    class="material-icons icon-ctrl pointer"
                     title="Delete this card"
                   >
                     delete

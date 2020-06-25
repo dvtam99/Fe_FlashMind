@@ -15,6 +15,7 @@ import { updateMe } from "../../api/profile";
 import withAuth from "../../hoc/authHoc";
 
 const Profile = () => {
+  let fileInput;
   const { authUser, setAuthUser } = useContext(authCtx);
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
   const [updateMeApi, callUpdateMeApi] = useAsync(null, updateMe);
@@ -59,6 +60,7 @@ const Profile = () => {
                     formik.values.photoUrl
                   }
                   alt=""
+                  onClick={() => fileInput.click()}
                   style={{ width: "80px", height: "80px" }}
                   className="border rounded-circle m-3"
                 />
@@ -67,6 +69,8 @@ const Profile = () => {
               <Form.Control
                 className="ml-3 bg-red"
                 type="file"
+                hidden
+                ref={(file) => (fileInput = file)}
                 accept="image/png, image/jpeg"
                 onChange={onChooseImage}
               />

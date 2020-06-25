@@ -3,6 +3,7 @@ import ReactLoading from "react-loading";
 import authCtx from "../../contexts/auth";
 import { useAsync } from "react-hook-async";
 import { uploadFile } from "../../api/file";
+import { useHistory } from "react-router-dom";
 import { updateSetCard, getSetCard } from "../../api/flashcard";
 import "../../scss/editform.scss";
 import Modal from "../modal";
@@ -13,6 +14,7 @@ import withAuth from "../../hoc/authHoc";
 import { useParams } from "react-router-dom";
 
 const EditForm = () => {
+  const history = useHistory();
   const { authUser } = useContext(authCtx);
 
   const [result, setResult] = useState(null);
@@ -154,16 +156,11 @@ const EditForm = () => {
             message={message}
             onHide={() => {
               setModalShow(false);
-              document.location.pathname = "/dashboard";
+              history.push("/dashboard");
+              // document.location.pathname = "/dashboard";
             }}
           />
         )}
-        <div className="header-edit">
-          <h3>Update set card!</h3>
-          <button className="finish" onClick={handleUpdate}>
-            {!postingStatus ? "Update!" : "Updating..."}
-          </button>
-        </div>
         <div className="set-meta">
           <div className="header-edit">
             <h3>Update set card!</h3>

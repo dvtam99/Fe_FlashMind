@@ -162,12 +162,6 @@ const DetailSet = () => {
                           ></i>
                         </span>
                       </div>
-                      <span className="float-right icon-check">
-                        <i
-                          class="fa fa-check icon-ctrl"
-                          title="I have remember this question"
-                        ></i>
-                      </span>
                     </div>
                   ) : (
                     ""

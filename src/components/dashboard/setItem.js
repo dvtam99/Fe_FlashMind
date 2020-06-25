@@ -5,7 +5,6 @@ import authCtx from "../../contexts/auth";
 
 const SetItem = (props) => {
   const history = useHistory();
-  debugger;
   const {
     _id,
     avatar,

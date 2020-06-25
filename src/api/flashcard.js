@@ -1,8 +1,8 @@
 import axios from "../config/axios";
 
-export const createSetCard = (token) =>
+export const createSetCard = (token, data) =>
   axios
-    .post("/setCard", {
+    .post("/setCard", data, {
       headers: {
         // eslint-disable-next-line prefer-template
         Authorization: "Bearer " + token,
@@ -34,10 +34,10 @@ export const deleteSetCard = (token, payload) =>
 export const getSetCard = (slug) =>
   axios
     .get(`/setCard/${slug}`, {
-      headers: {
-        // eslint-disable-next-line prefer-template
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
+      // headers: {
+      //   // eslint-disable-next-line prefer-template
+      //   Authorization: "Bearer " + localStorage.getItem("jwt"),
+      // },
     })
     .then((res) => res.data);
 
@@ -50,20 +50,3 @@ export const getAllSetCard = () =>
       // },
     })
     .then((res) => res.data);
-//  fetch(`${process.env.REACT_APP_API_DOMAIN}/setCard`, {
-//     method: "get",
-//     //body: { _id: currentId },
-//     // headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authUser.token}`}
-//   })
-//     .then((res) => res.json())
-//     .then(
-//       (result) => {
-//         console.log(result);
-//         setIsLoaded(true);
-//         setResultArr(result);
-//       },
-//       (error) => {
-//         setIsLoaded(true);
-//         setError(error);
-//       }
-//     );

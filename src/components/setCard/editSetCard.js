@@ -14,6 +14,7 @@ import withAuth from "../../hoc/authHoc";
 import { useParams } from "react-router-dom";
 
 const EditForm = () => {
+  let fileInput;
   const history = useHistory();
   const { authUser } = useContext(authCtx);
 
@@ -222,13 +223,20 @@ const EditForm = () => {
                       <img
                         src={process.env.REACT_APP_API_DOMAIN + "/" + avatar}
                         alt=""
+                        onClick={() => fileInput.click()}
                         style={{ width: "600px", height: "340px" }}
                         className="border rounded"
                       />
                     )}
                   </div>
 
-                  <input type="file" onChange={onChooseImage} />
+                  <input
+                    hidden
+                    type="file"
+                    className="file"
+                    ref={(file) => (fileInput = file)}
+                    onChange={onChooseImage}
+                  />
                 </div>
               </div>
             </div>
